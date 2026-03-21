@@ -61,7 +61,12 @@
     .rank-btn:hover { background: rgba(0,0,0,0.6); }
     .card.liked { border-color: var(--green); box-shadow: 0 0 0 1px var(--green); }
     .card.disliked { border-color: var(--red); opacity: 0.5; }
-    .card.regen-requested { border-color: #1d4ed8; box-shadow: 0 0 0 1px #1d4ed8; }
+    .card.regen-requested { border-color: #1d4ed8; box-shadow: 0 0 0 1px #1d4ed8; animation: pulse-blue 2s ease-in-out infinite; }
+    .card.regenerated { border-color: #059669; box-shadow: 0 0 0 2px #059669; }
+    @keyframes pulse-blue { 0%,100% { box-shadow: 0 0 0 1px #1d4ed8; } 50% { box-shadow: 0 0 12px 2px rgba(29,78,216,0.3); } }
+    .gen-status { position: absolute; bottom: 0.5rem; right: 0.5rem; padding: 0.2rem 0.6rem; border-radius: 12px; font-size: 0.65rem; font-weight: 600; z-index: 10; }
+    .gen-status.generating { background: rgba(29,78,216,0.9); color: #fff; animation: pulse-blue 2s ease-in-out infinite; }
+    .gen-status.ready { background: rgba(5,150,105,0.9); color: #fff; cursor: pointer; }
     .card.disliked:hover { opacity: 0.8; }
     .card.selected { border-color: var(--gold); box-shadow: 0 0 0 2px var(--gold), 0 4px 20px rgba(201,169,97,0.2); }
     .card.hidden { display: none; }
@@ -297,6 +302,8 @@
               ${idx > 0 ? `<button class="rank-btn" onclick="moveRank('${cat}','${asset.id}',-1)" title="Move up">&#9650;</button>` : ''}
               ${idx < items.length - 1 ? `<button class="rank-btn" onclick="moveRank('${cat}','${asset.id}',1)" title="Move down">&#9660;</button>` : ''}
             </div>` : ''}
+            ${status === 'regen-requested' && r.metadata?.job_queued ? '<div class="gen-status generating">⏳ Generating...</div>' : ''}
+            ${status === 'regenerated' && r.metadata?.result_url ? `<div class="gen-status ready" onclick="window.open('${r.metadata.result_url}')">✅ New version</div>` : ''}
             <img class="card-img ${asset.logo ? 'logo-fit' : ''}" src="${IMG_BASE}/${asset.id}.${asset.ext}" alt="${asset.title}" loading="lazy" onclick="openLightbox('${asset.id}')" style="cursor:zoom-in">
             <div class="card-body">
               <h3>${asset.title}</h3>
@@ -439,9 +446,10 @@
         reviewed_at: new Date().toISOString(),
       };
       await sb.from('spgd_brand_reviews').upsert(row, { onConflict: 'asset_id' });
-      if (genBtn) { genBtn.textContent = 'Queued'; genBtn.classList.add('saved'); setTimeout(() => { genBtn.textContent = 'NewGen'; genBtn.classList.remove('saved'); }, 3000); }
-      showToast('Generation queued — AI will pick this up');
+      if (genBtn) { genBtn.textContent = '⏳ Queued'; genBtn.classList.add('saved'); setTimeout(() => { genBtn.textContent = 'NewGen'; genBtn.classList.remove('saved'); }, 8000); }
+      showToast('Generation queued — Gemini will generate in ~2 min');
       render();
+      startStatusPolling();
     }
 
     // ── Supabase ──
@@ -561,10 +569,28 @@
       if (e.key === 'ArrowLeft') lbNav(-1);
     });
 
+    // ── Status Polling (for active regen jobs) ──
+    let pollTimer = null;
+    function startStatusPolling() {
+      if (pollTimer) return;
+      pollTimer = setInterval(async () => {
+        const hasActive = ASSETS.some(a => {
+          const r = reviews[a.id] || {};
+          return r.status === 'regen-requested';
+        });
+        if (!hasActive) { clearInterval(pollTimer); pollTimer = null; return; }
+        await loadReviews();
+        render();
+      }, 30000); // poll every 30s
+    }
+
     // ── Init ──
     (async () => {
       await loadReviews();
       render();
+      // Auto-start polling if any regen jobs are active
+      const hasActive = ASSETS.some(a => (reviews[a.id] || {}).status === 'regen-requested');
+      if (hasActive) startStatusPolling();
     })();
   </script>
 
