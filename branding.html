@@ -78,9 +78,9 @@
     .card-body .desc { font-size: 0.78rem; color: var(--text-dim); line-height: 1.45; }
     .card-body .model { font-size: 0.65rem; color: var(--text-muted); margin-top: 0.3rem; }
 
-    /* Action buttons */
-    .card-actions { display: flex; gap: 0.4rem; padding: 0.5rem 1rem; border-top: 1px solid var(--border-light); background: #fafdf7; }
-    .action-btn { flex: 1; display: flex; align-items: center; justify-content: center; gap: 0.3rem; padding: 0.4rem; border-radius: 6px; border: 1px solid var(--border); background: var(--surface); font-size: 0.75rem; font-weight: 500; color: var(--text-dim); cursor: pointer; transition: all 0.15s; }
+    /* Action buttons — stacked vertically */
+    .card-actions { display: flex; flex-direction: column; gap: 0.3rem; padding: 0.5rem 1rem; border-top: 1px solid var(--border-light); background: #fafdf7; }
+    .action-btn { display: flex; align-items: center; justify-content: center; gap: 0.3rem; padding: 0.45rem; border-radius: 6px; border: 1px solid var(--border); background: var(--surface); font-size: 0.75rem; font-weight: 500; color: var(--text-dim); cursor: pointer; transition: all 0.15s; }
     .action-btn:hover { background: var(--bg); }
     .action-btn.like-active { background: var(--green-soft); border-color: var(--green-border); color: var(--green); }
     .action-btn.dislike-active { background: var(--red-soft); border-color: var(--red-border); color: var(--red); }
@@ -530,10 +530,19 @@
 
     // ── Lightbox ──
     let lbIndex = -1;
-    const allIds = () => ASSETS.map(a => a.id);
+    // Build display-order list matching rendered page order (by category + rank)
+    function getDisplayOrder() {
+      const order = [];
+      for (const cat of CAT_ORDER) {
+        for (const asset of getRankedAssets(cat)) {
+          order.push(asset.id);
+        }
+      }
+      return order;
+    }
 
     function openLightbox(assetId) {
-      const ids = allIds();
+      const ids = getDisplayOrder();
       lbIndex = ids.indexOf(assetId);
       if (lbIndex < 0) return;
       updateLightbox();
@@ -541,7 +550,7 @@
     }
 
     function updateLightbox() {
-      const ids = allIds();
+      const ids = getDisplayOrder();
       const asset = ASSETS.find(a => a.id === ids[lbIndex]);
       if (!asset) return;
       document.getElementById('lb-img').src = `${IMG_BASE}/${asset.id}.${asset.ext}`;
@@ -552,7 +561,7 @@
     }
 
     function lbNav(dir) {
-      const ids = allIds();
+      const ids = getDisplayOrder();
       lbIndex = (lbIndex + dir + ids.length) % ids.length;
       updateLightbox();
     }
