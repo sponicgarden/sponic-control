@@ -156,7 +156,8 @@
     const SUPABASE_URL = 'https://aphrrfprbixmhissnjfn.supabase.co';
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFwaHJyZnByYml4bWhpc3NuamZuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk5MzA0MjUsImV4cCI6MjA4NTUwNjQyNX0.yYkdQIq97GQgxK7yT2OQEPi5Tt-a7gM45aF8xjSD6wk';
     const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-    const IMG_BASE = 'https://alpacaplayhouse.com/rahulio/pages/sponic-garden/branding';
+    const IMG_BASE = 'https://sponicgarden.com/branding';
+    function imgUrl(asset) { return `${IMG_BASE}/${asset.id}.${asset.ext}`; }
 
     // All assets with metadata
     const ASSETS = [
@@ -339,7 +340,7 @@
             </div>` : ''}
             ${status === 'regen-requested' && r.metadata?.job_queued ? '<div class="gen-status generating">⏳ Generating...</div>' : ''}
             ${status === 'regenerated' && r.metadata?.result_url ? `<div class="gen-status ready" onclick="window.open('${r.metadata.result_url}')">✅ New version</div>` : ''}
-            <img class="card-img ${asset.logo ? 'logo-fit' : ''}" src="${IMG_BASE}/${asset.id}.${asset.ext}" alt="${asset.title}" loading="lazy" onclick="openLightbox('${asset.id}')" style="cursor:zoom-in">
+            <img class="card-img ${asset.logo ? 'logo-fit' : ''}" src="${imgUrl(asset)}" alt="${asset.title}" loading="lazy" onclick="openLightbox('${asset.id}')" style="cursor:zoom-in">
             <div class="card-body">
               <h3>${asset.title}</h3>
               <div class="desc">${asset.desc}</div>
@@ -491,7 +492,7 @@
       const row = {
         asset_id: assetId,
         asset_category: asset?.cat || null,
-        asset_url: `${IMG_BASE}/${assetId}.${asset?.ext || 'jpg'}`,
+        asset_url: `${asset ? imgUrl(asset) : ''}`,
         status: 'regen-requested',
         is_style_direction: r.is_style_direction || false,
         comment: prompt,
@@ -513,7 +514,7 @@
       const row = {
         asset_id: assetId,
         asset_category: asset?.cat || null,
-        asset_url: `${IMG_BASE}/${assetId}.${asset?.ext || 'jpg'}`,
+        asset_url: `${asset ? imgUrl(asset) : ''}`,
         status: r.status || 'pending',
         is_style_direction: r.is_style_direction || false,
         comment: r.comment || null,
@@ -558,7 +559,7 @@
             title: a.title,
             description: a.desc,
             model: a.model,
-            url: `${IMG_BASE}/${a.id}.${a.ext}`,
+            url: imgUrl(a),
             status: r.status || 'pending',
             is_style_direction: r.is_style_direction || false,
             comment: r.comment || null,
@@ -607,7 +608,7 @@
       const ids = getDisplayOrder();
       const asset = ASSETS.find(a => a.id === ids[lbIndex]);
       if (!asset) return;
-      document.getElementById('lb-img').src = `${IMG_BASE}/${asset.id}.${asset.ext}`;
+      document.getElementById('lb-img').src = `${imgUrl(asset)}`;
       const catItems = getRankedAssets(asset.cat);
       const rankIdx = catItems.findIndex(a => a.id === asset.id);
       const rankInfo = getRankLabel(rankIdx >= 0 ? rankIdx : 0);
