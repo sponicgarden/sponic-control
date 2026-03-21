@@ -85,6 +85,8 @@
     .action-btn.like-active { background: var(--green-soft); border-color: var(--green-border); color: var(--green); }
     .action-btn.dislike-active { background: var(--red-soft); border-color: var(--red-border); color: var(--red); }
     .action-btn.style-active { background: var(--gold-soft); border-color: rgba(201,169,97,0.4); color: #92400e; }
+    .action-btn.crown-btn { border-color: rgba(201,169,97,0.4); color: #92400e; }
+    .action-btn.crown-btn:hover { background: var(--gold-soft); border-color: var(--gold); }
 
     /* Comment */
     .card-comment { padding: 0.5rem 1rem 0.8rem; border-top: 1px solid var(--border-light); display: flex; flex-direction: column; gap: 0.4rem; }
@@ -321,6 +323,7 @@
               <button class="action-btn ${isStyleDir ? 'style-active' : ''}" onclick="setStyleDirection('${asset.id}')">
                 ${isStyleDir ? '&#11088;' : '&#127775;'} Use Style
               </button>
+              ${idx > 0 ? `<button class="action-btn crown-btn" onclick="elevateToChampion('${asset.cat}','${asset.id}')">&#128081; Champion</button>` : ''}
             </div>
             <div class="card-comment">
               <textarea placeholder="Describe a variation or leave a note..." id="comment-${asset.id}">${comment}</textarea>
@@ -405,6 +408,22 @@
       }
       render();
       showToast(`Moved to #${newIdx + 1}`);
+    }
+
+    async function elevateToChampion(cat, assetId) {
+      const items = getRankedAssets(cat);
+      const currentIdx = items.findIndex(a => a.id === assetId);
+      if (currentIdx <= 0) return; // already champion
+      // Move elevated asset to front, shift others down
+      const [elevated] = items.splice(currentIdx, 1);
+      items.unshift(elevated);
+      for (let i = 0; i < items.length; i++) {
+        reviews[items[i].id] = { ...(reviews[items[i].id] || {}), rank_order: i, reviewed_at: new Date().toISOString() };
+        await upsert(items[i].id);
+      }
+      render();
+      const asset = ASSETS.find(a => a.id === assetId);
+      showToast(`👑 ${asset.title} is now Champion`);
     }
 
     async function clearStyleDirection() {
