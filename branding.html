@@ -87,8 +87,9 @@
     .action-btn.style-active { background: var(--gold-soft); border-color: rgba(201,169,97,0.4); color: #92400e; }
 
     /* Comment */
-    .card-comment { padding: 0.5rem 1rem 0.8rem; border-top: 1px solid var(--border-light); display: flex; gap: 0.4rem; align-items: flex-start; }
-    .card-comment textarea { flex: 1; border: 1px solid var(--border); border-radius: 6px; padding: 0.4rem 0.6rem; font-size: 0.78rem; font-family: inherit; resize: vertical; min-height: 2.2rem; background: var(--bg); color: var(--text); }
+    .card-comment { padding: 0.5rem 1rem 0.8rem; border-top: 1px solid var(--border-light); display: flex; flex-direction: column; gap: 0.4rem; }
+    .card-comment-btns { display: flex; gap: 0.4rem; }
+    .card-comment textarea { flex: 1; border: 1px solid var(--border); border-radius: 6px; padding: 0.4rem 0.6rem; font-size: 0.78rem; font-family: inherit; resize: vertical; min-height: 3.5rem; max-height: 8rem; overflow-y: auto; background: var(--bg); color: var(--text); }
     .card-comment textarea:focus { outline: none; border-color: var(--green); }
     .comment-btn { padding: 0.4rem 0.6rem; border-radius: 6px; border: 1px solid; font-size: 0.7rem; font-weight: 600; cursor: pointer; white-space: nowrap; transition: all 0.15s; }
     .btn-note { border-color: var(--border); background: var(--bg); color: var(--text-dim); }
@@ -323,8 +324,10 @@
             </div>
             <div class="card-comment">
               <textarea placeholder="Describe a variation or leave a note..." id="comment-${asset.id}">${comment}</textarea>
-              <button class="comment-btn btn-newgen" onclick="requestNewGen('${asset.id}')">NewGen</button>
-              <button class="comment-btn btn-note" onclick="saveNote('${asset.id}')">Note</button>
+              <div class="card-comment-btns">
+                <button class="comment-btn btn-newgen" onclick="requestNewGen('${asset.id}')">NewGen</button>
+                <button class="comment-btn btn-note" onclick="saveNote('${asset.id}')">Note</button>
+              </div>
             </div>
           `;
           grid.appendChild(card);
