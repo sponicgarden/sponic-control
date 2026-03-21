@@ -50,6 +50,7 @@
     .card { background: var(--surface); border: 2px solid var(--border-light); border-radius: 10px; overflow: hidden; transition: all 0.2s; }
     .card.liked { border-color: var(--green); box-shadow: 0 0 0 1px var(--green); }
     .card.disliked { border-color: var(--red); opacity: 0.5; }
+    .card.regen-requested { border-color: #1d4ed8; box-shadow: 0 0 0 1px #1d4ed8; }
     .card.disliked:hover { opacity: 0.8; }
     .card.selected { border-color: var(--gold); box-shadow: 0 0 0 2px var(--gold), 0 4px 20px rgba(201,169,97,0.2); }
     .card.hidden { display: none; }
@@ -73,9 +74,13 @@
     .card-comment { padding: 0.5rem 1rem 0.8rem; border-top: 1px solid var(--border-light); display: flex; gap: 0.4rem; align-items: flex-start; }
     .card-comment textarea { flex: 1; border: 1px solid var(--border); border-radius: 6px; padding: 0.4rem 0.6rem; font-size: 0.78rem; font-family: inherit; resize: vertical; min-height: 2.2rem; background: var(--bg); color: var(--text); }
     .card-comment textarea:focus { outline: none; border-color: var(--green); }
-    .comment-save-btn { padding: 0.4rem 0.7rem; border-radius: 6px; border: 1px solid var(--green-border); background: var(--green); color: white; font-size: 0.72rem; font-weight: 600; cursor: pointer; white-space: nowrap; transition: all 0.15s; }
-    .comment-save-btn:hover { background: #245a17; }
-    .comment-save-btn.saved { background: var(--green-soft); color: var(--green); border-color: var(--green-border); }
+    .comment-btn { padding: 0.4rem 0.6rem; border-radius: 6px; border: 1px solid; font-size: 0.7rem; font-weight: 600; cursor: pointer; white-space: nowrap; transition: all 0.15s; }
+    .btn-note { border-color: var(--border); background: var(--bg); color: var(--text-dim); }
+    .btn-note:hover { background: var(--surface); }
+    .btn-note.saved { background: var(--green-soft); color: var(--green); border-color: var(--green-border); }
+    .btn-newgen { border-color: rgba(29,78,216,0.3); background: rgba(29,78,216,0.08); color: #1d4ed8; }
+    .btn-newgen:hover { background: rgba(29,78,216,0.15); }
+    .btn-newgen.saved { background: rgba(29,78,216,0.15); color: #1d4ed8; }
 
     /* Toast */
     .toast { position: fixed; bottom: 2rem; right: 2rem; padding: 0.6rem 1.2rem; background: var(--green); color: white; border-radius: 8px; font-size: 0.82rem; font-weight: 500; z-index: 1000; opacity: 0; transform: translateY(10px); transition: all 0.3s; }
@@ -274,8 +279,9 @@
               </button>
             </div>
             <div class="card-comment">
-              <textarea placeholder="Add a comment..." id="comment-${asset.id}">${comment}</textarea>
-              <button class="comment-save-btn" onclick="saveComment('${asset.id}')">Save</button>
+              <textarea placeholder="Describe a variation or leave a note..." id="comment-${asset.id}">${comment}</textarea>
+              <button class="comment-btn btn-newgen" onclick="requestNewGen('${asset.id}')">NewGen</button>
+              <button class="comment-btn btn-note" onclick="saveNote('${asset.id}')">Note</button>
             </div>
           `;
           grid.appendChild(card);
@@ -351,14 +357,40 @@
       showToast('Style direction cleared');
     }
 
-    async function saveComment(assetId) {
+    async function saveNote(assetId) {
       const textarea = document.getElementById(`comment-${assetId}`);
-      const btn = textarea?.nextElementSibling;
+      const noteBtn = textarea?.parentElement?.querySelector('.btn-note');
       const comment = textarea?.value || '';
       reviews[assetId] = { ...(reviews[assetId] || {}), comment: comment.trim(), reviewed_at: new Date().toISOString() };
       await upsert(assetId);
-      if (btn) { btn.textContent = 'Saved'; btn.classList.add('saved'); setTimeout(() => { btn.textContent = 'Save'; btn.classList.remove('saved'); }, 2000); }
-      showToast('Comment saved');
+      if (noteBtn) { noteBtn.textContent = 'Noted'; noteBtn.classList.add('saved'); setTimeout(() => { noteBtn.textContent = 'Note'; noteBtn.classList.remove('saved'); }, 2000); }
+      showToast('Note saved');
+    }
+
+    async function requestNewGen(assetId) {
+      const textarea = document.getElementById(`comment-${assetId}`);
+      const genBtn = textarea?.parentElement?.querySelector('.btn-newgen');
+      const prompt = textarea?.value?.trim();
+      if (!prompt) { showToast('Describe the variation you want'); return; }
+      reviews[assetId] = { ...(reviews[assetId] || {}), comment: prompt, status: 'regen-requested', reviewed_at: new Date().toISOString() };
+      // Save with metadata flagging it for regeneration
+      const asset = ASSETS.find(a => a.id === assetId);
+      const r = reviews[assetId];
+      const row = {
+        asset_id: assetId,
+        asset_category: asset?.cat || null,
+        asset_url: `${IMG_BASE}/${assetId}.${asset?.ext || 'jpg'}`,
+        status: 'regen-requested',
+        is_style_direction: r.is_style_direction || false,
+        comment: prompt,
+        model_used: asset?.model || null,
+        metadata: JSON.stringify({ regen_prompt: prompt, requested_at: new Date().toISOString() }),
+        reviewed_at: new Date().toISOString(),
+      };
+      await sb.from('spgd_brand_reviews').upsert(row, { onConflict: 'asset_id' });
+      if (genBtn) { genBtn.textContent = 'Queued'; genBtn.classList.add('saved'); setTimeout(() => { genBtn.textContent = 'NewGen'; genBtn.classList.remove('saved'); }, 3000); }
+      showToast('Generation queued — AI will pick this up');
+      render();
     }
 
     // ── Supabase ──
