@@ -201,6 +201,12 @@
       { id: '42-style-soft-watercolor-real', cat: 'style-audition', title: 'Realistic Watercolor', desc: 'Hand-painted with pen-and-ink linework. Warm, human, artisanal.', model: 'nano-banana-pro', ext: 'jpg' },
       { id: '43-style-ink-botanical', cat: 'style-audition', title: 'Botanical Ink Drawing', desc: '19th-century scientific illustration style. Crosshatching, stippling.', model: 'nano-banana-pro', ext: 'jpg' },
       { id: '44-style-gouache-modern', cat: 'style-audition', title: 'Modern Gouache', desc: 'Monocle/NYT editorial illustration. Flat brushstrokes, bold shapes.', model: 'nano-banana-pro', ext: 'jpg' },
+      // Sonics wordmarks (sonics not music)
+      { id: '50-sonics-organic-digital', cat: 'sonics-wordmark', title: 'Sonics — Organic→Digital', desc: 'Sonic waveforms and frequency spectra bridge circuit SPONIC to botanical GARDEN.', model: 'nano-banana-pro', ext: 'jpg', logo: true },
+      { id: '51-sonics-gradient-bridge', cat: 'sonics-wordmark', title: 'Sonics — Gradient Bridge', desc: 'Sonic frequency patterns flow from tech to nature. Sound is the medium.', model: 'nano-banana-pro', ext: 'jpg', logo: true },
+      { id: '52-sonics-clean-minimal', cat: 'sonics-wordmark', title: 'Sonics — Clean Minimal', desc: 'Oscilloscope waveform underline. Frequency spectrum bars from baseline.', model: 'nano-banana-pro', ext: 'jpg', logo: true },
+      { id: '53-sonics-flowing-vines', cat: 'sonics-wordmark', title: 'Sonics — Flowing Vines', desc: 'Sonic waves that look like both sound and growing vines simultaneously.', model: 'nano-banana-pro', ext: 'jpg', logo: true },
+      { id: '54-sonics-bold-contrast', cat: 'sonics-wordmark', title: 'Sonics — Bold Contrast', desc: 'Dramatic golden sonic pulse arc. Heartbeat/seismic energy. Signage-ready.', model: 'nano-banana-pro', ext: 'jpg', logo: true },
     ];
 
     const CAT_LABELS = {
@@ -213,8 +219,9 @@
       'app-icon': 'App Icons — SG Monogram',
       'artistic-style': '5 Artistic Styles',
       'blended': 'Blended — Botanical + Music + Spa + AI',
+      'sonics-wordmark': 'Sonics Wordmarks — Sound as Bridge',
     };
-    const CAT_ORDER = ['chosen', 'swapped-logo', 'style-audition', 'wordmark', 'logo', 'app-icon', 'scene', 'artistic-style', 'blended'];
+    const CAT_ORDER = ['chosen', 'sonics-wordmark', 'swapped-logo', 'style-audition', 'wordmark', 'logo', 'app-icon', 'scene', 'artistic-style', 'blended'];
 
     let reviews = {}; // asset_id -> review data
     let currentFilter = 'all';
