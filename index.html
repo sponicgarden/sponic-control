@@ -1472,24 +1472,22 @@
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <script>
-    // Load champion wordmark from Supabase brand reviews
+    // Load champion wordmark from Supabase — uses __global_champion__ pointer
     (async () => {
       try {
         const sb = window.supabase.createClient(
           'https://aphrrfprbixmhissnjfn.supabase.co',
           'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFwaHJyZnByYml4bWhpc3NuamZuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk5MzA0MjUsImV4cCI6MjA4NTUwNjQyNX0.yYkdQIq97GQgxK7yT2OQEPi5Tt-a7gM45aF8xjSD6wk'
         );
+        // Read the global champion pointer
         const { data } = await sb.from('spgd_brand_reviews')
-          .select('asset_id')
-          .eq('asset_category', 'sonics-wordmark')
-          .eq('status', 'liked')
-          .order('rank_order', { ascending: true })
-          .limit(1);
-        if (data?.[0]?.asset_id) {
-          const id = data[0].asset_id;
+          .select('comment')
+          .eq('asset_id', '__global_champion__')
+          .single();
+        if (data?.comment) {
+          const id = data.comment;
           const heroImg = document.querySelector('.hero-logo');
           if (heroImg) {
-            // Try png first (new assets), fall back to jpg (originals)
             const img = new Image();
             img.onload = () => { heroImg.src = img.src; };
             img.onerror = () => { heroImg.src = `branding/${id}.jpg`; };
