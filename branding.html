@@ -408,11 +408,11 @@
             <div class="rank-badge ${rankInfo.cls}">${rankInfo.label}</div>
             ${status === 'regen-requested' && r.metadata?.job_queued ? '<div class="gen-status generating">⏳ Generating...</div>' : ''}
             ${status === 'regenerated' && r.metadata?.result_url ? `<div class="gen-status ready" onclick="window.open('${r.metadata.result_url}')">✅ New version</div>` : ''}
-            <img class="card-img ${asset.logo ? 'logo-fit' : ''}" src="${imgUrl(asset)}" alt="${asset.title}" loading="lazy" onclick="openLightbox('${asset.id}')" style="cursor:zoom-in">
+            <img class="card-img ${asset.logo ? 'logo-fit' : ''}" src="${asset._overrideImg || imgUrl(asset)}" alt="${asset._overrideTitle || asset.title}" loading="lazy" onclick="openLightbox('${asset._championId || asset.id}')" style="cursor:zoom-in">
             <div class="card-body">
-              <h3>${asset.title}</h3>
-              <div class="desc">${asset.desc}</div>
-              <div class="model">${asset.model} · ${rankInfo.text}</div>
+              <h3>${asset._overrideTitle || asset.title}</h3>
+              <div class="desc">${asset._overrideDesc || asset.desc}</div>
+              <div class="model">${asset._overrideModel || asset.model} · ${rankInfo.text}</div>
             </div>
             <div class="card-actions">
               <button class="action-btn ${status === 'liked' ? 'like-active' : ''}" onclick="setStatus('${asset.id}', 'liked')">
@@ -525,26 +525,71 @@
     }
 
     async function elevateToChampion(cat, assetId) {
+      // 1. Reorder within category
       const items = getRankedAssets(cat);
       const currentIdx = items.findIndex(a => a.id === assetId);
-      if (currentIdx <= 0) return; // already champion
-      // Move elevated asset to front, shift others down
-      const [elevated] = items.splice(currentIdx, 1);
-      items.unshift(elevated);
-      for (let i = 0; i < items.length; i++) {
-        const isChampion = i === 0;
-        reviews[items[i].id] = {
-          ...(reviews[items[i].id] || {}),
-          rank_order: i,
-          // Champion gets status 'liked' so homepage picks it up
-          ...(isChampion ? { status: 'liked' } : {}),
-          reviewed_at: new Date().toISOString()
-        };
-        await upsert(items[i].id);
+      if (currentIdx > 0) {
+        const [elevated] = items.splice(currentIdx, 1);
+        items.unshift(elevated);
+        for (let i = 0; i < items.length; i++) {
+          reviews[items[i].id] = {
+            ...(reviews[items[i].id] || {}),
+            rank_order: i,
+            reviewed_at: new Date().toISOString()
+          };
+          await upsert(items[i].id);
+        }
       }
+
+      // 2. Set as GLOBAL champion — clear previous champions, set this one
+      // Find all assets that were previously 'liked' (global champions)
+      for (const [id, r] of Object.entries(reviews)) {
+        if (r.status === 'liked' && id !== assetId) {
+          reviews[id] = { ...r, status: 'pending', reviewed_at: new Date().toISOString() };
+          await upsert(id);
+        }
+      }
+      // Mark this asset as the global champion
+      reviews[assetId] = {
+        ...(reviews[assetId] || {}),
+        status: 'liked',
+        rank_order: 0,
+        reviewed_at: new Date().toISOString()
+      };
+      await upsert(assetId);
+
+      // 3. Update the "Current Champion" section to show this asset
+      updateCurrentChampionDisplay(assetId);
+
       render();
       const asset = ASSETS.find(a => a.id === assetId);
-      showToast(`👑 ${asset.title} is now Champion — homepage updated`);
+      showToast(`👑 ${asset.title} is now the Global Champion — homepage updated`);
+    }
+
+    // Update the Current Champion section to show the global champion
+    function updateCurrentChampionDisplay(championId) {
+      const asset = ASSETS.find(a => a.id === championId);
+      if (!asset) return;
+      const chosenAsset = ASSETS.find(a => a.id === '00-chosen-wordmark');
+      if (chosenAsset) {
+        // Temporarily update the chosen asset display data
+        chosenAsset._overrideTitle = asset.title;
+        chosenAsset._overrideDesc = asset.desc;
+        chosenAsset._overrideImg = imgUrl(asset);
+        chosenAsset._overrideModel = asset.model;
+        chosenAsset._championId = championId;
+      }
+    }
+
+    // Load global champion on init
+    function loadGlobalChampion() {
+      // Find the asset with status 'liked' — that's the global champion
+      for (const [id, r] of Object.entries(reviews)) {
+        if (r.status === 'liked') {
+          updateCurrentChampionDisplay(id);
+          return;
+        }
+      }
     }
 
     async function clearStyleDirection() {
@@ -754,6 +799,7 @@
     // ── Init ──
     (async () => {
       await loadReviews();
+      loadGlobalChampion();
       render();
       // Auto-start polling if any regen jobs are active
       const hasActive = ASSETS.some(a => (reviews[a.id] || {}).status === 'regen-requested');
