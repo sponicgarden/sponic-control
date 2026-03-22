@@ -358,21 +358,16 @@
       { id: '98-logo-hex-leaf', cat: 'logo-fusion', title: 'Hex Leaf', desc: 'Hexagon (circuit) with leaf growing through. Veins merge with traces at intersection.', model: 'gemini-3-pro-image-preview', ext: 'jpg', logo: true },
       { id: '99-logo-pulse-sprout', cat: 'logo-fusion', title: 'Pulse Sprout', desc: 'Sprout→heartbeat pulse→circuit roots. Life + data + health. Green/gold/teal.', model: 'gemini-3-pro-image-preview', ext: 'jpg', logo: true },
 
-      // Section illustrations — Gemini vs MiniMax shootout (batch 91)
-      { id: '91-gardening-gemini', cat: 'section-illustration', title: 'Gardening — Gemini', desc: 'Raised beds, vertical planters, sunlit greenhouse. Rich detail, warm editorial style.', model: 'gemini-3-pro-image-preview', ext: 'jpg' },
-      { id: '91-gardening-minimax', cat: 'section-illustration', title: 'Gardening — MiniMax', desc: 'Raised beds, vertical planters, sunlit greenhouse. Photorealistic, cinematic backlighting.', model: 'minimax-image-01', ext: 'jpg' },
-      { id: '91-thermal-gemini', cat: 'section-illustration', title: 'Thermal/Spa — Gemini', desc: 'Sauna + cold plunge contrast therapy. Glass-enclosed sauna, stone plunge pool. Illustrated.', model: 'gemini-3-pro-image-preview', ext: 'jpg' },
-      { id: '91-thermal-minimax', cat: 'section-illustration', title: 'Thermal/Spa — MiniMax', desc: 'Sauna + cold plunge contrast therapy. Dramatic steam, skylight oculus, cinematic light rays.', model: 'minimax-image-01', ext: 'jpg' },
-      { id: '91-fitness-gemini', cat: 'section-illustration', title: 'Fitness — Gemini', desc: 'Hot yoga class in plant-filled studio. Instructor leading, greenhouse + Warsaw skyline visible.', model: 'gemini-3-pro-image-preview', ext: 'jpg' },
-      { id: '91-fitness-minimax', cat: 'section-illustration', title: 'Fitness — MiniMax', desc: 'Hot yoga class in plant-filled studio. Photorealistic warrior pose, strong depth of field.', model: 'minimax-image-01', ext: 'jpg' },
-      { id: '91-food-gemini', cat: 'section-illustration', title: 'Food Market — Gemini', desc: 'Artisan vendors in greenhouse marketplace. Evening, string lights, wooden stalls. Vibrant.', model: 'gemini-3-pro-image-preview', ext: 'jpg' },
-      { id: '91-food-minimax', cat: 'section-illustration', title: 'Food Market — MiniMax', desc: 'Artisan vendors in greenhouse marketplace. Daytime, airy atrium with trees, clean market hall.', model: 'minimax-image-01', ext: 'jpg' },
-      { id: '91-community-gemini', cat: 'section-illustration', title: 'Community/Music — Gemini', desc: 'Evening atrium gathering. Live acoustic duo, data viz screens, vertical gardens, wine glasses.', model: 'gemini-3-pro-image-preview', ext: 'jpg' },
-      { id: '91-community-minimax', cat: 'section-illustration', title: 'Community/Music — MiniMax', desc: 'Evening atrium gathering. Bird\'s-eye courtyard view, multi-level building, large crowd mingling.', model: 'minimax-image-01', ext: 'jpg' },
+      // Flowing Vines v2 — colorful botanical variations (batch 92)
+      { id: '92-flowing-vines-orchid-burst', cat: 'flowing-vines', title: 'Flowing Vines — Orchid Burst', desc: 'Sonic waves morph into flowing tropical vines. Orchids, proteas, and monstera cascade around the letters in vibrant purples, corals, and emeralds.', model: 'gemini-3-pro-image-preview', ext: 'jpg', logo: true },
+      { id: '92-flowing-vines-cherry-wave', cat: 'flowing-vines', title: 'Flowing Vines — Cherry Blossom Wave', desc: 'Delicate cherry blossoms and wisteria cascade in gentle sound-wave patterns. Soft pinks, lavenders, and mint greens on white.', model: 'gemini-3-pro-image-preview', ext: 'jpg', logo: true },
+      { id: '92-flowing-vines-tropical-riot', cat: 'flowing-vines', title: 'Flowing Vines — Tropical Riot', desc: 'Bold tropical plant explosion — bird of paradise, hibiscus, banana leaves, and heliconia burst from sound waves in hot oranges, magentas, and jungle greens.', model: 'gemini-3-pro-image-preview', ext: 'jpg', logo: true },
+      { id: '92-flowing-vines-botanical-spectrum', cat: 'flowing-vines', title: 'Flowing Vines — Botanical Spectrum', desc: 'A rainbow gradient of diverse flowers from warm to cool — roses through irises — threaded along golden sonic wave lines.', model: 'gemini-3-pro-image-preview', ext: 'jpg', logo: true },
+      { id: '92-flowing-vines-midnight-garden', cat: 'flowing-vines', title: 'Flowing Vines — Midnight Garden', desc: 'Deep jewel-toned botanicals on white — dark plum dahlias, emerald ferns, sapphire berries, and golden sound waves weaving through.', model: 'gemini-3-pro-image-preview', ext: 'jpg', logo: true },
     ];
 
     const CAT_LABELS = {
-      'section-illustration': 'Section Illustrations — Gemini vs MiniMax Shootout',
+      'flowing-vines': 'Flowing Vines — Colorful Botanical Wordmarks',
       'chosen': 'Current Champion',
       'swapped-logo': 'Logo — Swapped (SPONIC=Digital, GARDEN=Botanical)',
       'wordmark': 'Wordmarks (Original Direction)',
@@ -390,7 +385,7 @@
       'moody-evening': 'Moody Evening — Adopted Style, All Scenes (Polish 25-47, Stylish Athleisure)',
       'logo-fusion': 'Logo Auditions — Botanical × Digital Fusion (Pick a Champion)',
     };
-    const CAT_ORDER = ['section-illustration', 'chosen', 'sonics-wordmark', 'logo-fusion', 'moody-evening', 'warsaw-demo', 'scene-style', 'wordmark-fusion', 'drawing-style', 'swapped-logo', 'style-audition', 'blended', 'artistic-style', 'scene', 'app-icon', 'logo', 'wordmark'];
+    const CAT_ORDER = ['flowing-vines', 'chosen', 'sonics-wordmark', 'logo-fusion', 'moody-evening', 'warsaw-demo', 'scene-style', 'wordmark-fusion', 'drawing-style', 'swapped-logo', 'style-audition', 'blended', 'artistic-style', 'scene', 'app-icon', 'logo', 'wordmark'];
 
     let reviews = {}; // asset_id -> review data (includes rank_order)
     let currentFilter = 'all';
