@@ -327,14 +327,14 @@
     function getRankedAssets(cat) {
       const items = ASSETS.filter(a => a.cat === cat);
       return items.sort((a, b) => {
-        // Reverse chronological: use created_at from DB first, then ID number as fallback
-        const ca = reviews[a.id]?.created_at;
-        const cb = reviews[b.id]?.created_at;
-        if (ca && cb && ca !== cb) return cb.localeCompare(ca);
-        // Extract leading number from asset ID (e.g. "22-gradient-morph-v5" → 22)
-        const na = parseInt(a.id.match(/^(\d+)/)?.[1] || '0', 10);
-        const nb = parseInt(b.id.match(/^(\d+)/)?.[1] || '0', 10);
-        return nb - na; // higher number = newer = first
+        const ra = reviews[a.id], rb = reviews[b.id];
+        // If either has a rank_order set (from champion/reorder), use that first
+        const roa = ra?.rank_order, rob = rb?.rank_order;
+        if (roa != null && rob != null) return roa - rob;
+        if (roa != null) return -1; // ranked items before unranked
+        if (rob != null) return 1;
+        // Unranked: newest first by array index (higher index = newer)
+        return ASSETS.indexOf(b) - ASSETS.indexOf(a);
       });
     }
 
