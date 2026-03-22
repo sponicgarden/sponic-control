@@ -267,6 +267,18 @@
       { id: '72-moody-dinner', cat: 'moody-evening', title: 'Moody — Dinner', desc: 'Warsaw 25-47, 5W 3M. Night harvest dinner. Herbs lit from below, vertical microgreen racks in purple-pink. Amber IoT LEDs. Candlelight warmth.', model: 'gemini-3-pro-image-preview', ext: 'jpg' },
       { id: '73-moody-hottub', cat: 'moody-evening', title: 'Moody — Hot Tub', desc: 'Warsaw 27-38, 3W 1M. Evening barrel tubs, backlit philodendron. Grow lights on rockwool starts. Amber sensor probes. Steam + candlelight.', model: 'gemini-3-pro-image-preview', ext: 'jpg' },
       { id: '74-moody-gardening', cat: 'moody-evening', title: 'Moody — Gardening', desc: 'Warsaw 25-42, 4W 2M. Evening workshop under dramatic grow lights. Jasmine canopy, amber sensor LEDs. Tablet glow. Meditative, beautiful.', model: 'gemini-3-pro-image-preview', ext: 'jpg' },
+
+      // Logo auditions — botanical × digital fusion
+      { id: '90-logo-leaf-circuit', cat: 'logo-fusion', title: 'Leaf Circuit', desc: 'Half-leaf organic veins, half circuit traces. Green→teal gradient. Favicon-ready.', model: 'gemini-3-pro-image-preview', ext: 'jpg', logo: true },
+      { id: '91-logo-sg-roots-wire', cat: 'logo-fusion', title: 'SG Roots × Wire', desc: 'S=vine root (green), G=circuit trace (teal). Golden dot at junction. Monogram.', model: 'gemini-3-pro-image-preview', ext: 'jpg', logo: true },
+      { id: '92-logo-seed-node', cat: 'logo-fusion', title: 'Seed Node', desc: 'Seed with circuit internals, stem emerges with one organic + one digital leaf. Golden dot.', model: 'gemini-3-pro-image-preview', ext: 'jpg', logo: true },
+      { id: '93-logo-tree-pcb', cat: 'logo-fusion', title: 'Tree PCB', desc: 'Organic canopy, PCB circuit roots with nodes. Golden node at trunk base.', model: 'gemini-3-pro-image-preview', ext: 'jpg', logo: true },
+      { id: '94-logo-circle-fusion', cat: 'logo-fusion', title: 'Circle Fusion', desc: 'Circle: left botanical, right circuit. Flowing vine division line. Golden ring.', model: 'gemini-3-pro-image-preview', ext: 'jpg', logo: true },
+      { id: '95-logo-double-helix', cat: 'logo-fusion', title: 'Double Helix', desc: 'Vine strand + circuit strand spiral together. DNA-like. Golden crossover dot.', model: 'gemini-3-pro-image-preview', ext: 'jpg', logo: true },
+      { id: '96-logo-sg-ligature', cat: 'logo-fusion', title: 'SG Ligature', desc: 'Custom SG monogram: S=leaf curves, G=circuit nodes. Vine-to-wire baseline. App icon ready.', model: 'gemini-3-pro-image-preview', ext: 'jpg', logo: true },
+      { id: '97-logo-photosynthesis', cat: 'logo-fusion', title: 'Photosynthesis', desc: 'Leaf with golden light rays entering, teal data traces flowing out. Green→teal gradient.', model: 'gemini-3-pro-image-preview', ext: 'jpg', logo: true },
+      { id: '98-logo-hex-leaf', cat: 'logo-fusion', title: 'Hex Leaf', desc: 'Hexagon (circuit) with leaf growing through. Veins merge with traces at intersection.', model: 'gemini-3-pro-image-preview', ext: 'jpg', logo: true },
+      { id: '99-logo-pulse-sprout', cat: 'logo-fusion', title: 'Pulse Sprout', desc: 'Sprout→heartbeat pulse→circuit roots. Life + data + health. Green/gold/teal.', model: 'gemini-3-pro-image-preview', ext: 'jpg', logo: true },
     ];
 
     const CAT_LABELS = {
@@ -285,8 +297,9 @@
       'scene-style': 'Scene Style Auditions — Same Scene, 5 Visual Styles',
       'warsaw-demo': 'Warsaw Demo — Target Demographic (25-47, 60% Women)',
       'moody-evening': 'Moody Evening — Adopted Style, All Scenes (Polish 25-47, Stylish Athleisure)',
+      'logo-fusion': 'Logo Auditions — Botanical × Digital Fusion (Pick a Champion)',
     };
-    const CAT_ORDER = ['chosen', 'moody-evening', 'warsaw-demo', 'scene-style', 'wordmark-fusion', 'drawing-style', 'sonics-wordmark', 'swapped-logo', 'style-audition', 'wordmark', 'logo', 'app-icon', 'scene', 'artistic-style', 'blended'];
+    const CAT_ORDER = ['chosen', 'logo-fusion', 'moody-evening', 'warsaw-demo', 'scene-style', 'wordmark-fusion', 'drawing-style', 'sonics-wordmark', 'swapped-logo', 'style-audition', 'wordmark', 'logo', 'app-icon', 'scene', 'artistic-style', 'blended'];
 
     let reviews = {}; // asset_id -> review data (includes rank_order)
     let currentFilter = 'all';
