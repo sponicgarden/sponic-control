@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sonic Vision — Patent Framework | Sponic Garden</title>
+  <meta property="og:title" content="Sonic Vision — Provisional Patent Framework">
+  <meta property="og:description" content="Adaptive Ambient Audio System Using Computer Vision for Real-Time Audience Detection, Behavioral Feedback Analysis, and Gesture-Based Control">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>" type="image/svg+xml">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Serif+Display&family=JetBrains+Mono:wght@400;500&display=swap');
+
+    :root {
+      --bg: #f4f7f1;
+      --surface: #ffffff;
+      --surface2: #eef3ea;
+      --surface3: #e2eadc;
+      --border: #c4d4ba;
+      --border-light: #d8e3cf;
+      --text: #1a2412;
+      --text-soft: #2d3b22;
+      --text-dim: #4a6040;
+      --text-muted: #7a9168;
+      --green: #2d6a1e;
+      --green-soft: rgba(45, 106, 30, 0.07);
+      --green-border: rgba(45, 106, 30, 0.20);
+      --emerald: #047857;
+      --emerald-soft: rgba(4, 120, 87, 0.06);
+      --emerald-border: rgba(4, 120, 87, 0.18);
+      --earth: #92400e;
+      --earth-soft: rgba(146, 64, 14, 0.06);
+      --earth-border: rgba(146, 64, 14, 0.20);
+      --sky: #0369a1;
+      --sky-soft: rgba(3, 105, 161, 0.05);
+      --sky-border: rgba(3, 105, 161, 0.16);
+      --plum: #7e22ce;
+      --plum-soft: rgba(126, 34, 206, 0.05);
+      --plum-border: rgba(126, 34, 206, 0.16);
+      --vine: #1a4d2e;
+      --circuit: rgba(79, 209, 197, 0.10);
+      --node: #34d399;
+      --glow: rgba(52, 211, 153, 0.20);
+      --radius: 10px;
+      --radius-lg: 14px;
+      --shadow: 0 1px 3px rgba(0,0,0,0.05);
+      --shadow-md: 0 2px 8px rgba(0,0,0,0.06);
+      --shadow-lg: 0 4px 20px rgba(0,0,0,0.08);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 4rem 1.5rem 3rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(180deg, #d0dce8 0%, #d8e2da 35%, var(--bg) 100%);
+      border-bottom: 1px solid var(--border);
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='52' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l30 15v22L30 52 0 37V15z' fill='none' stroke='%234fd1c5' stroke-width='0.4' opacity='0.12'/%3E%3C/svg%3E");
+      background-size: 60px 52px;
+      opacity: 0.6;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 70% at 50% 20%, rgba(52,211,153,0.08), transparent 70%);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 780px;
+      margin: 0 auto;
+    }
+    .hero .breadcrumb {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+    .hero .breadcrumb a {
+      color: var(--emerald);
+      text-decoration: none;
+    }
+    .hero .breadcrumb a:hover { text-decoration: underline; }
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2.6rem;
+      color: var(--green);
+      line-height: 1.15;
+      margin-bottom: 0.6rem;
+    }
+    .hero .subtitle {
+      font-size: 1.05rem;
+      color: var(--text-dim);
+      max-width: 640px;
+      margin: 0 auto 1.5rem;
+      line-height: 1.6;
+    }
+    .hero .badge-row {
+      display: flex;
+      gap: 0.6rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.3rem 0.75rem;
+      border-radius: 100px;
+      font-size: 0.78rem;
+      font-weight: 500;
+    }
+    .badge-green { background: var(--green-soft); color: var(--green); border: 1px solid var(--green-border); }
+    .badge-sky { background: var(--sky-soft); color: var(--sky); border: 1px solid var(--sky-border); }
+    .badge-earth { background: var(--earth-soft); color: var(--earth); border: 1px solid var(--earth-border); }
+    .badge-plum { background: var(--plum-soft); color: var(--plum); border: 1px solid var(--plum-border); }
+
+    /* Main content */
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 4rem;
+    }
+
+    /* Download bar */
+    .download-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0.85rem 1.2rem;
+      margin-bottom: 2.5rem;
+      box-shadow: var(--shadow);
+      flex-wrap: wrap;
+    }
+    .download-bar .label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .download-bar .label code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      background: var(--surface2);
+      padding: 0.15rem 0.45rem;
+      border-radius: 4px;
+      color: var(--text-dim);
+    }
+    .btn-md {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius);
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1px solid var(--green-border);
+      background: var(--green-soft);
+      color: var(--green);
+      transition: all 0.15s;
+    }
+    .btn-md:hover {
+      background: var(--green);
+      color: white;
+    }
+
+    /* Section cards */
+    .section-card {
+      background: var(--surface);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow);
+    }
+    .section-card h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.5rem;
+      color: var(--vine);
+      margin-bottom: 1rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .section-card h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-soft);
+      margin: 1.5rem 0 0.6rem;
+    }
+    .section-card h3:first-of-type { margin-top: 0.5rem; }
+    .section-card p {
+      color: var(--text-soft);
+      margin-bottom: 0.8rem;
+      font-size: 0.95rem;
+    }
+    .section-card ul, .section-card ol {
+      margin: 0.5rem 0 1rem 1.3rem;
+      color: var(--text-soft);
+      font-size: 0.95rem;
+    }
+    .section-card li { margin-bottom: 0.35rem; }
+
+    /* Tables */
+    .table-wrap {
+      overflow-x: auto;
+      margin: 0.8rem 0 1rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--border-light);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+    thead {
+      background: var(--surface2);
+    }
+    th {
+      text-align: left;
+      padding: 0.65rem 0.85rem;
+      font-weight: 600;
+      color: var(--text-dim);
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      border-bottom: 1px solid var(--border);
+    }
+    td {
+      padding: 0.6rem 0.85rem;
+      border-bottom: 1px solid var(--border-light);
+      color: var(--text-soft);
+      vertical-align: top;
+    }
+    tr:last-child td { border-bottom: none; }
+    td strong { color: var(--text); }
+    td code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      background: var(--surface2);
+      padding: 0.1rem 0.35rem;
+      border-radius: 3px;
+    }
+
+    /* Verdict callout */
+    .verdict {
+      background: var(--green-soft);
+      border: 1px solid var(--green-border);
+      border-radius: var(--radius);
+      padding: 1.2rem 1.5rem;
+      margin: 1rem 0;
+    }
+    .verdict strong { color: var(--green); }
+    .verdict-negative {
+      background: rgba(190, 18, 60, 0.05);
+      border-color: rgba(190, 18, 60, 0.16);
+    }
+    .verdict-negative strong { color: #be123c; }
+
+    /* Diagram */
+    .diagram {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      margin: 1.2rem 0;
+      overflow-x: auto;
+    }
+    .diagram pre {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      line-height: 1.5;
+      color: var(--text-dim);
+      white-space: pre;
+      margin: 0;
+    }
+
+    /* Claims */
+    .claim {
+      background: var(--surface2);
+      border: 1px solid var(--border-light);
+      border-left: 3px solid var(--emerald);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1rem 1.2rem;
+      margin: 0.8rem 0;
+      font-size: 0.92rem;
+    }
+    .claim .claim-label {
+      font-weight: 700;
+      color: var(--emerald);
+      font-size: 0.85rem;
+      margin-bottom: 0.4rem;
+    }
+    .claim ul {
+      margin: 0.4rem 0 0 1.2rem;
+      color: var(--text-soft);
+    }
+
+    /* Cost highlight */
+    .cost-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+    .cost-card {
+      background: var(--surface2);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius);
+      padding: 1rem 1.2rem;
+      text-align: center;
+    }
+    .cost-card .cost-amount {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.5rem;
+      color: var(--green);
+      margin: 0.3rem 0 0.2rem;
+    }
+    .cost-card .cost-label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-dim);
+    }
+    .cost-card .cost-desc {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 0.2rem;
+    }
+
+    /* Checklist */
+    .checklist {
+      list-style: none;
+      margin: 0.8rem 0;
+      padding: 0;
+    }
+    .checklist li {
+      padding: 0.45rem 0 0.45rem 1.6rem;
+      position: relative;
+      color: var(--text-soft);
+      font-size: 0.92rem;
+    }
+    .checklist li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.6rem;
+      width: 14px;
+      height: 14px;
+      border: 2px solid var(--border);
+      border-radius: 3px;
+      background: var(--surface);
+    }
+
+    /* Risk note */
+    .note {
+      background: var(--sky-soft);
+      border: 1px solid var(--sky-border);
+      border-radius: var(--radius);
+      padding: 0.85rem 1.1rem;
+      font-size: 0.88rem;
+      color: var(--text-soft);
+      margin: 0.8rem 0;
+    }
+    .note strong { color: var(--sky); }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem 1.5rem;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      border-top: 1px solid var(--border-light);
+    }
+    footer a { color: var(--emerald); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 640px) {
+      .hero h1 { font-size: 1.8rem; }
+      .section-card { padding: 1.3rem; }
+      .cost-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══ HERO ═══ -->
+  <div class="hero">
+    <div class="hero-content">
+      <div class="breadcrumb"><a href="/">Sponic Garden</a> &rarr; Patents</div>
+      <h1>Sonic Vision</h1>
+      <p class="subtitle">Adaptive Ambient Audio System Using Computer Vision for Real-Time Audience Detection, Behavioral Feedback Analysis, and Gesture-Based Control</p>
+      <div class="badge-row">
+        <span class="badge badge-green">Provisional Patent</span>
+        <span class="badge badge-sky">Computer Vision</span>
+        <span class="badge badge-earth">Reinforcement Learning</span>
+        <span class="badge badge-plum">Gesture Control</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <!-- Download bar -->
+    <div class="download-bar">
+      <span class="label">Full specification: <code>SONIC-VISION-PATENT.md</code></span>
+      <a href="SONIC-VISION-PATENT.md" class="btn-md" download>Download .md</a>
+    </div>
+
+    <!-- ═══ PRIOR ART ═══ -->
+    <div class="section-card">
+      <h2>1. Prior Art Analysis</h2>
+
+      <h3>Closest Prior Art</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Patent / Reference</th><th>What It Covers</th><th>Gap</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>US9489934B2</strong><br>Music selection via face recognition (2014)</td>
+              <td>Camera captures face, detects emotion, selects music to guide emotion toward target state</td>
+              <td>Single-user only; no crowd/demographic analysis; no activity detection; no behavioral feedback loop; no gesture control</td>
+            </tr>
+            <tr>
+              <td><strong>US9570091B2</strong><br>Music via speech emotion</td>
+              <td>Analyzes voice to detect emotion, plays matching music</td>
+              <td>Audio-only input (no vision); no crowd analysis; no real-time feedback loop</td>
+            </tr>
+            <tr>
+              <td><strong>US10846517</strong><br>Content modification via emotion (2020)</td>
+              <td>Detects emotion, modifies content delivery</td>
+              <td>Generic content (not music-specific); no spatial/environmental awareness; no gesture control</td>
+            </tr>
+            <tr>
+              <td><strong>Spotify Patent</strong><br>Speech-based recommendation</td>
+              <td>Detects emotional state, gender, age from voice, recommends content</td>
+              <td>Voice-only; personal device; no camera; no crowd; no ambient/spatial application</td>
+            </tr>
+            <tr>
+              <td><strong>US10672407</strong><br>Distributed audience measurement</td>
+              <td>Demographics, activities, media measurement</td>
+              <td>Measurement/analytics only &mdash; does not control or select content</td>
+            </tr>
+            <tr>
+              <td><strong>MediaPipe gesture projects</strong><br>Open source</td>
+              <td>Hand gesture to volume/track control via webcam</td>
+              <td>No AI music selection; no crowd analysis; no feedback loop; not patented</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Assessment</h3>
+      <div class="verdict">
+        <strong>OPPORTUNITY EXISTS.</strong> No single patent or combination covers the full system. The key novel elements are:
+      </div>
+      <ol>
+        <li><strong>Closed-loop feedback</strong> &mdash; The system observes audience reaction to its own selections and adapts in real-time (dancing = positive, covering ears = negative). Prior art is one-shot, not ongoing feedback.</li>
+        <li><strong>Multi-signal crowd analysis</strong> &mdash; Demographics + activity type + crowd density + time of day + behavioral response combined into a single selection engine.</li>
+        <li><strong>Spatial/environmental context</strong> &mdash; Camera monitors a location (not a personal device), selecting ambient audio for a shared physical space.</li>
+        <li><strong>Gesture control layer</strong> &mdash; Audience uses hand gestures detected by the same camera to control volume and track selection.</li>
+        <li><strong>Push notification feedback loop</strong> &mdash; App-based micro-feedback integrated with vision for hybrid explicit/implicit preference learning.</li>
+      </ol>
+
+      <div class="note">
+        <strong>Risk factors:</strong> Individual components (face detection, emotion recognition, gesture control, music recommendation) are well-patented separately. The novelty is in the <em>integrated system</em> and the <em>closed-loop behavioral feedback</em>. A strong provisional should emphasize the system architecture and feedback loop.
+      </div>
+    </div>
+
+    <!-- ═══ INVENTION SUMMARY ═══ -->
+    <div class="section-card">
+      <h2>2. Invention Summary</h2>
+
+      <h3>Problem</h3>
+      <p>Current ambient music systems in commercial, hospitality, and public spaces use static playlists, manual DJ control, or simple time-based scheduling. They cannot adapt to who is present, what they're doing, or whether they're enjoying the current selection.</p>
+
+      <h3>Solution</h3>
+      <p>An integrated system comprising four modules:</p>
+      <ol>
+        <li><strong>Vision Module</strong> &mdash; Camera(s) with AI for person detection, demographic estimation, activity recognition, behavioral feedback detection, and gesture recognition</li>
+        <li><strong>Audio Intelligence Engine</strong> &mdash; Software that selects audio from a tagged library based on weighted vision inputs, with reinforcement learning from audience reactions</li>
+        <li><strong>Audio Output System</strong> &mdash; Zone-aware speakers with smooth transitions and noise-adaptive volume</li>
+        <li><strong>Companion App</strong> &mdash; Push notifications for explicit feedback, song requests, gesture-like controls for accessibility</li>
+      </ol>
+
+      <h3>Key Innovation: The Behavioral Feedback Loop</h3>
+      <div class="diagram">
+<pre>
+  CAMERA ──────▶ VISION MODULE ──────▶ AUDIO ENGINE
+  (observe)      - detect people        - select music
+                 - demographics         - set volume
+                 - activity             - mix/crossfade
+                 - reactions                  │
+                 - gestures                   ▼
+                       │               SPEAKERS
+                       │               (play audio)
+                       ▼                     │
+               ┌─────────────────────────────┘
+               │      FEEDBACK LOOP
+               │  Camera observes reaction to the music
+               │  that the system itself selected.
+               │  Positive signals → reinforce selection
+               │  Negative signals → adjust selection
+               └─── This is continuous, not one-shot.
+</pre>
+      </div>
+    </div>
+
+    <!-- ═══ CLAIMS ═══ -->
+    <div class="section-card">
+      <h2>3. Claims Framework</h2>
+
+      <h3>Independent Claims</h3>
+
+      <div class="claim">
+        <div class="claim-label">Claim 1 &mdash; System</div>
+        A system for adaptive ambient audio selection comprising:
+        <ul>
+          <li>(a) at least one image capture device monitoring a physical space;</li>
+          <li>(b) a computer vision module configured to detect presence of persons, estimate demographic characteristics, classify activities, and detect behavioral responses to currently playing audio;</li>
+          <li>(c) an audio selection engine that receives inputs from the vision module and selects audio based on a weighted combination of detected persons, demographics, activities, and behavioral feedback;</li>
+          <li>(d) at least one audio output device; and</li>
+          <li>(e) a feedback loop wherein the vision module continuously monitors behavioral responses to currently playing audio and the engine adjusts subsequent selections accordingly.</li>
+        </ul>
+      </div>
+
+      <div class="claim">
+        <div class="claim-label">Claim 2 &mdash; Method</div>
+        A method for dynamically selecting ambient audio for a physical space, comprising:
+        <ul>
+          <li>(a) capturing video of the physical space;</li>
+          <li>(b) processing video to detect persons, estimate demographics, and classify activities;</li>
+          <li>(c) selecting audio content based on detected characteristics;</li>
+          <li>(d) playing selected audio through speakers serving the space;</li>
+          <li>(e) monitoring behavioral responses using the same camera system;</li>
+          <li>(f) classifying responses as positive or negative feedback; and</li>
+          <li>(g) adjusting audio selection based on classified feedback.</li>
+        </ul>
+      </div>
+
+      <div class="claim">
+        <div class="claim-label">Claim 3 &mdash; Gesture Control</div>
+        The system of Claim 1, further comprising gesture recognition wherein detected persons can control audio playback attributes including volume and track selection through hand gestures recognized by the computer vision module.
+      </div>
+
+      <h3>Dependent Claims</h3>
+      <ul>
+        <li><strong>Claim 4:</strong> Positive feedback includes dancing, rhythmic movement, head-nodding, remaining in area, smiling, clapping</li>
+        <li><strong>Claim 5:</strong> Negative feedback includes covering ears, leaving area, grimacing, gesturing disapproval</li>
+        <li><strong>Claim 6:</strong> Mobile app with push notifications for explicit feedback</li>
+        <li><strong>Claim 7:</strong> Reinforcement learning using behavioral feedback as reward signals</li>
+        <li><strong>Claim 8:</strong> Per-location preference profiles that improve over time</li>
+        <li><strong>Claim 9:</strong> Multiple independent camera-speaker zones within a single venue</li>
+        <li><strong>Claim 10:</strong> Volume adjustment based on ambient noise and crowd density</li>
+        <li><strong>Claim 11:</strong> Demographic estimation (age range, group size) weighting genre/energy preferences</li>
+        <li><strong>Claim 12:</strong> Temporal context (time of day, day of week, calendar events)</li>
+      </ul>
+    </div>
+
+    <!-- ═══ DESCRIPTION OUTLINE ═══ -->
+    <div class="section-card">
+      <h2>4. Detailed Description Outline</h2>
+      <p>The provisional application should include these sections (each 2&ndash;5 pages):</p>
+      <ol>
+        <li><strong>Field of the Invention</strong> &mdash; Ambient audio systems; computer vision; machine learning</li>
+        <li><strong>Background</strong> &mdash; Limitations of current systems (static playlists, manual DJ, Muzak-style)</li>
+        <li><strong>Summary of Invention</strong></li>
+        <li><strong>System Architecture</strong> &mdash; Block diagrams of hardware + software</li>
+        <li><strong>Vision Module Detail</strong> &mdash; Pose estimation, face analysis, gesture recognition pipelines</li>
+        <li><strong>Audio Engine Detail</strong> &mdash; Music tagging schema, selection algorithm, RL approach</li>
+        <li><strong>Feedback Loop Detail</strong> &mdash; Signal classification, weighting, feedback integration</li>
+        <li><strong>Gesture Control Detail</strong> &mdash; Supported gestures, recognition pipeline, conflict resolution</li>
+        <li><strong>Companion App Detail</strong> &mdash; Push notification flow, explicit feedback integration</li>
+        <li><strong>Use Cases</strong> &mdash; Restaurant, retail, gym, hotel lobby, co-working, outdoor venue</li>
+        <li><strong>Figures</strong> &mdash; System block diagram, feedback loop flowchart, gesture vocabulary, UI mockups</li>
+      </ol>
+    </div>
+
+    <!-- ═══ COST ESTIMATE ═══ -->
+    <div class="section-card">
+      <h2>5. Cost Estimate</h2>
+
+      <h3>Quick View</h3>
+      <div class="cost-row">
+        <div class="cost-card">
+          <div class="cost-label">Self-File (DIY)</div>
+          <div class="cost-amount">$65</div>
+          <div class="cost-desc">USPTO fee only (micro entity)</div>
+        </div>
+        <div class="cost-card">
+          <div class="cost-label">Patent Agent</div>
+          <div class="cost-amount">$2K&ndash;$4.5K</div>
+          <div class="cost-desc">Good for establishing priority</div>
+        </div>
+        <div class="cost-card">
+          <div class="cost-label">Quality Attorney</div>
+          <div class="cost-amount">$5K&ndash;$12K</div>
+          <div class="cost-desc">Best for licensing / investors</div>
+        </div>
+        <div class="cost-card">
+          <div class="cost-label">Full Non-Provisional</div>
+          <div class="cost-amount">$10K&ndash;$25K+</div>
+          <div class="cost-desc">Within 12 months of provisional</div>
+        </div>
+      </div>
+
+      <h3>USPTO Filing Fees (2025&ndash;2026)</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Entity Type</th><th>Provisional Filing Fee</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Micro entity</td><td><strong>$65</strong></td></tr>
+            <tr><td>Small entity</td><td><strong>$130</strong></td></tr>
+            <tr><td>Large entity</td><td><strong>$320</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Attorney / Agent Fees</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Service</th><th>DIY</th><th>Budget Attorney</th><th>Quality Attorney</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Provisional drafting</td><td>$0</td><td>$1,500&ndash;$3,000</td><td>$4,000&ndash;$8,000</td></tr>
+            <tr><td>Claims strategy</td><td>$0</td><td>included</td><td>$1,000&ndash;$2,000</td></tr>
+            <tr><td>Figures / drawings</td><td>$0&ndash;$200</td><td>$300&ndash;$800</td><td>$500&ndash;$1,500</td></tr>
+            <tr><td>Filing + admin</td><td>$0</td><td>$200&ndash;$500</td><td>$300&ndash;$500</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Recommended Path</h3>
+      <div class="verdict">
+        <strong>Smart Bootstrap ($2,500&ndash;$4,000):</strong> Use this document as foundation &rarr; hire a patent agent to refine claims &rarr; file as micro entity ($65) &rarr; 12 months to decide on non-provisional.
+      </div>
+
+      <h3>Timeline</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Milestone</th><th>Timeframe</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Finalize provisional application</td><td>1&ndash;3 weeks</td></tr>
+            <tr><td>File provisional with USPTO</td><td>Same day (online)</td></tr>
+            <tr><td>Priority date established</td><td>Filing date</td></tr>
+            <tr><td><strong>Deadline to file non-provisional</strong></td><td><strong>12 months from filing</strong></td></tr>
+            <tr><td>Non-provisional examination</td><td>18&ndash;36 months after filing</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ═══ NEXT STEPS ═══ -->
+    <div class="section-card">
+      <h2>6. Next Steps</h2>
+      <ul class="checklist">
+        <li>Decide: self-file vs. hire patent agent/attorney</li>
+        <li>Expand Detailed Description into full prose (15&ndash;30 pages)</li>
+        <li>Create formal figures and diagrams</li>
+        <li>Conduct deeper patent search on Google Patents / USPTO PAIR</li>
+        <li>Consider international filing (PCT) if global protection desired</li>
+        <li>File provisional application</li>
+        <li>Begin building prototype (strengthens patent, demonstrates reduction to practice)</li>
+      </ul>
+    </div>
+
+    <!-- ═══ NOTES ═══ -->
+    <div class="section-card">
+      <h2>7. Important Notes</h2>
+      <ul>
+        <li>A provisional patent application does <strong>not</strong> get examined &mdash; it only establishes a priority date</li>
+        <li>You can mark products/services as <strong>"Patent Pending"</strong> once filed</li>
+        <li>The provisional expires after 12 months if not converted to a non-provisional</li>
+        <li>Consider <strong>trade secret protection</strong> for the specific ML models/algorithms as a complement to patent protection</li>
+        <li><strong>Privacy:</strong> The system should process video on-device without storing facial data &mdash; this strengthens both the patent (privacy-preserving design) and commercial viability (GDPR/CCPA compliance)</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>Sonic Vision &mdash; Sponic Garden IP Portfolio &middot; Draft prepared March 2026</p>
+    <p style="margin-top: 0.4rem;"><a href="/">Back to Sponic Garden</a> &middot; <a href="SONIC-VISION-PATENT.md">Download .md source</a></p>
+  </footer>
+
+</body>
+</html>
