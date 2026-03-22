@@ -438,8 +438,8 @@
       const gallery = document.getElementById('gallery');
       gallery.innerHTML = '';
 
-      // Reverse chronological: newest categories first (CAT_ORDER is already newest-first)
-      const displayOrder = [...CAT_ORDER].reverse();
+      // CAT_ORDER is already newest-first, use as-is
+      const displayOrder = CAT_ORDER;
 
       // Build TOC
       const toc = document.createElement('div');
