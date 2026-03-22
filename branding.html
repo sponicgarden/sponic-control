@@ -318,7 +318,7 @@
       'moody-evening': 'Moody Evening — Adopted Style, All Scenes (Polish 25-47, Stylish Athleisure)',
       'logo-fusion': 'Logo Auditions — Botanical × Digital Fusion (Pick a Champion)',
     };
-    const CAT_ORDER = ['chosen', 'logo-fusion', 'moody-evening', 'warsaw-demo', 'scene-style', 'wordmark-fusion', 'drawing-style', 'sonics-wordmark', 'swapped-logo', 'style-audition', 'wordmark', 'logo', 'app-icon', 'scene', 'artistic-style', 'blended'];
+    const CAT_ORDER = ['chosen', 'logo-fusion', 'moody-evening', 'warsaw-demo', 'scene-style', 'wordmark-fusion', 'sonics-wordmark', 'drawing-style', 'swapped-logo', 'style-audition', 'blended', 'artistic-style', 'scene', 'app-icon', 'logo', 'wordmark'];
 
     let reviews = {}; // asset_id -> review data (includes rank_order)
     let currentFilter = 'all';
@@ -327,13 +327,14 @@
     function getRankedAssets(cat) {
       const items = ASSETS.filter(a => a.cat === cat);
       return items.sort((a, b) => {
-        const ra = reviews[a.id], rb = reviews[b.id];
-        // If both have created_at, sort reverse chronological
-        if (ra?.created_at && rb?.created_at && ra.created_at !== rb.created_at) {
-          return rb.created_at.localeCompare(ra.created_at);
-        }
-        // Unreviewed items: higher array index = newer = shown first
-        return ASSETS.indexOf(b) - ASSETS.indexOf(a);
+        // Reverse chronological: use created_at from DB first, then ID number as fallback
+        const ca = reviews[a.id]?.created_at;
+        const cb = reviews[b.id]?.created_at;
+        if (ca && cb && ca !== cb) return cb.localeCompare(ca);
+        // Extract leading number from asset ID (e.g. "22-gradient-morph-v5" → 22)
+        const na = parseInt(a.id.match(/^(\d+)/)?.[1] || '0', 10);
+        const nb = parseInt(b.id.match(/^(\d+)/)?.[1] || '0', 10);
+        return nb - na; // higher number = newer = first
       });
     }
 
