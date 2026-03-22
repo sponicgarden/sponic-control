@@ -1471,6 +1471,35 @@
   </footer>
 
   <script src="/vendor/supabase-js-2.39.3.min.js"></script>
+  <script>
+    // Load champion wordmark from Supabase brand reviews
+    (async () => {
+      try {
+        const sb = window.supabase.createClient(
+          'https://aphrrfprbixmhissnjfn.supabase.co',
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFwaHJyZnByYml4bWhpc3NuamZuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk5MzA0MjUsImV4cCI6MjA4NTUwNjQyNX0.yYkdQIq97GQgxK7yT2OQEPi0Tt-a7gM45aF8xjSD6wk'
+        );
+        const { data } = await sb.from('spgd_brand_reviews')
+          .select('asset_id')
+          .eq('asset_category', 'sonics-wordmark')
+          .eq('status', 'liked')
+          .order('rank_order', { ascending: true })
+          .limit(1);
+        if (data?.[0]?.asset_id) {
+          const id = data[0].asset_id;
+          const ext = id.match(/^\d+-sonics-/) ? 'jpg' : 'png'; // originals are jpg, new ones png
+          const heroImg = document.querySelector('.hero-logo');
+          if (heroImg) {
+            // Try png first (new assets), fall back to jpg (old assets)
+            const img = new Image();
+            img.onload = () => { heroImg.src = img.src; };
+            img.onerror = () => { heroImg.src = `branding/${id}.jpg`; };
+            img.src = `branding/${id}.png`;
+          }
+        }
+      } catch (e) { /* silently fall back to static logo */ }
+    })();
+  </script>
   <script type="module">
     import { initPersonalPage } from '/shared/personal-page-shell.js';
     initPersonalPage();
