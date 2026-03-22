@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620" font-family="Arial, Helvetica, sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#333"/></marker>
+    <marker id="arrow-dash" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#666"/></marker>
+  </defs>
+  <text x="450" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="#111">FIG. 1 — System Architecture Block Diagram</text>
+
+  <!-- Camera 100 -->
+  <rect x="30" y="80" width="160" height="100" rx="8" fill="#e8f0fe" stroke="#333" stroke-width="1.5"/>
+  <text x="110" y="105" text-anchor="middle" font-size="13" font-weight="bold" fill="#333">IMAGE CAPTURE</text>
+  <text x="110" y="120" text-anchor="middle" font-size="13" font-weight="bold" fill="#333">DEVICE (100)</text>
+  <text x="110" y="142" text-anchor="middle" font-size="10" fill="#555">Camera w/ wide-angle lens</text>
+  <text x="110" y="156" text-anchor="middle" font-size="10" fill="#555">Infrared / depth sensor (opt.)</text>
+  <text x="110" y="170" text-anchor="middle" font-size="10" fill="#555">Microphone array (opt.)</text>
+
+  <!-- Vision Module 200 -->
+  <rect x="260" y="60" width="200" height="150" rx="8" fill="#fef3c7" stroke="#333" stroke-width="1.5"/>
+  <text x="360" y="85" text-anchor="middle" font-size="13" font-weight="bold" fill="#333">COMPUTER VISION</text>
+  <text x="360" y="100" text-anchor="middle" font-size="13" font-weight="bold" fill="#333">MODULE (200)</text>
+  <text x="360" y="122" text-anchor="middle" font-size="10" fill="#555">Person Detection (210)</text>
+  <text x="360" y="137" text-anchor="middle" font-size="10" fill="#555">Demographic Estimation (220)</text>
+  <text x="360" y="152" text-anchor="middle" font-size="10" fill="#555">Activity Classification (230)</text>
+  <text x="360" y="167" text-anchor="middle" font-size="10" fill="#555">Behavioral Response Det. (240)</text>
+  <text x="360" y="182" text-anchor="middle" font-size="10" fill="#555">Gesture Recognition (250)</text>
+  <text x="360" y="197" text-anchor="middle" font-size="10" fill="#555">Crowd Turnover Det. (260)</text>
+
+  <!-- Audio Engine 300 -->
+  <rect x="530" y="80" width="180" height="120" rx="8" fill="#d1fae5" stroke="#333" stroke-width="1.5"/>
+  <text x="620" y="105" text-anchor="middle" font-size="13" font-weight="bold" fill="#333">AUDIO SELECTION</text>
+  <text x="620" y="120" text-anchor="middle" font-size="13" font-weight="bold" fill="#333">ENGINE (300)</text>
+  <text x="620" y="142" text-anchor="middle" font-size="10" fill="#555">Music/Soundscape Library (310)</text>
+  <text x="620" y="157" text-anchor="middle" font-size="10" fill="#555">Selection Algorithm (320)</text>
+  <text x="620" y="172" text-anchor="middle" font-size="10" fill="#555">RL Feedback Processor (330)</text>
+  <text x="620" y="187" text-anchor="middle" font-size="10" fill="#555">Crossfade/Mixer (340)</text>
+
+  <!-- Speaker 400 -->
+  <rect x="760" y="100" width="120" height="80" rx="8" fill="#ede9fe" stroke="#333" stroke-width="1.5"/>
+  <text x="820" y="130" text-anchor="middle" font-size="13" font-weight="bold" fill="#333">AUDIO OUTPUT</text>
+  <text x="820" y="145" text-anchor="middle" font-size="13" font-weight="bold" fill="#333">(400)</text>
+  <text x="820" y="167" text-anchor="middle" font-size="10" fill="#555">Speaker(s) in space</text>
+
+  <!-- Arrows: Camera → Vision → Engine → Speaker -->
+  <line x1="190" y1="130" x2="258" y2="130" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="460" y1="130" x2="528" y2="130" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="710" y1="140" x2="758" y2="140" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- QR Interface 500 -->
+  <rect x="530" y="280" width="180" height="110" rx="8" fill="#fff7ed" stroke="#333" stroke-width="1.5"/>
+  <text x="620" y="305" text-anchor="middle" font-size="13" font-weight="bold" fill="#333">QR COMPANION</text>
+  <text x="620" y="320" text-anchor="middle" font-size="13" font-weight="bold" fill="#333">INTERFACE (500)</text>
+  <text x="620" y="342" text-anchor="middle" font-size="10" fill="#555">QR Code Display (510)</text>
+  <text x="620" y="357" text-anchor="middle" font-size="10" fill="#555">Location Gate (520)</text>
+  <text x="620" y="372" text-anchor="middle" font-size="10" fill="#555">Web UI — Feedback/Control (530)</text>
+
+  <!-- Voice Onboarding 600 -->
+  <rect x="260" y="280" width="200" height="110" rx="8" fill="#fce7f3" stroke="#333" stroke-width="1.5"/>
+  <text x="360" y="305" text-anchor="middle" font-size="13" font-weight="bold" fill="#333">AI VOICE ONBOARDING</text>
+  <text x="360" y="320" text-anchor="middle" font-size="13" font-weight="bold" fill="#333">MODULE (600)</text>
+  <text x="360" y="342" text-anchor="middle" font-size="10" fill="#555">TTS Synthesis Engine (610)</text>
+  <text x="360" y="357" text-anchor="middle" font-size="10" fill="#555">Announcement Templates (620)</text>
+  <text x="360" y="372" text-anchor="middle" font-size="10" fill="#555">Frequency Controller (630)</text>
+
+  <!-- Processing Architecture 700 -->
+  <rect x="30" y="280" width="160" height="110" rx="8" fill="#f0fdf4" stroke="#333" stroke-width="1.5"/>
+  <text x="110" y="305" text-anchor="middle" font-size="13" font-weight="bold" fill="#333">PROCESSING</text>
+  <text x="110" y="320" text-anchor="middle" font-size="13" font-weight="bold" fill="#333">ARCH. (700)</text>
+  <text x="110" y="342" text-anchor="middle" font-size="10" fill="#555">Edge Mode (710)</text>
+  <text x="110" y="357" text-anchor="middle" font-size="10" fill="#555">Cloud Mode (720)</text>
+  <text x="110" y="372" text-anchor="middle" font-size="10" fill="#555">Hybrid Mode (730)</text>
+
+  <!-- Connections -->
+  <!-- Vision → Voice (crowd turnover triggers announcements) -->
+  <line x1="360" y1="210" x2="360" y2="278" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="365" y="248" font-size="9" fill="#666">crowd turnover</text>
+
+  <!-- Voice → Speaker -->
+  <line x1="460" y1="335" x2="820" y2="182" stroke="#666" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arrow-dash)"/>
+  <text x="650" y="255" font-size="9" fill="#666">announcements</text>
+
+  <!-- QR → Engine (explicit feedback) -->
+  <line x1="620" y1="280" x2="620" y2="202" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="625" y="248" font-size="9" fill="#666">explicit feedback</text>
+
+  <!-- Processing ↔ Vision (bidirectional) -->
+  <line x1="190" y1="310" x2="258" y2="310" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="258" y1="330" x2="190" y2="330" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="224" y="305" text-anchor="middle" font-size="9" fill="#666">config</text>
+  <text x="224" y="348" text-anchor="middle" font-size="9" fill="#666">frames</text>
+
+  <!-- FEEDBACK LOOP (big curved arrow) -->
+  <path d="M 820 180 L 820 480 L 110 480 L 110 390" fill="none" stroke="#b45309" stroke-width="2.5" stroke-dasharray="8,4" marker-end="url(#arrow)"/>
+  <rect x="310" y="460" width="290" height="30" rx="6" fill="#fff7ed" stroke="#b45309" stroke-width="1.5"/>
+  <text x="455" y="480" text-anchor="middle" font-size="11" font-weight="bold" fill="#b45309">BEHAVIORAL FEEDBACK LOOP (800)</text>
+
+  <!-- Camera observes physical space -->
+  <rect x="30" y="440" width="160" height="40" rx="6" fill="#f3f4f6" stroke="#999" stroke-width="1"/>
+  <text x="110" y="460" text-anchor="middle" font-size="10" fill="#555">MONITORED</text>
+  <text x="110" y="474" text-anchor="middle" font-size="10" fill="#555">PHYSICAL SPACE</text>
+  <line x1="110" y1="180" x2="110" y2="438" stroke="#999" stroke-width="1" stroke-dasharray="4,3"/>
+
+  <!-- People in space → QR -->
+  <line x1="190" y1="460" x2="530" y2="370" stroke="#999" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="340" y="425" font-size="9" fill="#999">users scan QR</text>
+
+  <!-- Legend -->
+  <rect x="30" y="530" width="840" height="70" rx="6" fill="#f9fafb" stroke="#ddd" stroke-width="1"/>
+  <text x="50" y="552" font-size="11" font-weight="bold" fill="#333">LEGEND:</text>
+  <line x1="50" y1="570" x2="90" y2="570" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="95" y="574" font-size="10" fill="#555">Data flow</text>
+  <line x1="180" y1="570" x2="220" y2="570" stroke="#666" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arrow-dash)"/>
+  <text x="225" y="574" font-size="10" fill="#555">Audio output</text>
+  <line x1="340" y1="570" x2="380" y2="570" stroke="#b45309" stroke-width="2.5" stroke-dasharray="8,4"/>
+  <text x="385" y="574" font-size="10" fill="#555">Feedback loop</text>
+  <line x1="510" y1="570" x2="550" y2="570" stroke="#999" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="555" y="574" font-size="10" fill="#555">Physical interaction</text>
+  <text x="710" y="574" font-size="10" fill="#555">(NNN) = Reference numeral</text>
+</svg>

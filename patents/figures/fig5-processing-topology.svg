@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 550" font-family="Arial, Helvetica, sans-serif">
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#333"/></marker>
+  </defs>
+  <text x="425" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="#111">FIG. 5 — Edge / Cloud / Hybrid Processing Topology (700)</text>
+
+  <!-- ═══ MODE A: EDGE ═══ -->
+  <rect x="20" y="55" width="250" height="440" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="145" y="80" text-anchor="middle" font-size="14" font-weight="bold" fill="#16a34a">MODE A: EDGE (710)</text>
+  <text x="145" y="95" text-anchor="middle" font-size="10" fill="#4a6040">Maximum privacy — no data leaves device</text>
+
+  <!-- Camera -->
+  <rect x="55" y="115" width="180" height="40" rx="6" fill="#e8f0fe" stroke="#333" stroke-width="1.5"/>
+  <text x="145" y="140" text-anchor="middle" font-size="11" font-weight="bold">Camera + Edge SoC</text>
+  <text x="145" y="108" text-anchor="middle" font-size="9" fill="#666">(Jetson Nano / Google Coral)</text>
+
+  <!-- On-device processing -->
+  <line x1="145" y1="155" x2="145" y2="178" stroke="#333" stroke-width="1.5" marker-end="url(#a)"/>
+  <rect x="55" y="180" width="180" height="70" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="145" y="200" text-anchor="middle" font-size="10" font-weight="bold" fill="#16a34a">ON-DEVICE INFERENCE</text>
+  <text x="145" y="215" text-anchor="middle" font-size="9" fill="#555">Person detection</text>
+  <text x="145" y="228" text-anchor="middle" font-size="9" fill="#555">Gesture recognition</text>
+  <text x="145" y="241" text-anchor="middle" font-size="9" fill="#555">Demographic estimation</text>
+
+  <!-- Results to engine -->
+  <line x1="145" y1="250" x2="145" y2="278" stroke="#333" stroke-width="1.5" marker-end="url(#a)"/>
+  <rect x="55" y="280" width="180" height="40" rx="6" fill="#d1fae5" stroke="#333" stroke-width="1.5"/>
+  <text x="145" y="305" text-anchor="middle" font-size="11" font-weight="bold">Audio Engine (300)</text>
+
+  <!-- Speaker -->
+  <line x1="145" y1="320" x2="145" y2="348" stroke="#333" stroke-width="1.5" marker-end="url(#a)"/>
+  <rect x="75" y="350" width="140" height="35" rx="6" fill="#ede9fe" stroke="#333" stroke-width="1.5"/>
+  <text x="145" y="373" text-anchor="middle" font-size="11" font-weight="bold">Speaker (400)</text>
+
+  <!-- Privacy shield -->
+  <rect x="45" y="405" width="200" height="35" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="145" y="427" text-anchor="middle" font-size="10" font-weight="bold" fill="#16a34a">🔒 No video leaves device</text>
+
+  <!-- Latency -->
+  <text x="145" y="465" text-anchor="middle" font-size="10" fill="#4a6040">Latency: &lt;50ms</text>
+  <text x="145" y="480" text-anchor="middle" font-size="10" fill="#4a6040">Models: Lightweight (MobileNet)</text>
+
+  <!-- ═══ MODE B: CLOUD ═══ -->
+  <rect x="300" y="55" width="250" height="440" rx="10" fill="#eff6ff" stroke="#0369a1" stroke-width="2"/>
+  <text x="425" y="80" text-anchor="middle" font-size="14" font-weight="bold" fill="#0369a1">MODE B: CLOUD (720)</text>
+  <text x="425" y="95" text-anchor="middle" font-size="10" fill="#555">Maximum model power — centralized fleet</text>
+
+  <!-- Camera (dumb) -->
+  <rect x="335" y="115" width="180" height="40" rx="6" fill="#e8f0fe" stroke="#333" stroke-width="1.5"/>
+  <text x="425" y="140" text-anchor="middle" font-size="11" font-weight="bold">Camera (capture only)</text>
+
+  <!-- Upload -->
+  <line x1="425" y1="155" x2="425" y2="178" stroke="#333" stroke-width="1.5" marker-end="url(#a)"/>
+  <rect x="345" y="180" width="160" height="30" rx="6" fill="#fff" stroke="#999" stroke-width="1"/>
+  <text x="425" y="200" text-anchor="middle" font-size="10" fill="#666">Video frames via network</text>
+
+  <!-- Cloud server -->
+  <line x1="425" y1="210" x2="425" y2="233" stroke="#333" stroke-width="1.5" marker-end="url(#a)"/>
+  <rect x="335" y="235" width="180" height="70" rx="6" fill="#dbeafe" stroke="#0369a1" stroke-width="1.5"/>
+  <text x="425" y="255" text-anchor="middle" font-size="10" font-weight="bold" fill="#0369a1">CLOUD SERVER</text>
+  <text x="425" y="270" text-anchor="middle" font-size="9" fill="#555">Full vision pipeline</text>
+  <text x="425" y="283" text-anchor="middle" font-size="9" fill="#555">Large models (ViT, YOLO-X)</text>
+  <text x="425" y="296" text-anchor="middle" font-size="9" fill="#555">Fleet-wide model updates</text>
+
+  <!-- Results back -->
+  <line x1="425" y1="305" x2="425" y2="328" stroke="#333" stroke-width="1.5" marker-end="url(#a)"/>
+  <rect x="345" y="330" width="160" height="30" rx="6" fill="#fff" stroke="#999" stroke-width="1"/>
+  <text x="425" y="350" text-anchor="middle" font-size="10" fill="#666">Selection commands</text>
+
+  <!-- Audio Engine + Speaker -->
+  <line x1="425" y1="360" x2="425" y2="383" stroke="#333" stroke-width="1.5" marker-end="url(#a)"/>
+  <rect x="355" y="385" width="140" height="35" rx="6" fill="#d1fae5" stroke="#333" stroke-width="1.5"/>
+  <text x="425" y="408" text-anchor="middle" font-size="11" font-weight="bold">Audio Engine (300)</text>
+  <line x1="425" y1="420" x2="425" y2="443" stroke="#333" stroke-width="1.5" marker-end="url(#a)"/>
+  <rect x="365" y="445" width="120" height="35" rx="6" fill="#ede9fe" stroke="#333" stroke-width="1.5"/>
+  <text x="425" y="468" text-anchor="middle" font-size="11" font-weight="bold">Speaker (400)</text>
+
+  <!-- Latency -->
+  <text x="425" y="500" text-anchor="middle" font-size="10" fill="#555">Latency: 100-500ms</text>
+  <text x="425" y="515" text-anchor="middle" font-size="10" fill="#555">Models: Full-size (ViT, YOLO-X)</text>
+
+  <!-- ═══ MODE C: HYBRID ═══ -->
+  <rect x="580" y="55" width="250" height="440" rx="10" fill="#fefce8" stroke="#b45309" stroke-width="2"/>
+  <text x="705" y="80" text-anchor="middle" font-size="14" font-weight="bold" fill="#b45309">MODE C: HYBRID (730)</text>
+  <text x="705" y="95" text-anchor="middle" font-size="10" fill="#666">Balanced — real-time + deep analysis</text>
+
+  <!-- Camera + edge -->
+  <rect x="615" y="115" width="180" height="40" rx="6" fill="#e8f0fe" stroke="#333" stroke-width="1.5"/>
+  <text x="705" y="140" text-anchor="middle" font-size="11" font-weight="bold">Camera + Edge SoC</text>
+
+  <!-- Split -->
+  <line x1="705" y1="155" x2="705" y2="175" stroke="#333" stroke-width="1.5"/>
+  <line x1="705" y1="175" x2="650" y2="175" stroke="#333" stroke-width="1"/>
+  <line x1="705" y1="175" x2="760" y2="175" stroke="#333" stroke-width="1"/>
+
+  <!-- Edge (fast) -->
+  <line x1="650" y1="175" x2="650" y2="198" stroke="#16a34a" stroke-width="1.5" marker-end="url(#a)"/>
+  <rect x="600" y="200" width="100" height="60" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="1"/>
+  <text x="650" y="218" text-anchor="middle" font-size="9" font-weight="bold" fill="#16a34a">EDGE (fast)</text>
+  <text x="650" y="232" text-anchor="middle" font-size="8" fill="#555">Gestures</text>
+  <text x="650" y="244" text-anchor="middle" font-size="8" fill="#555">Person detect</text>
+  <text x="650" y="256" text-anchor="middle" font-size="8" fill="#555">&lt;50ms</text>
+
+  <!-- Cloud (deep) -->
+  <line x1="760" y1="175" x2="760" y2="198" stroke="#0369a1" stroke-width="1.5" marker-end="url(#a)"/>
+  <rect x="710" y="200" width="100" height="60" rx="6" fill="#dbeafe" stroke="#0369a1" stroke-width="1"/>
+  <text x="760" y="218" text-anchor="middle" font-size="9" font-weight="bold" fill="#0369a1">CLOUD (deep)</text>
+  <text x="760" y="232" text-anchor="middle" font-size="8" fill="#555">Demographics</text>
+  <text x="760" y="244" text-anchor="middle" font-size="8" fill="#555">Model updates</text>
+  <text x="760" y="256" text-anchor="middle" font-size="8" fill="#555">100-500ms</text>
+
+  <!-- Merge -->
+  <line x1="650" y1="260" x2="650" y2="290" stroke="#333" stroke-width="1"/>
+  <line x1="760" y1="260" x2="760" y2="290" stroke="#333" stroke-width="1"/>
+  <line x1="650" y1="290" x2="760" y2="290" stroke="#333" stroke-width="1"/>
+  <line x1="705" y1="290" x2="705" y2="313" stroke="#333" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <!-- Audio Engine + Speaker -->
+  <rect x="635" y="315" width="140" height="35" rx="6" fill="#d1fae5" stroke="#333" stroke-width="1.5"/>
+  <text x="705" y="338" text-anchor="middle" font-size="11" font-weight="bold">Audio Engine (300)</text>
+  <line x1="705" y1="350" x2="705" y2="373" stroke="#333" stroke-width="1.5" marker-end="url(#a)"/>
+  <rect x="645" y="375" width="120" height="35" rx="6" fill="#ede9fe" stroke="#333" stroke-width="1.5"/>
+  <text x="705" y="398" text-anchor="middle" font-size="11" font-weight="bold">Speaker (400)</text>
+
+  <!-- Dynamic switching -->
+  <rect x="615" y="430" width="180" height="50" rx="6" fill="#fef9c3" stroke="#b45309" stroke-width="1"/>
+  <text x="705" y="450" text-anchor="middle" font-size="9" font-weight="bold" fill="#b45309">DYNAMIC MODE SELECTOR</text>
+  <text x="705" y="463" text-anchor="middle" font-size="8" fill="#666">Bandwidth ↔ Latency ↔ Privacy</text>
+  <text x="705" y="475" text-anchor="middle" font-size="8" fill="#666">policy → auto-select split ratio</text>
+
+  <text x="705" y="500" text-anchor="middle" font-size="10" fill="#666">Latency: &lt;50ms (gestures)</text>
+  <text x="705" y="515" text-anchor="middle" font-size="10" fill="#666">+ 100-500ms (demographics)</text>
+</svg>

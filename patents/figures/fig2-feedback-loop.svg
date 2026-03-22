@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 750 700" font-family="Arial, Helvetica, sans-serif">
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#333"/></marker>
+    <marker id="ag" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#16a34a"/></marker>
+    <marker id="ar" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#dc2626"/></marker>
+  </defs>
+  <text x="375" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="#111">FIG. 2 — Behavioral Feedback Loop Flowchart</text>
+
+  <!-- Start -->
+  <ellipse cx="375" cy="70" rx="80" ry="22" fill="#e0e7ff" stroke="#333" stroke-width="1.5"/>
+  <text x="375" y="75" text-anchor="middle" font-size="12" font-weight="bold">START (800)</text>
+  <line x1="375" y1="92" x2="375" y2="118" stroke="#333" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <!-- Step 1: Capture Video -->
+  <rect x="275" y="120" width="200" height="45" rx="6" fill="#e8f0fe" stroke="#333" stroke-width="1.5"/>
+  <text x="375" y="140" text-anchor="middle" font-size="11" font-weight="bold">Capture Video Frame</text>
+  <text x="375" y="155" text-anchor="middle" font-size="10" fill="#555">from Image Capture Device (100)</text>
+  <line x1="375" y1="165" x2="375" y2="188" stroke="#333" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <!-- Step 2: Detect People -->
+  <rect x="275" y="190" width="200" height="45" rx="6" fill="#fef3c7" stroke="#333" stroke-width="1.5"/>
+  <text x="375" y="210" text-anchor="middle" font-size="11" font-weight="bold">Detect Persons (210)</text>
+  <text x="375" y="225" text-anchor="middle" font-size="10" fill="#555">Count, locate, track</text>
+  <line x1="375" y1="235" x2="375" y2="258" stroke="#333" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <!-- Decision: People present? -->
+  <polygon points="375,260 455,295 375,330 295,295" fill="#fff" stroke="#333" stroke-width="1.5"/>
+  <text x="375" y="293" text-anchor="middle" font-size="10" font-weight="bold">People</text>
+  <text x="375" y="305" text-anchor="middle" font-size="10" font-weight="bold">present?</text>
+  <!-- No → wait -->
+  <line x1="455" y1="295" x2="550" y2="295" stroke="#999" stroke-width="1.5" marker-end="url(#a)"/>
+  <text x="490" y="288" font-size="10" fill="#999">No</text>
+  <rect x="555" y="278" width="130" height="35" rx="6" fill="#f3f4f6" stroke="#999" stroke-width="1"/>
+  <text x="620" y="300" text-anchor="middle" font-size="10" fill="#666">Play ambient/default</text>
+  <path d="M 620 313 L 620 340 L 700 340 L 700 130 L 477 130" fill="none" stroke="#999" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#a)"/>
+  <!-- Yes → continue -->
+  <line x1="375" y1="330" x2="375" y2="358" stroke="#333" stroke-width="1.5" marker-end="url(#a)"/>
+  <text x="382" y="348" font-size="10" fill="#333">Yes</text>
+
+  <!-- Step 3: Analyze -->
+  <rect x="260" y="360" width="230" height="55" rx="6" fill="#fef3c7" stroke="#333" stroke-width="1.5"/>
+  <text x="375" y="380" text-anchor="middle" font-size="11" font-weight="bold">Analyze Audience (220-260)</text>
+  <text x="375" y="395" text-anchor="middle" font-size="10" fill="#555">Demographics, activity, energy,</text>
+  <text x="375" y="407" text-anchor="middle" font-size="10" fill="#555">gestures, behavioral responses</text>
+  <line x1="375" y1="415" x2="375" y2="438" stroke="#333" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <!-- Decision: Music playing? -->
+  <polygon points="375,440 445,470 375,500 305,470" fill="#fff" stroke="#333" stroke-width="1.5"/>
+  <text x="375" y="468" text-anchor="middle" font-size="10" font-weight="bold">Music</text>
+  <text x="375" y="480" text-anchor="middle" font-size="10" font-weight="bold">playing?</text>
+  <!-- No → select initial -->
+  <line x1="305" y1="470" x2="180" y2="470" stroke="#333" stroke-width="1.5" marker-end="url(#a)"/>
+  <text x="250" y="463" font-size="10" fill="#333">No</text>
+  <rect x="50" y="450" width="130" height="40" rx="6" fill="#d1fae5" stroke="#333" stroke-width="1.5"/>
+  <text x="115" y="468" text-anchor="middle" font-size="10" font-weight="bold">Select Initial</text>
+  <text x="115" y="482" text-anchor="middle" font-size="10" font-weight="bold">Audio (320)</text>
+  <line x1="115" y1="490" x2="115" y2="560" stroke="#333" stroke-width="1.5"/>
+  <line x1="115" y1="560" x2="273" y2="560" stroke="#333" stroke-width="1.5" marker-end="url(#a)"/>
+  <!-- Yes → classify feedback -->
+  <line x1="375" y1="500" x2="375" y2="528" stroke="#333" stroke-width="1.5" marker-end="url(#a)"/>
+  <text x="382" y="518" font-size="10" fill="#333">Yes</text>
+
+  <!-- Step 4: Classify feedback -->
+  <polygon points="375,530 470,565 375,600 280,565" fill="#fff7ed" stroke="#b45309" stroke-width="1.5"/>
+  <text x="375" y="558" text-anchor="middle" font-size="10" font-weight="bold" fill="#b45309">Classify</text>
+  <text x="375" y="572" text-anchor="middle" font-size="10" font-weight="bold" fill="#b45309">Feedback (240)</text>
+
+  <!-- Positive -->
+  <line x1="280" y1="565" x2="130" y2="565" stroke="#16a34a" stroke-width="2" marker-end="url(#ag)"/>
+  <text x="210" y="558" font-size="10" font-weight="bold" fill="#16a34a">Positive</text>
+  <rect x="20" y="540" width="110" height="50" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="75" y="558" text-anchor="middle" font-size="9" fill="#16a34a">Dancing, nodding,</text>
+  <text x="75" y="570" text-anchor="middle" font-size="9" fill="#16a34a">staying, smiling,</text>
+  <text x="75" y="582" text-anchor="middle" font-size="9" fill="#16a34a">clapping</text>
+
+  <!-- Negative -->
+  <line x1="470" y1="565" x2="610" y2="565" stroke="#dc2626" stroke-width="2" marker-end="url(#ar)"/>
+  <text x="530" y="558" font-size="10" font-weight="bold" fill="#dc2626">Negative</text>
+  <rect x="615" y="540" width="110" height="50" rx="6" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="670" y="558" text-anchor="middle" font-size="9" fill="#dc2626">Covering ears,</text>
+  <text x="670" y="570" text-anchor="middle" font-size="9" fill="#dc2626">leaving, grimacing,</text>
+  <text x="670" y="582" text-anchor="middle" font-size="9" fill="#dc2626">disapproval gesture</text>
+
+  <!-- Both feed into RL -->
+  <line x1="75" y1="590" x2="75" y2="630" stroke="#16a34a" stroke-width="1.5"/>
+  <line x1="75" y1="630" x2="273" y2="630" stroke="#333" stroke-width="1.5" marker-end="url(#a)"/>
+  <line x1="670" y1="590" x2="670" y2="630" stroke="#dc2626" stroke-width="1.5"/>
+  <line x1="670" y1="630" x2="477" y2="630" stroke="#333" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <!-- Step 5: Adjust -->
+  <rect x="275" y="610" width="200" height="45" rx="6" fill="#d1fae5" stroke="#333" stroke-width="1.5"/>
+  <text x="375" y="630" text-anchor="middle" font-size="11" font-weight="bold">Adjust Audio (330)</text>
+  <text x="375" y="645" text-anchor="middle" font-size="10" fill="#555">RL reward signal → re-select</text>
+
+  <!-- Loop back -->
+  <path d="M 375 655 L 375 680 L 20 680 L 20 130 L 273 130" fill="none" stroke="#b45309" stroke-width="2" stroke-dasharray="8,4" marker-end="url(#a)"/>
+  <text x="40" y="420" font-size="11" font-weight="bold" fill="#b45309" transform="rotate(-90 40 420)">CONTINUOUS LOOP</text>
+</svg>
