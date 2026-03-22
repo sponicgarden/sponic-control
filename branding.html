@@ -308,10 +308,11 @@
     function getRankedAssets(cat) {
       const items = ASSETS.filter(a => a.cat === cat);
       return items.sort((a, b) => {
-        const ra = reviews[a.id]?.rank_order ?? 999;
-        const rb = reviews[b.id]?.rank_order ?? 999;
-        if (ra !== rb) return ra - rb;
-        return ASSETS.indexOf(a) - ASSETS.indexOf(b);
+        // Newest first by created_at (reverse chronological)
+        const ca = reviews[a.id]?.created_at || '1970-01-01';
+        const cb = reviews[b.id]?.created_at || '1970-01-01';
+        if (ca !== cb) return cb.localeCompare(ca);
+        return ASSETS.indexOf(b) - ASSETS.indexOf(a);
       });
     }
 
@@ -323,7 +324,23 @@
     }
 
     // ── Render ──
+    let _pendingRender = false;
     function render() {
+      // Don't destroy DOM if user is typing in a textarea
+      const focused = document.activeElement;
+      if (focused?.tagName === 'TEXTAREA' && focused.closest('.card-comment')) {
+        _pendingRender = true;
+        return;
+      }
+      _pendingRender = false;
+
+      // Preserve unsaved textarea values before destroying DOM
+      const savedComments = {};
+      document.querySelectorAll('.card-comment textarea').forEach(ta => {
+        const id = ta.id?.replace('comment-', '');
+        if (id && ta.value) savedComments[id] = ta.value;
+      });
+
       const gallery = document.getElementById('gallery');
       gallery.innerHTML = '';
 
@@ -340,7 +357,8 @@
           const status = r.status || 'pending';
           const isStyleDir = r.is_style_direction || false;
           const comment = r.comment || '';
-          const rankInfo = getRankLabel(idx);
+          const rankInfo = status === 'liked' ? { label: '★', cls: 'champion', text: 'Champion' }
+            : { label: String(idx + 1), cls: 'ranked', text: `#${idx + 1}` };
 
           // Filter logic
           let visible = currentFilter === 'all' ||
@@ -354,11 +372,6 @@
           card.dataset.assetId = asset.id;
           card.innerHTML = `
             <div class="rank-badge ${rankInfo.cls}">${rankInfo.label}</div>
-            ${items.length > 1 ? `
-            <div class="rank-controls">
-              ${idx > 0 ? `<button class="rank-btn" onclick="moveRank('${cat}','${asset.id}',-1)" title="Move up">&#9650;</button>` : ''}
-              ${idx < items.length - 1 ? `<button class="rank-btn" onclick="moveRank('${cat}','${asset.id}',1)" title="Move down">&#9660;</button>` : ''}
-            </div>` : ''}
             ${status === 'regen-requested' && r.metadata?.job_queued ? '<div class="gen-status generating">⏳ Generating...</div>' : ''}
             ${status === 'regenerated' && r.metadata?.result_url ? `<div class="gen-status ready" onclick="window.open('${r.metadata.result_url}')">✅ New version</div>` : ''}
             <img class="card-img ${asset.logo ? 'logo-fit' : ''}" src="${imgUrl(asset)}" alt="${asset.title}" loading="lazy" onclick="openLightbox('${asset.id}')" style="cursor:zoom-in">
@@ -390,6 +403,19 @@
           grid.appendChild(card);
         });
       }
+      // Restore unsaved textarea values
+      for (const [id, val] of Object.entries(savedComments)) {
+        const ta = document.getElementById(`comment-${id}`);
+        if (ta && !ta.value) ta.value = val;
+      }
+
+      // Re-render when user leaves textarea if a render was deferred
+      gallery.addEventListener('focusout', (e) => {
+        if (e.target?.tagName === 'TEXTAREA' && _pendingRender) {
+          setTimeout(() => render(), 50);
+        }
+      }, { once: true });
+
       updateCounts();
       updateStyleBanner();
     }
