@@ -501,9 +501,9 @@
          QUICK STATS
          ══════════════════════════════════════════════════ -->
     <div class="stats-row">
-      <span class="stat-pill">💶 <strong>€40</strong> per visit</span>
+      <span class="stat-pill">💶 <strong>€24</strong> avg per visit</span>
       <span class="stat-pill">👥 <strong>250</strong> max capacity</span>
-      <span class="stat-pill">📈 <strong>5%/week</strong> growth</span>
+      <span class="stat-pill">📈 <strong>3%/week</strong> growth</span>
       <span class="stat-pill">🧑‍💼 <strong>4</strong> core staff</span>
       <span class="stat-pill">🏗️ <strong>€200k</strong> buildout</span>
     </div>
@@ -514,28 +514,28 @@
     <div class="section">
       <div class="section-label">Assumptions</div>
       <h2>Model Inputs</h2>
-      <p>Conservative base case for the Warsaw prototype. 64 founding members get their first experience free. Paying visits start at 25/day and grow 5% per week, reaching full 250 capacity by Month 12. Buildout capital is deployed starting month 6 as Phase 2 expansion begins.</p>
+      <p>Stress-test scenario for the Warsaw prototype. Assumes heavy promotional discounting (40% off list price) and slower organic growth (3%/week vs 5%). 64 founding members get their first experience free. This is the "worst realistic case" — what happens if demand is soft and we have to buy our way in.</p>
 
       <div class="grid-2" style="margin-top: 0.75rem;">
         <div class="card accent-card accent-emerald">
           <h3>💰 Revenue</h3>
           <ul>
-            <li><strong>€40</strong> per visit (1–4 hours)</li>
+            <li><strong>€24</strong> avg per visit (40% promo discount from €40 list)</li>
             <li><strong>250</strong> daily capacity (max)</li>
-            <li><strong>5% weekly growth</strong> from 25 visits/day</li>
+            <li><strong>3% weekly growth</strong> from 15 visits/day</li>
             <li><strong>30 days/month</strong> operating</li>
-            <li>Steady-state monthly (M12): <strong>€300,000</strong></li>
+            <li>Month 12 revenue: <strong>€46,800</strong> (65 visits/day)</li>
           </ul>
         </div>
         <div class="card accent-card accent-earth">
-          <h3>📊 Ramp Schedule (5%/week)</h3>
+          <h3>📊 Ramp Schedule (3%/week)</h3>
           <ul>
-            <li><strong>Month 1:</strong> ~28 paying visits/day (+ 64 free founding)</li>
-            <li><strong>Month 3:</strong> ~42 visits/day</li>
-            <li><strong>Month 5:</strong> ~65 visits/day</li>
-            <li><strong>Month 7:</strong> ~99 visits/day</li>
-            <li><strong>Month 9:</strong> ~151 visits/day</li>
-            <li><strong>Month 12:</strong> 250 visits/day (100% capacity)</li>
+            <li><strong>Month 1:</strong> ~16 paying visits/day (+ 64 free founding)</li>
+            <li><strong>Month 3:</strong> ~21 visits/day</li>
+            <li><strong>Month 6:</strong> ~30 visits/day</li>
+            <li><strong>Month 9:</strong> ~45 visits/day</li>
+            <li><strong>Month 12:</strong> ~65 visits/day</li>
+            <li><strong>Month 22:</strong> 250 visits/day (full capacity)</li>
           </ul>
         </div>
       </div>
@@ -574,66 +574,66 @@
         <span><span class="dot dot-rev"></span> Revenue</span>
         <span><span class="dot dot-cost"></span> Costs</span>
       </div>
-      <!-- Heights computed as % of max value (€300k revenue M12) -->
+      <!-- Heights computed as % of max value (€61.9k costs M6+) -->
       <div class="bar-chart" id="barChart">
         <div class="bar-col">
-          <div class="bar bar-revenue" style="height: 11.2%"></div>
-          <div class="bar bar-cost" style="height: 11.1%"></div>
+          <div class="bar bar-revenue" style="height: 18.6%"></div>
+          <div class="bar bar-cost" style="height: 53.8%"></div>
           <span class="bar-label">M1</span>
         </div>
         <div class="bar-col">
-          <div class="bar bar-revenue" style="height: 13.6%"></div>
-          <div class="bar bar-cost" style="height: 11.1%"></div>
+          <div class="bar bar-revenue" style="height: 20.9%"></div>
+          <div class="bar bar-cost" style="height: 53.8%"></div>
           <span class="bar-label">M2</span>
         </div>
         <div class="bar-col">
-          <div class="bar bar-revenue" style="height: 16.8%"></div>
-          <div class="bar bar-cost" style="height: 11.1%"></div>
+          <div class="bar bar-revenue" style="height: 24.4%"></div>
+          <div class="bar bar-cost" style="height: 53.8%"></div>
           <span class="bar-label">M3</span>
         </div>
         <div class="bar-col">
-          <div class="bar bar-revenue" style="height: 20.8%"></div>
-          <div class="bar bar-cost" style="height: 11.1%"></div>
+          <div class="bar bar-revenue" style="height: 26.8%"></div>
+          <div class="bar bar-cost" style="height: 53.8%"></div>
           <span class="bar-label">M4</span>
         </div>
         <div class="bar-col">
-          <div class="bar bar-revenue" style="height: 26.0%"></div>
-          <div class="bar bar-cost" style="height: 11.1%"></div>
+          <div class="bar bar-revenue" style="height: 31.4%"></div>
+          <div class="bar bar-cost" style="height: 53.8%"></div>
           <span class="bar-label">M5</span>
         </div>
         <div class="bar-col">
-          <div class="bar bar-revenue" style="height: 32.0%"></div>
-          <div class="bar bar-cost" style="height: 20.6%"></div>
+          <div class="bar bar-revenue" style="height: 34.9%"></div>
+          <div class="bar bar-cost" style="height: 100%"></div>
           <span class="bar-label">M6</span>
         </div>
         <div class="bar-col">
-          <div class="bar bar-revenue" style="height: 39.6%"></div>
-          <div class="bar bar-cost" style="height: 20.6%"></div>
+          <div class="bar bar-revenue" style="height: 39.5%"></div>
+          <div class="bar bar-cost" style="height: 100%"></div>
           <span class="bar-label">M7</span>
         </div>
         <div class="bar-col">
-          <div class="bar bar-revenue" style="height: 48.8%"></div>
-          <div class="bar bar-cost" style="height: 20.6%"></div>
+          <div class="bar bar-revenue" style="height: 45.4%"></div>
+          <div class="bar bar-cost" style="height: 100%"></div>
           <span class="bar-label">M8</span>
         </div>
         <div class="bar-col">
-          <div class="bar bar-revenue" style="height: 60.4%"></div>
-          <div class="bar bar-cost" style="height: 20.6%"></div>
+          <div class="bar bar-revenue" style="height: 52.3%"></div>
+          <div class="bar bar-cost" style="height: 100%"></div>
           <span class="bar-label">M9</span>
         </div>
         <div class="bar-col">
-          <div class="bar bar-revenue" style="height: 74.4%"></div>
-          <div class="bar bar-cost" style="height: 20.6%"></div>
+          <div class="bar bar-revenue" style="height: 59.3%"></div>
+          <div class="bar bar-cost" style="height: 100%"></div>
           <span class="bar-label">M10</span>
         </div>
         <div class="bar-col">
-          <div class="bar bar-revenue" style="height: 92.0%"></div>
-          <div class="bar bar-cost" style="height: 20.6%"></div>
+          <div class="bar bar-revenue" style="height: 67.5%"></div>
+          <div class="bar bar-cost" style="height: 100%"></div>
           <span class="bar-label">M11</span>
         </div>
         <div class="bar-col">
-          <div class="bar bar-revenue" style="height: 100%"></div>
-          <div class="bar bar-cost" style="height: 20.6%"></div>
+          <div class="bar bar-revenue" style="height: 75.6%"></div>
+          <div class="bar bar-cost" style="height: 100%"></div>
           <span class="bar-label">M12</span>
         </div>
       </div>
@@ -645,7 +645,7 @@
     <div class="section">
       <div class="section-label">Financials</div>
       <h2>12-Month Profit & Loss</h2>
-      <p>All figures in EUR (€). Growth model: 25 paying visits/day + 5% weekly compounding, capped at 250. 64 founding members get first visits free. Buildout capex begins month 6.</p>
+      <p>All figures in EUR (€). Stress-test model: 15 paying visits/day + 3% weekly growth at €24 avg (40% promo discount). 64 founding members get first visits free. Buildout capex begins month 6.</p>
 
       <div class="fin-table-wrap">
         <table class="fin-table">
@@ -662,21 +662,21 @@
             <tr class="row-header"><td colspan="14">Revenue</td></tr>
             <tr>
               <td class="indent">Avg visits/day</td>
-              <td>28</td><td>34</td><td>42</td><td>52</td><td>65</td><td>80</td>
-              <td>99</td><td>122</td><td>151</td><td>186</td><td>230</td><td>250</td>
+              <td>16</td><td>18</td><td>21</td><td>23</td><td>27</td><td>30</td>
+              <td>34</td><td>39</td><td>45</td><td>51</td><td>58</td><td>65</td>
               <td>—</td>
             </tr>
             <tr>
-              <td class="indent">Admission revenue</td>
-              <td>33,600</td><td>40,800</td><td>50,400</td><td>62,400</td><td>78,000</td><td>96,000</td>
-              <td>118,800</td><td>146,400</td><td>181,200</td><td>223,200</td><td>276,000</td><td>300,000</td>
-              <td class="pos">1,606,800</td>
+              <td class="indent">Admission @ €24</td>
+              <td>11,520</td><td>12,960</td><td>15,120</td><td>16,560</td><td>19,440</td><td>21,600</td>
+              <td>24,480</td><td>28,080</td><td>32,400</td><td>36,720</td><td>41,760</td><td>46,800</td>
+              <td>307,440</td>
             </tr>
             <tr class="row-total">
               <td>Total Revenue</td>
-              <td>33,600</td><td>40,800</td><td>50,400</td><td>62,400</td><td>78,000</td><td>96,000</td>
-              <td>118,800</td><td>146,400</td><td>181,200</td><td>223,200</td><td>276,000</td><td>300,000</td>
-              <td class="pos">1,606,800</td>
+              <td>11,520</td><td>12,960</td><td>15,120</td><td>16,560</td><td>19,440</td><td>21,600</td>
+              <td>24,480</td><td>28,080</td><td>32,400</td><td>36,720</td><td>41,760</td><td>46,800</td>
+              <td>307,440</td>
             </tr>
 
             <!-- OPERATING COSTS -->
@@ -724,42 +724,42 @@
             <!-- NET -->
             <tr class="row-net">
               <td>Net Profit / (Loss)</td>
-              <td class="pos">267</td>
-              <td class="pos">7,467</td>
-              <td class="pos">17,067</td>
-              <td class="pos">29,067</td>
-              <td class="pos">44,667</td>
-              <td class="pos">34,096</td>
-              <td class="pos">56,896</td>
-              <td class="pos">84,496</td>
-              <td class="pos">119,296</td>
-              <td class="pos">161,296</td>
-              <td class="pos">214,096</td>
-              <td class="pos">238,096</td>
-              <td class="pos">1,006,807</td>
+              <td class="neg">(21,813)</td>
+              <td class="neg">(20,373)</td>
+              <td class="neg">(18,213)</td>
+              <td class="neg">(16,773)</td>
+              <td class="neg">(13,893)</td>
+              <td class="neg">(40,304)</td>
+              <td class="neg">(37,424)</td>
+              <td class="neg">(33,824)</td>
+              <td class="neg">(29,504)</td>
+              <td class="neg">(25,184)</td>
+              <td class="neg">(20,144)</td>
+              <td class="neg">(15,104)</td>
+              <td class="neg">(292,553)</td>
             </tr>
             <tr>
               <td class="indent" style="font-style:italic; color: var(--text-muted);">Cumulative</td>
-              <td class="pos">267</td>
-              <td class="pos">7,734</td>
-              <td class="pos">24,801</td>
-              <td class="pos">53,868</td>
-              <td class="pos">98,535</td>
-              <td class="pos">132,631</td>
-              <td class="pos">189,527</td>
-              <td class="pos">274,023</td>
-              <td class="pos">393,319</td>
-              <td class="pos">554,615</td>
-              <td class="pos">768,711</td>
-              <td class="pos">1,006,807</td>
+              <td class="neg">(21,813)</td>
+              <td class="neg">(42,186)</td>
+              <td class="neg">(60,399)</td>
+              <td class="neg">(77,172)</td>
+              <td class="neg">(91,065)</td>
+              <td class="neg">(131,369)</td>
+              <td class="neg">(168,793)</td>
+              <td class="neg">(202,617)</td>
+              <td class="neg">(232,121)</td>
+              <td class="neg">(257,305)</td>
+              <td class="neg">(277,449)</td>
+              <td class="neg">(292,553)</td>
               <td>—</td>
             </tr>
           </tbody>
         </table>
       </div>
 
-      <div class="callout" style="margin-top: 1rem;">
-        <p><strong>Profitable from Month 1.</strong> Even at just 28 visits/day, admission revenue barely edges past operating costs. The 5% weekly compounding creates an exponential revenue curve that accelerates through the year, generating <strong>€1.01M net profit</strong> in Year 1.</p>
+      <div class="callout" style="background: var(--earth-soft); border-color: var(--earth-border);">
+        <p style="color: var(--earth);"><strong>Year 1 loss: €293k.</strong> At discounted pricing and slow growth, the business does not break even in Year 1. Revenue never catches up to the fixed cost base. Cumulative loss deepens every month. The path to profitability requires either raising prices toward the €40 list rate, accelerating growth above 3%/week, or cutting costs.</p>
       </div>
     </div>
 
@@ -769,33 +769,43 @@
     <div class="section">
       <div class="section-label">Unit Economics</div>
       <h2>Per-Visit Breakdown</h2>
-      <p>At full capacity (250 visits/day, Month 12), each €40 admission covers costs with exceptional margin.</p>
+      <p>At €24/visit with only 65 visitors/day (Month 12), fixed costs dominate. The unit economics only work at scale.</p>
 
       <div class="grid-2" style="margin-top: 0.75rem;">
         <div class="card accent-card accent-green">
           <h3>📥 Revenue per Visit</h3>
           <ul>
-            <li>Admission: <strong>€40.00</strong></li>
+            <li>Admission (discounted): <strong>€24.00</strong></li>
           </ul>
         </div>
         <div class="card accent-card accent-rose">
-          <h3>📤 Cost per Visit (at 250/day)</h3>
+          <h3>📤 Cost per Visit (at 65/day)</h3>
           <ul>
-            <li>Staff: €2.00</li>
-            <li>Rent: €1.33</li>
-            <li>Tech amort.: €1.11</li>
-            <li>Buildout amort.: €3.81</li>
-            <li><strong>Total: €8.25</strong></li>
+            <li>Staff: €7.69</li>
+            <li>Rent: €5.13</li>
+            <li>Tech amort.: €4.27</li>
+            <li>Buildout amort.: €14.65</li>
+            <li><strong>Total: €31.74</strong></li>
           </ul>
         </div>
       </div>
 
-      <div class="card" style="margin-top: 0.6rem;">
-        <h3>🎯 Contribution Margin</h3>
-        <p style="font-size: 1.1rem; font-weight: 700; color: var(--positive); margin-top: 0.25rem;">
-          €31.75 per visit — 79.4% margin
+      <div class="card" style="margin-top: 0.6rem; border-left: 3px solid var(--negative);">
+        <h3 style="color: var(--negative);">🚨 Negative Margin at M12</h3>
+        <p style="font-size: 1.1rem; font-weight: 700; color: var(--negative); margin-top: 0.25rem;">
+          -€7.74 per visit — losing money on every visitor
         </p>
-        <p style="margin-top: 0.4rem;">Before variable costs (utilities, consumables, vendor commissions). Fixed costs are spread across 250 daily visitors, driving margin dramatically higher than in early months. Even at Month 1 (28 visits/day), the model is marginally profitable.</p>
+        <p style="margin-top: 0.4rem;">At 65 visits/day and €24/visit, cost per visit (€31.74) exceeds revenue. The business needs <strong>86 visits/day</strong> at €24 to break even on monthly costs (including buildout), or <strong>46 visits/day</strong> without buildout.</p>
+      </div>
+
+      <div class="card accent-card accent-emerald" style="margin-top: 0.6rem;">
+        <h3>🎯 Future Upside: At Full Price & Scale</h3>
+        <p>If discounts are phased out and growth continues to 250/day:</p>
+        <ul>
+          <li>At <strong>250 visits/day × €40</strong>: cost/visit drops to €8.25 → <strong>€31.75 margin (79%)</strong></li>
+          <li>At <strong>250 visits/day × €24</strong>: cost/visit = €8.25 → <strong>€15.75 margin (66%)</strong></li>
+          <li>Full capacity at full price reached ~Month 22</li>
+        </ul>
       </div>
     </div>
 
@@ -804,35 +814,38 @@
          ══════════════════════════════════════════════════ -->
     <div class="section">
       <div class="section-label">Sensitivity</div>
-      <h2>What-If Scenarios</h2>
+      <h2>Path to Profitability</h2>
 
       <div class="card accent-card accent-plum">
-        <h3>🔮 Growth Rate Sensitivity</h3>
+        <h3>🔮 What It Takes to Break Even</h3>
         <ul>
-          <li><strong>3%/week:</strong> Reaches 250 at ~18 months. Year 1 revenue ~€988k, net ~€388k</li>
-          <li><strong>5%/week (base case):</strong> Reaches 250 at Month 12. Year 1 revenue €1.61M, net €1.01M</li>
-          <li><strong>7%/week:</strong> Reaches 250 at Month 9. Year 1 revenue ~€2.2M, net ~€1.6M</li>
-          <li><strong>Breakeven:</strong> 28 visits/day (M1–5) or 52 visits/day (M6+ with buildout)</li>
+          <li><strong>At €24/visit:</strong> Need 86 visits/day (M6+) or 46 visits/day (M1–5). Reached around Month 17–18</li>
+          <li><strong>At €32/visit</strong> (20% discount): Need 65 visits/day (M6+). Reached around Month 12</li>
+          <li><strong>At €40/visit</strong> (full price): Need 52 visits/day (M6+). Reached around Month 9</li>
+          <li><strong>Key lever:</strong> Raising average price from €24 to €32 cuts time-to-breakeven by 6 months</li>
         </ul>
       </div>
 
       <details class="expandable">
-        <summary>Price sensitivity at full capacity (250/day)</summary>
+        <summary>Discount phase-out strategy</summary>
         <div class="expand-body">
-          <p><strong>At 250 visits/day (Month 12 onward):</strong></p>
-          <p><strong>€30/visit:</strong> €225k revenue → €163k/mo net (72% margin)</p>
-          <p><strong>€40/visit:</strong> €300k revenue → €238k/mo net (79% margin)</p>
-          <p><strong>€50/visit:</strong> €375k revenue → €313k/mo net (83% margin)</p>
-          <p><strong>€60/visit:</strong> €450k revenue → €388k/mo net (86% margin)</p>
-          <p>At full capacity, even €30/visit produces outstanding margins due to the high fixed-cost leverage.</p>
+          <p>If the 40% promo discount is gradually phased out (€24 → €32 by M6, €40 by M12), the blended Year 1 revenue roughly doubles, turning the €293k loss into a small profit. The promotional period buys market awareness; the question is whether demand sustains as prices rise.</p>
+        </div>
+      </details>
+
+      <details class="expandable">
+        <summary>Cost reduction levers</summary>
+        <div class="expand-body">
+          <p><strong>Delay buildout:</strong> Removing the €200k Phase 2 buildout saves €28.6k/mo in M6–12. Year 1 loss drops from €293k to €93k.</p>
+          <p><strong>Reduce team to 3 FTE:</strong> Saves €3,750/mo = €45k/yr. Year 1 loss drops to €248k.</p>
+          <p><strong>Both:</strong> Year 1 loss drops to just €48k — survivable with modest seed capital.</p>
         </div>
       </details>
 
       <details class="expandable">
         <summary>Founding cohort economics</summary>
         <div class="expand-body">
-          <p>64 founding members receive their first visit free. At €40/visit, this represents <strong>€2,560 in foregone revenue</strong> — a negligible customer acquisition cost of €40/member for the most valuable early adopters who will provide critical feedback and become evangelists.</p>
-          <p>If each founding member returns 2x/month at €40, that cohort alone generates <strong>€5,120/month</strong> ongoing.</p>
+          <p>64 founding members receive their first visit free. At €24/visit, this represents <strong>€1,536 in foregone revenue</strong>. If each founding member returns 2x/month at €24, that cohort generates <strong>€3,072/month</strong> ongoing — meaningful when total monthly revenue is €11–47k.</p>
         </div>
       </details>
     </div>
@@ -842,20 +855,21 @@
          ══════════════════════════════════════════════════ -->
     <div class="section">
       <div class="section-label">Capital</div>
-      <h2>Startup Capital Requirements</h2>
+      <h2>Funding Requirements</h2>
 
       <div class="card accent-card accent-slate">
-        <h3>💼 Startup Capital Needed</h3>
+        <h3>💼 Capital Needed (Stress Case)</h3>
         <ul>
           <li>Tech equipment upfront: <strong>€100,000</strong></li>
-          <li>Working capital (3-month buffer): <strong>~€50,000</strong></li>
-          <li><strong>Total seed: ~€150,000</strong></li>
+          <li>Year 1 operating losses: <strong>€293,000</strong></li>
+          <li>Working capital buffer: <strong>~€57,000</strong></li>
+          <li><strong>Total funding needed: ~€450,000</strong></li>
         </ul>
-        <p style="margin-top: 0.5rem;">The model is cash-positive from Month 1 (barely — €267 net). By Month 5, cumulative profit reaches €99k. Phase 2 buildout (€200k from Month 6) requires either pre-funding or a small bridge, as cumulative profits only cover ~50% by the time it starts.</p>
+        <p style="margin-top: 0.5rem;">This stress scenario requires ~€450k to survive Year 1. The business doesn't generate positive monthly cash flow until visits reach ~46/day (without buildout) or ~86/day (with buildout) — around Months 14–18 at 3% weekly growth.</p>
       </div>
 
-      <div class="callout">
-        <p><strong>Slower ramp, higher ceiling.</strong> Unlike a flat-occupancy model, the exponential growth means Month 12 alone generates €238k net. By end of Year 1, cumulative profit exceeds €1M despite the conservative start.</p>
+      <div class="callout" style="background: var(--earth-soft); border-color: var(--earth-border);">
+        <p style="color: var(--earth);"><strong>This is a fundraising scenario, not a bootstrapping one.</strong> Unlike the base case (5%/week at €40), the stress test shows that heavy discounting + slow growth requires significant outside capital and patience. The business becomes a strong cash generator only after ~18 months.</p>
       </div>
     </div>
 
@@ -864,26 +878,26 @@
          ══════════════════════════════════════════════════ -->
     <div class="section">
       <div class="section-label">Risks</div>
-      <h2>Key Risks</h2>
+      <h2>Key Risks (Stress Scenario)</h2>
 
       <div class="grid-2">
         <div class="card accent-card accent-rose">
-          <h3>⚠️ Demand Risk</h3>
-          <p>Sustaining 5% weekly growth for 47 weeks is ambitious. Mitigated by Warsaw's low cost base — breakeven at just 28 visits/day (M1–5) means the model survives even if growth stalls early.</p>
+          <h3>⚠️ Cash Runway</h3>
+          <p>With €293k in Year 1 losses, the business burns ~€24k/month on average. Without sufficient runway, it dies before reaching the growth inflection point.</p>
         </div>
         <div class="card accent-card accent-warm">
-          <h3>⚠️ Ramp Risk</h3>
-          <p>5% weekly growth compounds aggressively — ~80 visits/day by Month 6, 250 by Month 12. The founding cohort's free first visit and community voting model are designed to seed organic word-of-mouth.</p>
+          <h3>⚠️ Discount Trap</h3>
+          <p>Promotional pricing at €24 may anchor customer expectations. Raising prices later risks churn. Must plan the transition from promotional to full price carefully.</p>
         </div>
       </div>
       <div class="grid-2">
         <div class="card accent-card accent-sky">
-          <h3>⚠️ Buildout Overrun</h3>
-          <p>Phase 2 construction costs could exceed €200k. Cumulative profit at Month 5 is ~€99k — a shortfall vs the €200k buildout. May need a small bridge loan (~€100k) or delay Phase 2 by 2 months to self-fund.</p>
+          <h3>⚠️ Buildout Timing</h3>
+          <p>Starting €200k buildout at Month 6 — when the business is losing €40k/mo — is aggressive. Consider delaying to Month 12+ when demand is proven and cash losses are narrowing.</p>
         </div>
         <div class="card accent-card accent-slate">
-          <h3>⚠️ Variable Costs</h3>
-          <p>Utilities, consumables, insurance, and vendor commissions are not modeled. These are typically 10–15% of revenue in similar venues, reducing margin to ~50–55% — still very healthy.</p>
+          <h3>⚠️ Growth Stall</h3>
+          <p>3%/week growth stalling below 86 visits/day means the business never reaches monthly breakeven with buildout costs. The "valley of death" between months 6–18 is the critical risk zone.</p>
         </div>
       </div>
     </div>
@@ -892,7 +906,7 @@
          8. FOOTNOTE
          ══════════════════════════════════════════════════ -->
     <div class="section">
-      <p style="font-size: 0.78rem; color: var(--text-muted); font-style: italic;">Growth model: 25 paying visits/day compounding at 5% per week (doubling every ~14 weeks), capped at 250 daily capacity. 64 founding members receive their first experience free — a ~€2,560 customer acquisition investment. All projections assume admission revenue only — workshop fees, F&B commissions, and premium experiences represent upside not included in this model.</p>
+      <p style="font-size: 0.78rem; color: var(--text-muted); font-style: italic;">Stress-test model: 15 paying visits/day compounding at 3% per week (doubling every ~23 weeks), capped at 250 daily capacity. Average admission €24 (40% promotional discount from €40 list price). 64 founding members receive their first experience free. All projections assume discounted admission revenue only — full-price transitions, workshop fees, F&B commissions, and premium experiences represent upside not modeled.</p>
     </div>
 
   </div>
