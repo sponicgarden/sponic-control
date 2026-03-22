@@ -586,6 +586,60 @@
     }
 
     /* ════════════════════════════════════════════════════
+       HERO LOGO
+       ════════════════════════════════════════════════════ */
+    .hero-logo {
+      max-width: 420px;
+      width: 80%;
+      margin: 0 auto 1.2rem;
+      display: block;
+      filter: drop-shadow(0 2px 12px rgba(0,0,0,0.15));
+    }
+
+    /* ════════════════════════════════════════════════════
+       CONCEPT GALLERY
+       ════════════════════════════════════════════════════ */
+    .concept-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.2rem;
+      margin: 1.5rem 0 0.5rem;
+    }
+    .concept-card {
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--surface);
+      border: 1px solid var(--border-light);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .concept-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+    .concept-card img {
+      width: 100%;
+      aspect-ratio: 16/10;
+      object-fit: cover;
+      display: block;
+    }
+    .concept-card .concept-label {
+      padding: 0.7rem 0.9rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-soft);
+    }
+    .concept-card .concept-desc {
+      padding: 0 0.9rem 0.8rem;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+      margin-top: -0.3rem;
+    }
+    @media (max-width: 600px) {
+      .concept-gallery { grid-template-columns: 1fr; }
+    }
+
+    /* ════════════════════════════════════════════════════
        CNS DIAGRAM
        ════════════════════════════════════════════════════ */
     .cns-diagram {
@@ -634,7 +688,8 @@
     </svg>
 
     <div class="hero-content">
-      <h1>Sponic Garden</h1>
+      <img src="branding/00-chosen-wordmark.jpg" alt="Sponic Garden" class="hero-logo">
+      <h1 style="position:absolute;left:-9999px;">Sponic Garden</h1>
       <!-- Vine underline -->
       <svg class="vine-underline" viewBox="0 0 200 12" xmlns="http://www.w3.org/2000/svg">
         <path d="M0 6 Q40 2 70 6 T130 5 T200 6" fill="none" stroke="#1a4d2e" stroke-width="1.5" opacity="0.4"/>
@@ -668,6 +723,37 @@
       <p>What makes it fundamentally different is that <strong>every system — from irrigation to event scheduling to food logistics — runs on a <span class="annotation" data-note="Not bolted-on SaaS tools — a unified platform with multimodal data fusion, built from day one.">native AI platform</span></strong>. The facility is a living lab where AI doesn't assist operations — it <em>is</em> the operating system.</p>
       <div class="margin-note" style="top: 0.5rem;">Think: a greenhouse that learns. Every sensor reading, every member interaction, every plant measurement feeds a single intelligence that gets better daily.</div>
       <div class="margin-note" style="top: 6.5rem;"><strong><a href="https://sponicgarden.com/charter" style="color:var(--green);text-decoration:none;border-bottom:1px solid var(--green-border)">The Charter</a></strong> — 7 founding principles: contribution as currency, embrace new tech, protect privacy, promote health, educate, optimize through community voice, start with givers.</div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════
+         CONCEPT GALLERY — Moody Evening Scenes
+         ══════════════════════════════════════════════════ -->
+    <div class="concept-gallery">
+      <div class="concept-card">
+        <img src="branding/70-moody-lounge.jpg" alt="Greenhouse Social Lounge" loading="lazy">
+        <div class="concept-label">Social Lounge</div>
+        <div class="concept-desc">Craft cocktails among overgrown monstera, amber sensor LEDs glowing like fireflies in the foliage.</div>
+      </div>
+      <div class="concept-card">
+        <img src="branding/74-moody-gardening.jpg" alt="Gardening Workshop" loading="lazy">
+        <div class="concept-label">Gardening Workshop</div>
+        <div class="concept-desc">Evening planting sessions under dramatic grow lights. Soil probes and plant health dashboards guide every hand.</div>
+      </div>
+      <div class="concept-card">
+        <img src="branding/71-moody-yoga.jpg" alt="Yoga Among Plants" loading="lazy">
+        <div class="concept-label">Yoga & Movement</div>
+        <div class="concept-desc">Warrior pose at dusk. Beeswax candles line the floor, purple grow bars illuminate towering ferns.</div>
+      </div>
+      <div class="concept-card">
+        <img src="branding/73-moody-hottub.jpg" alt="Hot Tub Retreat" loading="lazy">
+        <div class="concept-label">Thermal Wellness</div>
+        <div class="concept-desc">Wooden barrel hot tubs wrapped in trailing philodendron. Steam rises into candlelight and grow light glow.</div>
+      </div>
+      <div class="concept-card">
+        <img src="branding/72-moody-dinner.jpg" alt="Harvest Dinner" loading="lazy">
+        <div class="concept-label">Harvest Dinner</div>
+        <div class="concept-desc">Farm-to-table under the glass. Herb walls lit from below, vertical microgreen racks in purple-pink.</div>
+      </div>
     </div>
 
     <!-- ══════════════════════════════════════════════════
