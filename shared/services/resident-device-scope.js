@@ -1,5 +1,5 @@
 /**
- * Resident device access scope helper.
+ * Member device access scope helper.
  *
  * Rules:
  * - Staff/admin/oracle: full access.
@@ -11,7 +11,7 @@ import { supabase } from '../supabase.js';
 const STAFF_ROLES = new Set(['staff', 'admin', 'oracle']);
 const ASSIGNMENT_ACTIVE_STATUSES = ['active', 'pending_contract', 'contract_sent'];
 
-export async function getResidentDeviceScope(appUser, hasPermission) {
+export async function getMemberDeviceScope(appUser, hasPermission) {
   const role = appUser?.role || null;
   const fullAccess = STAFF_ROLES.has(role) || !!hasPermission?.('view_spaces');
 

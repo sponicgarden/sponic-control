@@ -1,7 +1,7 @@
 /**
  * Personal Page Shell — Auth gate + header + privacy controls for personal pages
  *
- * Sits between public-shell.js (no auth) and resident-shell.js (heavy auth + tabs).
+ * Sits between public-shell.js (no auth) and member-shell.js (heavy auth + tabs).
  * Default: requires authentication, any registered user can view.
  * Owners (admin/oracle) see a floating settings FAB to manage visibility + grants.
  */
@@ -16,7 +16,7 @@ const ROLE_LEVEL = { oracle: 4, admin: 3, staff: 2, demo: 2, resident: 1, associ
 const VISIBILITY_OPTIONS = [
   { value: 'public',         label: 'Public',    icon: 'globe',  desc: 'Anyone — no login required' },
   { value: 'registered',     label: 'Registered', icon: 'person', desc: 'Any signed-in user' },
-  { value: 'role:resident',  label: 'Residents',  icon: 'people', desc: 'Residents and above' },
+  { value: 'role:resident',  label: 'Members',  icon: 'people', desc: 'Residents and above' },
   { value: 'role:staff',     label: 'Staff',      icon: 'shield', desc: 'Staff and above' },
   { value: 'role:admin',     label: 'Admins',     icon: 'key',    desc: 'Admins only' },
   { value: 'private',        label: 'Private',    icon: 'lock',   desc: 'Only me + granted emails' },
@@ -568,7 +568,7 @@ function renderUserMenu(state) {
       ${avatarHtml}<span class="user-profile-name">${esc(name)}</span>
     </button>
     <div class="user-menu-dropdown hidden">
-      <a href="/residents/profile.html" class="user-menu-item">Profile</a>
+      <a href="/members/profile.html" class="user-menu-item">Profile</a>
       ${navLinks}
       <button class="user-menu-item user-menu-signout" id="ppSignOutBtn">Sign Out</button>
     </div>`;

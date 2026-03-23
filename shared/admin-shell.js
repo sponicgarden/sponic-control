@@ -79,7 +79,7 @@ export const ALL_ADMIN_TABS = [
   { id: 'brand', label: 'Brand', href: 'brand.html', permission: 'view_settings', section: 'admin' },
   { id: 'accounting', label: 'Accounting', href: 'accounting.html', permission: 'view_accounting', section: 'admin' },
   { id: 'testdev', label: 'Test Dev', href: 'testdev.html', permission: 'view_settings', section: 'admin' },
-  { id: 'lifeofpai', label: 'Life of PAI', href: '/residents/lifeofpaiadmin.html', permission: 'admin_pai_settings', section: 'admin', feature: 'pai' },
+  { id: 'lifeofpai', label: 'Life of PAI', href: '/members/lifeofpaiadmin.html', permission: 'admin_pai_settings', section: 'admin', feature: 'pai' },
   { id: 'openclaw', label: 'AlpaClaw', href: 'alpaclaw.html', permission: 'view_openclaw', section: 'admin', feature: 'pai' },
   // DevControl is a top-level nav item (in context switcher), not an admin sub-tab
 ];
@@ -222,7 +222,7 @@ function renderUserInfo(el, appUser, profileHref) {
     </button>
     <div class="user-menu-dropdown hidden">
       <a href="${profileHref}" class="user-menu-item">Profile</a>
-      <a href="/residents/lighting.html" class="user-menu-item">Intranet</a>
+      <a href="/members/lighting.html" class="user-menu-item">Intranet</a>
       <button class="user-menu-item user-menu-signout" id="headerSignOutBtn">Sign Out</button>
     </div>`;
 
@@ -254,7 +254,7 @@ function escapeHtml(s) {
 }
 
 // =============================================
-// CONTEXT SWITCHER (Devices / Resident / Associate / Staff / Admin)
+// CONTEXT SWITCHER (Devices / Member / Associate / Staff / Admin)
 // =============================================
 async function renderContextSwitcher(userRole, activeSection = 'staff') {
   const switcher = document.getElementById('contextSwitcher');
@@ -281,8 +281,8 @@ async function renderContextSwitcher(userRole, activeSection = 'staff') {
   const hasAssociatePerms = hasAnyPermission('clock_in_out', 'view_own_hours');
 
   const tabs = [];
-  if (hasDevicePerms) tabs.push({ id: 'devices', label: 'Devices', href: '/residents/devices.html' });
-  tabs.push({ id: 'resident', label: 'Residents', href: '/residents/' });
+  if (hasDevicePerms) tabs.push({ id: 'devices', label: 'Devices', href: '/members/devices.html' });
+  tabs.push({ id: 'resident', label: 'Members', href: '/members/' });
   if (hasAssociatePerms || ['staff', 'admin', 'oracle'].includes(userRole)) {
     tabs.push({ id: 'associate', label: 'Associates', href: '/associates/worktracking.html' });
   }
@@ -537,7 +537,7 @@ export async function initAdminPage({ activeTab, requiredRole = 'staff', require
       const userLevel = ROLE_LEVEL[userRole] || 0;
       const requiredLevel = ROLE_LEVEL[requiredRole] || 0;
       meetsRequirement = userLevel >= requiredLevel;
-      // Also allow access if the user has the specific tab permission (e.g. resident with view_appdev)
+      // Also allow access if the user has the specific tab permission (e.g. member with view_appdev)
       if (!meetsRequirement) {
         const tabDef = ALL_ADMIN_TABS.find(t => t.id === activeTab);
         if (tabDef?.permission && state.hasPermission?.(tabDef.permission)) {
@@ -554,7 +554,7 @@ export async function initAdminPage({ activeTab, requiredRole = 'staff', require
       const siteAuthEl = document.getElementById('aapHeaderAuth');
       const legacyUserInfo = document.getElementById('userInfo');
       if (siteAuthEl) {
-        renderUserInfo(siteAuthEl, state.appUser, '/residents/profile.html');
+        renderUserInfo(siteAuthEl, state.appUser, '/members/profile.html');
         siteAuthEl.classList.add('user-info');
         const signInLink = document.getElementById('aapSignInLink');
         if (signInLink) signInLink.style.display = 'none';
@@ -562,7 +562,7 @@ export async function initAdminPage({ activeTab, requiredRole = 'staff', require
         if (mobileSignInLink) mobileSignInLink.closest('li')?.remove();
         if (legacyUserInfo) legacyUserInfo.style.display = 'none';
       } else if (legacyUserInfo) {
-        renderUserInfo(legacyUserInfo, state.appUser, '/residents/profile.html');
+        renderUserInfo(legacyUserInfo, state.appUser, '/members/profile.html');
       }
 
       // Update role badge and admin-only visibility

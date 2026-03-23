@@ -387,7 +387,7 @@ function renderUserMenuHTML(appUser, profileHref) {
 
   let navLinks = '';
   if (isResident) {
-    navLinks += `<a href="/residents/lighting.html" class="user-menu-item">Intranet</a>`;
+    navLinks += `<a href="/members/lighting.html" class="user-menu-item">Intranet</a>`;
   }
 
   return `
@@ -406,9 +406,9 @@ function renderUserMenuHTML(appUser, profileHref) {
  * @param {Object} options
  * @param {string} options.authContainerId - ID of element to fill with user menu when signed in
  * @param {string} options.signInLinkId - ID of Sign In link to hide when signed in
- * @param {string} [options.profileHref='/residents/profile.html'] - Profile link for dropdown
+ * @param {string} [options.profileHref='/members/profile.html'] - Profile link for dropdown
  */
-export async function initPublicHeaderAuth({ authContainerId, signInLinkId, profileHref = '/residents/profile.html' }) {
+export async function initPublicHeaderAuth({ authContainerId, signInLinkId, profileHref = '/members/profile.html' }) {
   const authEl = document.getElementById(authContainerId);
   const signInEl = document.getElementById(signInLinkId);
   if (!authEl) return;
@@ -434,9 +434,9 @@ export async function initPublicHeaderAuth({ authContainerId, signInLinkId, prof
         // Build mobile nav items for authenticated user
         const mobileItems = [];
         if (isResident) {
-          mobileItems.push(`<li class="aap-mobile-nav__item"><a href="/residents/lighting.html" class="aap-mobile-nav__link">Intranet</a></li>`);
+          mobileItems.push(`<li class="aap-mobile-nav__item"><a href="/members/lighting.html" class="aap-mobile-nav__link">Intranet</a></li>`);
         }
-        mobileItems.push(`<li class="aap-mobile-nav__item"><a href="/residents/profile.html" class="aap-mobile-nav__link">Profile</a></li>`);
+        mobileItems.push(`<li class="aap-mobile-nav__item"><a href="/members/profile.html" class="aap-mobile-nav__link">Profile</a></li>`);
         mobileItems.push(`<li class="aap-mobile-nav__item"><button class="aap-mobile-nav__link aap-mobile-nav__signout" id="mobileSignOutBtn" style="background:none;border:none;color:#c0392b;cursor:pointer;font:inherit;padding:inherit;width:100%;text-align:left;">Sign Out</button></li>`);
 
         mobileLi.outerHTML = mobileItems.join('');

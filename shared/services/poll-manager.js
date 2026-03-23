@@ -2,7 +2,7 @@
  * Poll Manager - Reusable polling with visibility-based pause
  * and circuit breaker for Supabase outage resilience.
  *
- * Used by all mobile tab modules and resident pages to refresh data on an
+ * Used by all mobile tab modules and member pages to refresh data on an
  * interval, pausing when the app/tab is not visible or when the backend is down.
  */
 

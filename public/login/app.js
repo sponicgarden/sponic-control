@@ -78,9 +78,9 @@ function getRedirectTarget(role) {
   if (['public'].includes(role)) {
     target = '/spaces/';
   }
-  // Resident/associate users go to resident area by default (not admin)
+  // Resident/associate users go to member area by default (not admin)
   else if (target === '/spaces/admin/' && ['resident', 'associate'].includes(role)) {
-    target = '/residents/cameras.html';
+    target = '/members/cameras.html';
   }
   return target;
 }

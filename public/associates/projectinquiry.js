@@ -106,14 +106,14 @@ async function loadUsers() {
   const select = document.getElementById('assignedToSelect');
   if (!users || !select) return;
 
-  // Group by role, with staff/associates/admins first, residents last
+  // Group by role, with staff/associates/admins first, members last
   const roleOrder = ['oracle', 'admin', 'staff', 'associate', 'resident'];
   const roleLabels = {
     oracle: 'Admin',
     admin: 'Admin',
     staff: 'Staff',
     associate: 'Associates',
-    resident: 'Residents',
+    resident: 'Members',
   };
 
   // Merge oracle and admin into one group
@@ -121,7 +121,7 @@ async function loadUsers() {
     'Staff': [],
     'Associates': [],
     'Admin': [],
-    'Residents': [],
+    'Members': [],
   };
 
   users.forEach(u => {
@@ -130,14 +130,14 @@ async function loadUsers() {
     const name = (u.first_name && u.last_name)
       ? `${u.first_name} ${u.last_name}`
       : u.display_name || u.email;
-    const group = roleLabels[u.role] || 'Residents';
+    const group = roleLabels[u.role] || 'Members';
     if (groups[group]) {
       groups[group].push({ id: u.id, name });
     }
   });
 
   // Add optgroups in order: Staff, Associates, Admin, Residents
-  const groupOrder = ['Staff', 'Associates', 'Admin', 'Residents'];
+  const groupOrder = ['Staff', 'Associates', 'Admin', 'Members'];
   groupOrder.forEach(groupName => {
     const members = groups[groupName];
     if (!members || members.length === 0) return;

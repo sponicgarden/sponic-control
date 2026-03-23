@@ -1,6 +1,6 @@
 /**
- * PAI (Prompt Alpaca Intelligence) - Floating chat widget for resident pages
- * Allows residents to control smart home devices and ask property questions
+ * PAI (Prompt Alpaca Intelligence) - Floating chat widget for member pages
+ * Allows members to control smart home devices and ask property questions
  * via natural language, powered by Gemini AI with function calling.
  */
 

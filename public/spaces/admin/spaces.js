@@ -1058,7 +1058,7 @@ function showSpaceDetail(spaceId) {
         <p><strong>Size:</strong> ${space.sq_footage ? `${space.sq_footage} sq ft` : 'N/A'}</p>
         <p><strong>Beds:</strong> ${getBedSummary(space) || 'N/A'}</p>
         ${space.can_be_dwelling && ((space.bath_privacy && space.bath_privacy !== 'none') || space.bath_fixture) ? `<p><strong>Bathroom:</strong> ${(space.bath_privacy && space.bath_privacy !== 'none') ? space.bath_privacy : ''}${space.bath_fixture ? ` (${space.bath_fixture})` : ''}</p>` : ''}
-        <p><strong>Capacity:</strong> ${space.min_residents || 1}-${space.max_residents || '?'} residents</p>
+        <p><strong>Capacity:</strong> ${space.min_members || 1}-${space.max_members || '?'} members</p>
         ${space.gender_restriction && space.gender_restriction !== 'none' ? `<p><strong>Restriction:</strong> ${space.gender_restriction} only</p>` : ''}
       </div>
       <div class="detail-section">
@@ -1116,8 +1116,8 @@ async function openEditSpace(spaceId) {
   document.getElementById('editRentalTerm').value = space.rental_term || '';
   document.getElementById('editStandardDeposit').value = space.standard_deposit || '';
   document.getElementById('editSqFootage').value = space.sq_footage || '';
-  document.getElementById('editMinResidents').value = space.min_residents || 1;
-  document.getElementById('editMaxResidents').value = space.max_residents || '';
+  document.getElementById('editMinResidents').value = space.min_members || 1;
+  document.getElementById('editMaxResidents').value = space.max_members || '';
   document.getElementById('editBathPrivacy').value = space.bath_privacy || '';
   document.getElementById('editBathFixture').value = space.bath_fixture || '';
   document.getElementById('editGenderRestriction').value = space.gender_restriction || 'none';

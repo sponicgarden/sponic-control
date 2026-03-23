@@ -285,7 +285,7 @@ function getTemplatePreview(templateContent) {
  * Get the default template content (based on Sponic Garden Work Trade Agreement)
  */
 function getDefaultTemplate() {
-  return `# Work Agreement for Residents of the Sponic Garden
+  return `# Work Agreement for Members of the Sponic Garden
 
 **Date: {{signing_date}}**
 

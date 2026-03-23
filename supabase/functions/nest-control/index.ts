@@ -127,7 +127,7 @@ serve(async (req) => {
           grant_type: "authorization_code",
           redirect_uri:
             body.redirectUri ||
-            "https://sponicgarden.com/residents/climate.html",
+            "https://sponicgarden.com/members/climate.html",
         }),
       });
 

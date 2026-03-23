@@ -1,7 +1,7 @@
 /**
  * Climate Data Service
  * Loads Nest thermostat data and sends control commands via edge function.
- * Includes resident-level filtering: residents see only their assigned room's thermostat.
+ * Includes resident-level filtering: members see only their assigned room's thermostat.
  * No DOM code — just data fetching and thermostat control.
  */
 
@@ -51,7 +51,7 @@ async function nestApi(action, params = {}) {
 // =============================================
 
 /**
- * Load thermostats from nest_devices, filtered by role + resident assignment.
+ * Load thermostats from nest_devices, filtered by role + member assignment.
  *
  * Role-based filtering:
  *  - admin/staff: see all active thermostats (except min_role='admin' for staff)
@@ -110,7 +110,7 @@ export async function loadThermostats(appUser) {
 }
 
 /**
- * Get space IDs the resident is assigned to via active assignments.
+ * Get space IDs the member is assigned to via active assignments.
  * Chain: app_users.email → people.email → assignments (active) → assignment_spaces.space_id
  */
 async function getResidentSpaceIds(email) {

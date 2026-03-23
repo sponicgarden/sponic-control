@@ -528,14 +528,14 @@ function showInvitationModal(email, role) {
     admin: 'full admin access (view all spaces, occupant details, edit spaces, manage photos, and invite users)',
     staff: 'staff access (view all spaces and occupant details)',
     demo: 'demo access (conduct self-demo of SponicGarden, see redacted fake names and amounts for privacy)',
-    resident: 'resident access (cameras, lighting, and house info)',
+    resident: 'member access (cameras, lighting, and house info)',
     associate: 'associate access (cameras, lighting, and house info)',
     public: 'public access (view available spaces)',
     prospect: 'prospect access (view available spaces via link, no login required)',
   };
   const roleDescription = roleDescriptions[role] || roleDescriptions.resident;
 
-  const roleLabels = { admin: 'an admin', staff: 'a staff member', demo: 'a demo user', resident: 'a resident', associate: 'an associate', public: 'a public user' };
+  const roleLabels = { admin: 'an admin', staff: 'a staff member', demo: 'a demo user', resident: 'a member', associate: 'an associate', public: 'a public user' };
   const inviteText = `Hi,
 
 You've been invited to access AlpacApp as ${roleLabels[role] || 'a user'}.
@@ -778,7 +778,7 @@ async function removeUser(userId) {
   }
 }
 
-// --- Current Resident Management ---
+// --- Current Member Management ---
 
 async function refreshResidencyStatus() {
   try {
@@ -1095,7 +1095,7 @@ function renderUsers() {
                   <option value="public" ${u.role === 'public' ? 'selected' : ''}>Public</option>
                   <option value="demo" ${u.role === 'demo' ? 'selected' : ''}>Demo</option>
                   <option value="associate" ${u.role === 'associate' ? 'selected' : ''}>Associate</option>
-                  <option value="resident" ${u.role === 'resident' ? 'selected' : ''}>Resident</option>
+                  <option value="resident" ${u.role === 'member' ? 'selected' : ''}>Member</option>
                   <option value="staff" ${u.role === 'staff' ? 'selected' : ''}>Staff</option>
                   <option value="admin" ${u.role === 'admin' ? 'selected' : ''}>Admin</option>
                   <option value="oracle" ${u.role === 'oracle' ? 'selected' : ''}>Oracle</option>
@@ -1140,9 +1140,9 @@ function renderUsers() {
 
 // ---- Permission groups: functional grouping with colors ----
 // Each group maps DB permission keys → a visual section with icon, label, and background tint.
-// "admin_key" is the matching admin_resident permission to indent under this group.
+// "admin_key" is the matching admin_member permission to indent under this group.
 const PERM_GROUPS = [
-  // -- Resident smart-home tabs (matches GUI tab order: Lighting → Music → Cameras → Climate → Laundry → Cars → Profile → PAI) --
+  // -- Member smart-home tabs (matches GUI tab order: Lighting → Music → Cameras → Climate → Laundry → Cars → Profile → PAI) --
   { id: 'lighting', icon: '💡', label: 'Lighting', bg: '#fef9ec', headerBg: '#fdf0cc', headerColor: '#92600e',
     keys: ['view_lighting', 'control_lighting'], adminKey: 'admin_lighting_settings' },
   { id: 'music',    icon: '🎵', label: 'Music',    bg: '#f3effc', headerBg: '#e2dafc', headerColor: '#5b3fa0',
@@ -1204,7 +1204,7 @@ const PERM_GROUPS = [
 
 // Super-sections that group the above
 const PERM_SUPER_SECTIONS = [
-  { label: 'Resident', groupIds: ['lighting','music','cameras','climate','laundry','cars','profile','pai'] },
+  { label: 'Member', groupIds: ['lighting','music','cameras','climate','laundry','cars','profile','pai'] },
   { label: 'Staff',    groupIds: ['spaces','rentals','events','media','purchases','sms','hours','faq','voice','todo','appdev'] },
   { label: 'Admin',    groupIds: ['users','passwords','settings','templates','accounting','testdev'] },
   { label: 'Associate',groupIds: ['associate'] },
@@ -1435,7 +1435,7 @@ window.copyInviteText = copyInviteText;
 window.closeInviteModal = closeInviteModal;
 window.showInvitationModal = showInvitationModal;
 window.sendInviteEmail = sendInviteEmail;
-window.toggleCurrentResident = toggleCurrentResident;
+window.toggleCurrentMember = toggleCurrentResident;
 window.refreshResidencyStatus = refreshResidencyStatus;
 window.showLinkPersonModal = showLinkPersonModal;
 window.closeLinkPersonModal = closeLinkPersonModal;

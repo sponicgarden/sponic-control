@@ -825,7 +825,7 @@ function displaySpaceDetail(space) {
         <p><strong>Size:</strong> ${space.sq_footage ? `${space.sq_footage} sq ft` : 'N/A'}</p>
         <p><strong>Beds:</strong> ${getBedSummary(space) || 'N/A'}</p>
         ${space.can_be_dwelling && ((space.bath_privacy && space.bath_privacy !== 'none') || space.bath_fixture) ? `<p><strong>Bathroom:</strong> ${(space.bath_privacy && space.bath_privacy !== 'none') ? space.bath_privacy : ''}${space.bath_fixture ? ` (${space.bath_fixture})` : ''}</p>` : ''}
-        <p><strong>Capacity:</strong> ${space.min_residents || 1}-${space.max_residents || '?'} residents</p>
+        <p><strong>Capacity:</strong> ${space.min_members || 1}-${space.max_members || '?'} residents</p>
       </div>
       <div class="detail-section">
         <h3>Availability</h3>

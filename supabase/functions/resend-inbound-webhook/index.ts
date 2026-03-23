@@ -1076,7 +1076,7 @@ async function handleAlpaclawEmail(
     }
 
     if (!replyText) {
-      replyText = `Thank you for your email! I've received your message and I'll do my best to help.\n\nFor faster responses, you can also chat with me on Discord at the Alpacord server, or visit https://sponicgarden.com/residents/ (requires resident login).`;
+      replyText = `Thank you for your email! I've received your message and I'll do my best to help.\n\nFor faster responses, you can also chat with me on Discord at the Alpacord server, or visit https://sponicgarden.com/members/ (requires resident login).`;
     }
 
     const sendResult = await sendAlpaclawReply(resendApiKey, senderEmail, replyText, subject, bodyText || bodyHtml || "");
@@ -1108,7 +1108,7 @@ async function handleAlpaclawEmail(
     const sendResult = await sendAlpaclawReply(
       resendApiKey,
       senderEmail,
-      "Thank you for your email! I've received your message and the team will review it shortly.\n\nFor immediate assistance, you can reach us on Discord or at https://sponicgarden.com/residents/.",
+      "Thank you for your email! I've received your message and the team will review it shortly.\n\nFor immediate assistance, you can reach us on Discord or at https://sponicgarden.com/members/.",
       subject,
       bodyText || bodyHtml || ""
     );
@@ -1572,7 +1572,7 @@ async function handlePaiEmail(
       }
 
       if (!replyText) {
-        replyText = `Thank you for your email. I've received your ${classification.type === "command" ? "request" : "question"} and I'll have someone from the team follow up with you.\n\nFor faster responses, you can chat with me directly at https://sponicgarden.com/residents/ (requires resident login).`;
+        replyText = `Thank you for your email. I've received your ${classification.type === "command" ? "request" : "question"} and I'll have someone from the team follow up with you.\n\nFor faster responses, you can chat with me directly at https://sponicgarden.com/members/ (requires resident login).`;
       }
 
       const sendResult = await sendPaiReply(resendApiKey, senderEmail, replyText, subject, bodyText || bodyHtml || "");
@@ -1605,7 +1605,7 @@ async function handlePaiEmail(
       const sendResult = await sendPaiReply(
         resendApiKey,
         senderEmail,
-        "Thank you for your email. I've received your message and the team will review it shortly.\n\nFor immediate assistance, you can call us or chat with me at https://sponicgarden.com/residents/.",
+        "Thank you for your email. I've received your message and the team will review it shortly.\n\nFor immediate assistance, you can call us or chat with me at https://sponicgarden.com/members/.",
         subject,
         bodyText || bodyHtml || ""
       );

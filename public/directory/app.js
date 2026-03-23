@@ -16,7 +16,7 @@ const ROLE_LABELS = {
   admin: 'Admin',
   oracle: 'Admin',
   staff: 'Staff',
-  resident: 'Resident',
+  resident: 'Member',
   associate: 'Associate',
   demo: 'Demo',
   public: 'Guest'
@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Determine viewer relationship
     const isSelf = viewer?.appUser?.id === profileUser.id;
-    const isResident = viewer?.isResident === true;
+    const isMember = viewer?.isMember === true;
 
     // Load related data in parallel
     const [assignmentResult, ownedVehiclesResult, drivenVehiclesResult] = await Promise.all([
@@ -162,7 +162,7 @@ function renderProfile(user, ctx) {
   if (isSelf) {
     html += `<div class="dir-self-banner">
       <span>This is your personal page</span>
-      <a href="/residents/profile.html">Edit Profile</a>
+      <a href="/members/profile.html">Edit Profile</a>
     </div>`;
   }
 

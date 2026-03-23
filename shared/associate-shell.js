@@ -1,7 +1,7 @@
 /**
  * Associate Shell - Shared module for all associate pages
  * Provides: auth flow, tab navigation, context switcher, toast notifications
- * Cloned from resident-shell.js with associate-specific tab config
+ * Cloned from member-shell.js with associate-specific tab config
  */
 
 import { supabase } from './supabase.js';
@@ -75,7 +75,7 @@ function renderAssociateTabNav(activeTab) {
 }
 
 // =============================================
-// CONTEXT SWITCHER (Devices / Resident / Associate / Staff / Admin)
+// CONTEXT SWITCHER (Devices / Member / Associate / Staff / Admin)
 // =============================================
 function renderContextSwitcher() {
   const switcher = document.getElementById('contextSwitcher');
@@ -84,13 +84,13 @@ function renderContextSwitcher() {
   const hasStaffPerms = hasAnyPermission(...STAFF_PERMISSION_KEYS);
   const hasAdminPerms = hasAnyPermission(...ADMIN_PERMISSION_KEYS);
   if (!hasStaffPerms && !hasAdminPerms) {
-    // Still show switcher for associates (they can see Resident + Associate at minimum)
+    // Still show switcher for associates (they can see Member + Associate at minimum)
     // but hide Staff/Admin if no perms
   }
 
   const tabs = [
-    { id: 'devices', label: 'Devices', href: '/residents/devices.html' },
-    { id: 'resident', label: 'Residents', href: '/residents/' },
+    { id: 'devices', label: 'Devices', href: '/members/devices.html' },
+    { id: 'resident', label: 'Members', href: '/members/' },
     { id: 'associate', label: 'Associates', href: '/associates/worktracking.html' },
     { id: 'staff', label: 'Staff', href: '/spaces/admin/' },
     { id: 'admin', label: 'Admin', href: '/spaces/admin/users.html' },
@@ -384,7 +384,7 @@ export async function initAssociatePage({ activeTab, onReady }) {
       const siteAuthEl = document.getElementById('aapHeaderAuth');
       const legacyUserInfo = document.getElementById('userInfo');
       if (siteAuthEl) {
-        renderUserInfo(siteAuthEl, state.appUser, '/residents/profile.html');
+        renderUserInfo(siteAuthEl, state.appUser, '/members/profile.html');
         siteAuthEl.classList.add('user-info');
         const signInLink = document.getElementById('aapSignInLink');
         if (signInLink) signInLink.style.display = 'none';
@@ -392,7 +392,7 @@ export async function initAssociatePage({ activeTab, onReady }) {
         if (mobileSignInLink) mobileSignInLink.closest('li')?.remove();
         if (legacyUserInfo) legacyUserInfo.style.display = 'none';
       } else if (legacyUserInfo) {
-        renderUserInfo(legacyUserInfo, state.appUser, '/residents/profile.html');
+        renderUserInfo(legacyUserInfo, state.appUser, '/members/profile.html');
       }
 
       // Update role badge

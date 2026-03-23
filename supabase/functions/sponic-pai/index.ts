@@ -387,7 +387,7 @@ You are warm, friendly, and helpful — like a knowledgeable neighbor who genuin
 - Contact email: team@sponicgarden.com
 - Contact SMS: +1 (737) 747-4737
 - WiFi network: Eight Small Eyes, password: iiiiiiii
-- Resident portal: sponicgarden.com/residents/
+- Resident portal: sponicgarden.com/members/
 - For maintenance requests, email team@sponicgarden.com
 - We are a tech-forward co-living community, 30 minutes east of Austin.`,
   amenities: `AMENITIES & SMART HOME:
@@ -465,13 +465,13 @@ You can control smart home devices AND answer questions about the property. If s
 VALID SITE URLS (ONLY share these — NEVER invent URLs):
 - Property homepage: https://sponicgarden.com/
 - Available spaces: https://sponicgarden.com/spaces/
-- Cameras: https://sponicgarden.com/residents/cameras.html
-- Climate: https://sponicgarden.com/residents/climate.html
-- Lighting: https://sponicgarden.com/residents/lighting.html
-- Music: https://sponicgarden.com/residents/sonos.html
-- Laundry: https://sponicgarden.com/residents/laundry.html
-- Vehicles: https://sponicgarden.com/residents/cars.html
-- Profile: https://sponicgarden.com/residents/profile.html
+- Cameras: https://sponicgarden.com/members/cameras.html
+- Climate: https://sponicgarden.com/members/climate.html
+- Lighting: https://sponicgarden.com/members/lighting.html
+- Music: https://sponicgarden.com/members/sonos.html
+- Laundry: https://sponicgarden.com/members/laundry.html
+- Vehicles: https://sponicgarden.com/members/cars.html
+- Profile: https://sponicgarden.com/members/profile.html
 - Pay: https://sponicgarden.com/pay/
 - Emergency contacts: https://sponicgarden.com/lost.html
 - Personal directory pages: https://sponicgarden.com/{slug} (where {slug} is a person's URL slug from their profile)
@@ -563,7 +563,7 @@ Note: Sleeping vehicles will be woken automatically (takes ~30 seconds). Use get
     for (const c of scope.cameras) {
       parts.push(`- "${c.name}" (${c.location}${c.protectId ? `, snapshot_id: ${c.protectId}` : ""})`);
     }
-    parts.push(`View live feeds at: https://sponicgarden.com/residents/cameras.html
+    parts.push(`View live feeds at: https://sponicgarden.com/members/cameras.html
 When users ask about cameras, list the available cameras and provide the link above. The cameras page supports multiple quality levels (low/med/high), PTZ controls, snapshots, and fullscreen viewing.
 You can take camera snapshots using the take_snapshot tool — useful when someone asks "what does the backyard look like right now?" or "can you check the front door?".`);
   }
@@ -2321,7 +2321,7 @@ async function executeToolCall(
           pending: `Queued and waiting to be picked up by the builder... (requested ${new Date(latest.created_at).toLocaleTimeString()})`,
           processing: latest.progress_message || "Getting started...",
           building: latest.progress_message || "Claude Code is building your feature...",
-          completed: `Deployed! ${latest.build_summary || ''}\nFiles: ${(latest.files_created || []).join(', ')}\nVisit: https://sponicgarden.com${latest.build_summary ? '' : '/residents/'}`,
+          completed: `Deployed! ${latest.build_summary || ''}\nFiles: ${(latest.files_created || []).join(', ')}\nVisit: https://sponicgarden.com${latest.build_summary ? '' : '/members/'}`,
           review: `Built and waiting for team review on branch \`${latest.branch_name}\`.\n${latest.build_summary || ''}\nThe team has been notified. They'll review and merge it when ready.`,
           failed: `Failed: ${latest.error_message || 'Unknown error'}`,
           cancelled: "This request was cancelled.",

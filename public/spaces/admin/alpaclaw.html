@@ -38,7 +38,7 @@
     <span data-site-version style="display:none">v260322.27 11:46p</span>
 
     <div class="context-switcher hidden" id="contextSwitcher">
-      <a href="/residents/" class="context-switcher-btn">Resident</a>
+      <a href="/members/" class="context-switcher-btn">Member</a>
       <a class="context-switcher-btn active">Staff</a>
     </div>
 
@@ -304,7 +304,7 @@
         <div class="settings-card">
           <div class="settings-card-body">
             <p class="text-xs text-aap-text-muted mb-3">
-              Partition Discord into staff vs resident contexts and keep risky operations staff-only.
+              Partition Discord into staff vs member contexts and keep risky operations staff-only.
             </p>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div class="form-group" style="margin-bottom:0">
@@ -316,12 +316,12 @@
                 <input type="text" id="discordStaffChannelIds" placeholder="1477048544501174474" style="font-size:0.85rem;">
               </div>
               <div class="form-group" style="margin-bottom:0">
-                <label for="discordResidentGuildIds" style="font-size:0.8rem;">Resident Guild IDs (optional)</label>
-                <input type="text" id="discordResidentGuildIds" placeholder="Separate residents guild IDs" style="font-size:0.85rem;">
+                <label for="discordResidentGuildIds" style="font-size:0.8rem;">Member Guild IDs (optional)</label>
+                <input type="text" id="discordResidentGuildIds" placeholder="Separate members guild IDs" style="font-size:0.85rem;">
               </div>
               <div class="form-group" style="margin-bottom:0">
-                <label for="discordResidentChannelIds" style="font-size:0.8rem;">Resident Channel IDs (optional)</label>
-                <input type="text" id="discordResidentChannelIds" placeholder="Dedicated resident channels" style="font-size:0.85rem;">
+                <label for="discordResidentChannelIds" style="font-size:0.8rem;">Member Channel IDs (optional)</label>
+                <input type="text" id="discordResidentChannelIds" placeholder="Dedicated member channels" style="font-size:0.85rem;">
               </div>
             </div>
 
@@ -347,7 +347,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
               <label class="settings-toggle">
                 <input type="checkbox" id="residentModeEnabled">
-                <span class="settings-toggle-label">Enable resident mode routes</span>
+                <span class="settings-toggle-label">Enable member mode routes</span>
               </label>
               <label class="settings-toggle">
                 <input type="checkbox" id="recordPaymentStaffOnly" checked>
@@ -368,7 +368,7 @@
             </div>
 
             <div class="form-group mt-4" style="margin-bottom:0">
-              <label for="residentAllowedCommands" style="font-size:0.8rem;">Resident Allowed Commands (comma-separated)</label>
+              <label for="residentAllowedCommands" style="font-size:0.8rem;">Member Allowed Commands (comma-separated)</label>
               <input type="text" id="residentAllowedCommands" placeholder="availability, faq, who-is-in-space" style="font-size:0.85rem;">
             </div>
 

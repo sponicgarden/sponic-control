@@ -90,7 +90,7 @@ li { margin: 4px 0; }
     <tr><td>email-template-service.js</td><td>300</td><td>Email template CRUD</td></tr>
     <tr><td>project-service.js</td><td>263</td><td>Project/task management</td></tr>
     <tr><td>admin-shell.js</td><td>780</td><td>Admin dashboard shell</td></tr>
-    <tr><td>resident-shell.js</td><td>811</td><td>Resident portal shell</td></tr>
+    <tr><td>member-shell.js</td><td>811</td><td>Member portal shell</td></tr>
     <tr><td>associate-shell.js</td><td>~400</td><td>Associate/staff shell</td></tr>
     <tr><td>personal-page-shell.js</td><td>746</td><td>Personal page framework</td></tr>
     <tr><td>chat-widget.js</td><td>128</td><td>AI chat widget</td></tr>
@@ -110,7 +110,7 @@ li { margin: 4px 0; }
     <tr><td>printer-data.js</td><td>206</td><td>FlashForge 3D printer</td></tr>
     <tr><td>cars-data.js</td><td>132</td><td>Tesla vehicle data</td></tr>
     <tr><td>poll-manager.js</td><td>127</td><td>Device polling orchestration</td></tr>
-    <tr><td>resident-device-scope.js</td><td>125</td><td>Per-resident device access</td></tr>
+    <tr><td>member-device-scope.js</td><td>125</td><td>Per-member device access</td></tr>
   </table>
 
   <div class="cmd">GA="/Users/rahulio/Documents/CodingProjects/sponic-control"
@@ -122,7 +122,7 @@ for f in rental-service.js event-service.js media-service.js hours-service.js \
   stripe-service.js square-service.js accounting-service.js payout-service.js \
   signwell-service.js identity-service.js lease-template-service.js \
   event-template-service.js worktrade-template-service.js email-template-service.js \
-  project-service.js admin-shell.js resident-shell.js associate-shell.js \
+  project-service.js admin-shell.js member-shell.js associate-shell.js \
   personal-page-shell.js chat-widget.js pai-widget.js demo-redact.js \
   visitor-identity.js pdf-service.js; do
   cp "$GA/shared/$f" "$WORK/shared/$f" 2>/dev/null
@@ -154,7 +154,7 @@ find "$WORK/shared" -name "*.js" -exec sed -i '' \
     <tr><th>Section</th><th>Source Path</th><th>Target Path</th><th>Pages</th></tr>
     <tr><td>Admin Dashboard</td><td>spaces/admin/</td><td>public/spaces/admin/</td><td>24 HTML + 24 JS</td></tr>
     <tr><td>Associates</td><td>associates/</td><td>public/associates/</td><td>4 HTML + 4 JS</td></tr>
-    <tr><td>Residents Portal</td><td>residents/</td><td>public/residents/</td><td>16 HTML + 16 JS</td></tr>
+    <tr><td>Members Portal</td><td>residents/</td><td>public/members/</td><td>16 HTML + 16 JS</td></tr>
     <tr><td>Spaces (Public)</td><td>spaces/</td><td>public/spaces/</td><td>6 HTML</td></tr>
     <tr><td>Login</td><td>login/</td><td>public/login/</td><td>3 HTML</td></tr>
     <tr><td>Events</td><td>events/</td><td>public/events/</td><td>3 HTML</td></tr>
@@ -175,7 +175,7 @@ find "$WORK/shared" -name "*.js" -exec sed -i '' \
 WORK="/tmp/sponic-control-work"
 
 # Copy core page directories
-for dir in spaces associates residents login events contact community \
+for dir in spaces associates members login events contact community \
   orientation photos waiver clauded directory worktrade; do
   [ -d "$GA/$dir" ] && cp -R "$GA/$dir" "$WORK/public/$dir"
 done
@@ -394,7 +394,7 @@ cd "$WORK" && npm run build
 B=~/.claude/skills/gstack/browse/dist/browse
 $B goto https://sponicgarden.com/en
 $B goto https://sponicgarden.com/spaces/admin/
-$B goto https://sponicgarden.com/residents/
+$B goto https://sponicgarden.com/members/
 $B goto https://sponicgarden.com/en/signin
 
 # Commit and push
@@ -404,7 +404,7 @@ git commit -m "feat: port full feature set from sponic-control
 - 30 shared service modules (rentals, events, payments, smart home, etc.)
 - 63 edge functions (Stripe, Square, Govee, Sonos, Nest, etc.)
 - 35 database migrations (full schema)
-- Admin dashboard (24 pages), Resident portal (16 pages)
+- Admin dashboard (24 pages), Member portal (16 pages)
 - Associates, events, community, orientation pages
 - Property config for Sponic Garden Warsaw
 
@@ -427,7 +427,7 @@ git push origin main</div>
     <tr><td>Homepage</td><td>/en</td><td>Next.js app renders</td></tr>
     <tr><td>Sign in</td><td>/en/signin</td><td>Google + email buttons</td></tr>
     <tr><td>Admin dashboard</td><td>/spaces/admin/</td><td>Admin shell loads with tabs</td></tr>
-    <tr><td>Resident portal</td><td>/residents/</td><td>Resident shell with device tabs</td></tr>
+    <tr><td>Member portal</td><td>/members/</td><td>Member shell with device tabs</td></tr>
     <tr><td>Spaces listing</td><td>/spaces/</td><td>Property listing page</td></tr>
     <tr><td>Events</td><td>/events/</td><td>Event listing page</td></tr>
     <tr><td>Contact</td><td>/contact/</td><td>Contact form</td></tr>

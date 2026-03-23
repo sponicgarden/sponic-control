@@ -61,7 +61,7 @@ body {
   color: var(--text);
 }
 
-/* ===== HEADER LOGO (admin + resident pages) ===== */
+/* ===== HEADER LOGO (admin + member pages) ===== */
 .header-logo {
   display: flex;
   align-items: center;
