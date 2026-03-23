@@ -200,6 +200,8 @@
       'scene-04': '2026-03-22', 'scene-05': '2026-03-22', 'scene-06': '2026-03-22',
       'scene-07': '2026-03-22', 'scene-08': '2026-03-22', 'scene-09': '2026-03-22',
       'scene-10': '2026-03-22', 'scene-11': '2026-03-22',
+      'scene-12': '2026-03-22', 'scene-13': '2026-03-22', 'scene-14': '2026-03-22',
+      'scene-15': '2026-03-22', 'scene-16': '2026-03-22', 'scene-17': '2026-03-22', 'scene-18': '2026-03-22',
       // Scene/Warsaw/Moody (60-74 in scene-style, warsaw-demo, moody-evening cats use different prefix matching)
       '90-': '2026-03-16', '91-': '2026-03-16', '92-': '2026-03-16', '93-': '2026-03-16', '94-': '2026-03-16',
       '95-': '2026-03-16', '96-': '2026-03-16', '97-': '2026-03-16', '98-': '2026-03-16', '99-': '2026-03-16',
@@ -417,6 +419,15 @@
       { id: 'scene-09-hp-sauna-garden-gemini', cat: 'homepage-colorful', title: 'Sauna & Garden Circuit', desc: 'Outdoor wellness circuit — barrel sauna, cold plunge, garden walkway. People in white robes and spa sandals. Steam wisps, birch trees, ferns, flowering plants. Dappled sunlight.', model: 'gemini-3-pro-image-preview', ext: 'jpg' },
       { id: 'scene-10-hp-functional-fitness-gemini', cat: 'homepage-colorful', title: 'Functional Fitness Garden', desc: 'Energetic outdoor fitness area with vertical gardens. Kettlebells, battle ropes, bodyweight exercises. Bright athletic wear — coral, teal, yellow. Wooden rigs, natural stone. Dynamic poses.', model: 'gemini-3-pro-image-preview', ext: 'jpg' },
       { id: 'scene-11-hp-community-dinner-gemini', cat: 'homepage-colorful', title: 'Harvest Community Dinner', desc: 'Long communal table under string lights in garden atrium. 10+ people sharing colorful plant-based dishes. Smart-casual athleisure, candles, ceramic plates. Amber lights, teal sky, autumn warmth.', model: 'gemini-3-pro-image-preview', ext: 'jpg' },
+
+      // Warehouse Campus — Broad ages (13-60), subdued varied palette, ambient tech, indoor/outdoor
+      { id: 'scene-12-hp2-warehouse-entry-gemini', cat: 'warehouse-campus', title: 'Warehouse Entry & Welcome', desc: 'Main entrance to converted warehouse. Sliding barn doors reveal indoor garden atrium. Teenager + grandparent walking in. Steel beams with vines, environmental sensors among leaves. Afternoon light.', model: 'gemini-3-pro-image-preview', ext: 'jpg' },
+      { id: 'scene-13-hp2-outdoor-growing-gemini', cat: 'warehouse-campus', title: 'Outdoor Growing Terraces', desc: 'Terraced growing beds behind warehouse. 50s woman harvesting, teen watering, 30s couple examining plants. Soil sensors with green LEDs. Weather station like a birdhouse. Gravel paths, golden light.', model: 'gemini-3-pro-image-preview', ext: 'jpg' },
+      { id: 'scene-14-hp2-indoor-greenhouse-gemini', cat: 'warehouse-campus', title: 'Indoor Greenhouse Lab', desc: 'Warehouse greenhouse section with grow tables and vertical walls. LED grow strips in purple-pink. 60s man with seedling, 20s woman on tablet, teen photographing flowers. Sensors like jewelry on stems.', model: 'gemini-3-pro-image-preview', ext: 'jpg' },
+      { id: 'scene-15-hp2-barrel-sauna-yard-gemini', cat: 'warehouse-campus', title: 'Outdoor Barrel Sauna Yard', desc: 'Courtyard between warehouse buildings. Barrel saunas, cold plunge, deck loungers. 45yo man cooling off, 30s woman with towel, 60s couple relaxing. Native grasses, string lights. Dusk amber + cool blue.', model: 'gemini-3-pro-image-preview', ext: 'jpg' },
+      { id: 'scene-16-hp2-movement-studio-gemini', cat: 'warehouse-campus', title: 'Warehouse Movement Studio', desc: 'Open movement space — polished concrete, exposed brick, glass wall to garden. Fit 50yo leading stretches, stocky 35yo push-ups, teen yoga, 40s woman kettlebell. Air quality monitor like a clock.', model: 'gemini-3-pro-image-preview', ext: 'jpg' },
+      { id: 'scene-17-hp2-juice-workshop-gemini', cat: 'warehouse-campus', title: 'Community Kitchen & Juice Workshop', desc: 'Open kitchen — butcher-block counter, pendant lights, mason jars. 55yo woman teaching green juice, teen watching, 30s man chopping ginger, 40s woman blending. Garden vegetables, warm wood.', model: 'gemini-3-pro-image-preview', ext: 'jpg' },
+      { id: 'scene-18-hp2-evening-firepit-gemini', cat: 'warehouse-campus', title: 'Outdoor Evening Firepit', desc: 'Stone firepit with bench seating. 8-10 all ages — teen roasting marshmallow, 30s couple sharing blanket, 60yo with guitar, 40s woman laughing. Warehouse silhouette, stars. Warm fire + cool evening.', model: 'gemini-3-pro-image-preview', ext: 'jpg' },
     ];
 
     const CAT_LABELS = {
@@ -439,8 +450,9 @@
       'logo-fusion': 'Logo Auditions — Botanical × Digital Fusion (Pick a Champion)',
       'section-drawing': 'Section Illustrations — Gemini vs MiniMax Drawing Style Shootout',
       'homepage-colorful': 'Homepage Illustrations — Colorful Drawing Style (Fitness/Spa Athleisure)',
+      'warehouse-campus': 'Warehouse Campus — Ages 13-60, Ambient Tech, Indoor/Outdoor (Subdued Palette)',
     };
-    const CAT_ORDER = ['homepage-colorful', 'section-drawing', 'flowing-vines', 'chosen', 'sonics-wordmark', 'logo-fusion', 'moody-evening', 'warsaw-demo', 'scene-style', 'wordmark-fusion', 'drawing-style', 'swapped-logo', 'style-audition', 'blended', 'artistic-style', 'scene', 'app-icon', 'logo', 'wordmark'];
+    const CAT_ORDER = ['warehouse-campus', 'homepage-colorful', 'section-drawing', 'flowing-vines', 'chosen', 'sonics-wordmark', 'logo-fusion', 'moody-evening', 'warsaw-demo', 'scene-style', 'wordmark-fusion', 'drawing-style', 'swapped-logo', 'style-audition', 'blended', 'artistic-style', 'scene', 'app-icon', 'logo', 'wordmark'];
 
     let reviews = {}; // asset_id -> review data (includes rank_order)
     let currentFilter = 'all';
