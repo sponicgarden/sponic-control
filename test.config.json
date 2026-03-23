@@ -1,0 +1,21 @@
+{
+  "testUser": {
+    "email": "testuser@sponicgarden.com",
+    "password": "test1234",
+    "role": "demo"
+  },
+  "urls": {
+    "home": "https://sponicgarden.com/en",
+    "signin": "https://sponicgarden.com/en/signin",
+    "intranet": "https://sponicgarden.com/en/intranet",
+    "branding": "https://sponicgarden.com/branding.html",
+    "charter": "https://sponicgarden.com/charter.html",
+    "bizmodel": "https://sponicgarden.com/bizmodel.html",
+    "patents": "https://sponicgarden.com/patents/",
+    "legacy": "https://sponicgarden.com/legacy-homepage.html"
+  },
+  "qa": {
+    "tool": "/browse (gstack)",
+    "notes": "Use /browse for all QA testing. Login with testUser credentials via email form."
+  }
+}
