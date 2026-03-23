@@ -1,5 +1,5 @@
 /**
- * Austin Alpaca Playhouse - Site Components
+ * Austin Sponic Garden - Site Components
  *
  * Shared components for the main AAP website.
  * These components generate the header, navigation, and footer.
@@ -17,18 +17,18 @@ const ALPACA_ICON_FALLBACK = 'data:image/svg+xml,' + encodeURIComponent('<svg xm
 const ALPACA_WORDMARK_FALLBACK = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 28"><rect width="120" height="28" fill="none"/><text x="0" y="20" font-size="16" font-family="Arial,sans-serif" fill="#1f1720">Alpaca</text></svg>');
 const IMAGES = {
   // Alpaca head icon (transparent PNGs)
-  icon: `${LOGO_BASE}/alpaca-head-black-transparent.png`,        // black on transparent - for light backgrounds
-  iconInverted: `${LOGO_BASE}/alpaca-head-white-transparent.png`, // white on transparent - for dark backgrounds
+  icon: `${LOGO_BASE}/sponic-logo-dark.png`,        // black on transparent - for light backgrounds
+  iconInverted: `${LOGO_BASE}/sponic-logo-light.png`, // white on transparent - for dark backgrounds
   // Wordmark (transparent PNGs)
   wordmark: `${LOGO_BASE}/wordmark-black-transparent.png`,        // black on transparent - for light backgrounds
   wordmarkInverted: `${LOGO_BASE}/wordmark-white-transparent.png`, // white on transparent - for dark backgrounds
   // Legacy aliases
-  logo: `${LOGO_BASE}/alpaca-head-white-transparent.png`,
-  logoLight: `${LOGO_BASE}/alpaca-head-black-transparent.png`,
+  logo: `${LOGO_BASE}/sponic-logo-light.png`,
+  logoLight: `${LOGO_BASE}/sponic-logo-dark.png`,
   heroAlpacas: 'https://images.squarespace-cdn.com/content/v1/6213d804273001551ffe5b8c/4e23696e-623b-4621-8f3a-c223a521131b/P1020387.jpeg',
 };
 
-// Base path for links (root on alpacaplayhouse.com)
+// Base path for links (root on sponicgarden.com)
 // Change this if deploying to a different subdirectory
 const BASE_PATH = '';
 
@@ -82,8 +82,8 @@ function renderHeader(options = {}) {
     <header class="aap-header ${headerClass} ${colorClass}" id="aap-header">
       <div class="aap-header__inner">
         <a href="${BASE_PATH}/" class="aap-header__logo">
-          <img src="${light ? IMAGES.iconInverted : IMAGES.icon}" alt="Alpaca Playhouse Austin" class="aap-header__icon" width="21" height="30" data-light-src="${IMAGES.iconInverted}" data-dark-src="${IMAGES.icon}" onerror="this.onerror=null;this.src='${ALPACA_ICON_FALLBACK}'">
-          <img src="${light ? IMAGES.wordmarkInverted : IMAGES.wordmark}" alt="Alpaca Playhouse Austin" class="aap-header__wordmark" width="22" height="22" data-light-src="${IMAGES.wordmarkInverted}" data-dark-src="${IMAGES.wordmark}" onerror="this.onerror=null;this.src='${ALPACA_WORDMARK_FALLBACK}'">
+          <img src="${light ? IMAGES.iconInverted : IMAGES.icon}" alt="Sponic Garden Austin" class="aap-header__icon" width="21" height="30" data-light-src="${IMAGES.iconInverted}" data-dark-src="${IMAGES.icon}" onerror="this.onerror=null;this.src='${ALPACA_ICON_FALLBACK}'">
+          <img src="${light ? IMAGES.wordmarkInverted : IMAGES.wordmark}" alt="Sponic Garden Austin" class="aap-header__wordmark" width="22" height="22" data-light-src="${IMAGES.wordmarkInverted}" data-dark-src="${IMAGES.wordmark}" onerror="this.onerror=null;this.src='${ALPACA_WORDMARK_FALLBACK}'">
           ${version ? `<span title="Site version" class="aap-header__version">${version}</span>` : ''}
         </a>
         <nav class="aap-nav" id="aap-nav">
@@ -151,17 +151,17 @@ function renderFooter() {
     <footer class="aap-footer">
       <div class="aap-footer__content">
         <div class="aap-footer__logo">
-          <img src="${IMAGES.iconInverted}" alt="Alpaca Playhouse Austin" class="aap-footer__icon">
-          <img src="${IMAGES.wordmarkInverted}" alt="Alpaca Playhouse Austin" class="aap-footer__wordmark">
+          <img src="${IMAGES.iconInverted}" alt="Sponic Garden Austin" class="aap-footer__icon">
+          <img src="${IMAGES.wordmarkInverted}" alt="Sponic Garden Austin" class="aap-footer__wordmark">
         </div>
 
         <div class="aap-footer__social">
-          <a href="https://www.facebook.com/alpacaplayhouse" target="_blank" rel="noopener" aria-label="Facebook">
+          <a href="https://www.facebook.com/sponicgarden" target="_blank" rel="noopener" aria-label="Facebook">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
               <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
             </svg>
           </a>
-          <a href="https://instagram.com/alpacaplayhouseatx" target="_blank" rel="noopener" aria-label="Instagram">
+          <a href="https://instagram.com/sponicgarden" target="_blank" rel="noopener" aria-label="Instagram">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
               <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/>
               <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/>
@@ -171,7 +171,7 @@ function renderFooter() {
         </div>
 
         <p class="aap-footer__copyright">
-          © ${currentYear} Austin Alpaca Playhouse. All rights reserved.<br>
+          © ${currentYear} Austin Sponic Garden. All rights reserved.<br>
           160 Still Forest Drive, Cedar Creek, TX 78612
         </p>
       </div>
