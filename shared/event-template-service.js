@@ -293,7 +293,7 @@ This Rental Agreement (hereinafter, "Agreement") is made by and between the Revo
 
 ## RENTAL VENUE
 
-Company agrees to rent to Client the following spaces at 160 Still Forest Drive (aka the Austin Sponic Garden):
+Company agrees to rent to Client the following spaces at 160 Still Forest Drive (aka the Sponic Garden Warsaw):
 
 {{included_spaces}}
 

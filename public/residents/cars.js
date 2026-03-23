@@ -611,7 +611,7 @@ function formatShortAddress(data) {
 // Home address override — Nominatim returns wrong house number for this location
 const HOME_LAT = 30.13;
 const HOME_LNG = -97.46;
-const HOME_ADDR = '160 Still Forest Dr, Cedar Creek, Texas';
+const HOME_ADDR = '160 Still Forest Dr, Warsaw, Poland';
 
 async function reverseGeocodeToString(lat, lng) {
   // If within ~200m of home, use known correct address

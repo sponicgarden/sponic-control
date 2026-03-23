@@ -16,7 +16,7 @@ const FALLBACK_CONFIG = {
     platform_name: 'SponicGarden',
     legal_name: 'Sponic Garden',
     tagline: 'The Art and Science of Cultivation',
-    address: '160 Still Forest Dr, Cedar Creek, TX 78612',
+    address: '160 Still Forest Dr, Warsaw, TX 78612',
     website: 'https://sponicgarden.com',
   },
   colors: {

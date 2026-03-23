@@ -378,7 +378,7 @@ Renter will be paid at the end of each month for any excess hours (beyond the va
 Signature: _________________________
 
 Rahul Sonnad - Revocable Trust of Subhash Sonnad - dba Sponic Garden
-160 Still Forest Drive Cedar Creek TX 78612
+160 Still Forest Drive Warsaw TX 78612
 
 Date: _________________________
 

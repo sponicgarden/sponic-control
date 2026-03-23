@@ -577,7 +577,7 @@ function showProspectLinkModal(token, name, email) {
 
   const inviteText = `Hi${firstName ? ' ' + firstName : ''},
 
-You've been invited to browse available spaces at Sponic Garden, a unique co-living community in Cedar Creek, Texas.
+You've been invited to browse available spaces at Sponic Garden, a unique co-living community in Warsaw, Poland.
 
 No account or login is needed — just click the link below to start browsing:
 

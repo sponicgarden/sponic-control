@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Migration Plan: genalpaca-admin → sponic-control</title>
+<title>Migration Plan: sponic-control → sponic-control</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -40,7 +40,7 @@ li { margin: 4px 0; }
 </head>
 <body>
 
-<h1>Migration Plan: genalpaca-admin → sponic-control</h1>
+<h1>Migration Plan: sponic-control → sponic-control</h1>
 <p class="subtitle">Full feature port for Sponic Garden Warsaw — autonomous overnight execution plan</p>
 
 <div class="stats">
@@ -51,7 +51,7 @@ li { margin: 4px 0; }
 </div>
 
 <div class="warn">
-  <strong>Source:</strong> <code>/Users/rahulio/Documents/CodingProjects/genalpaca-admin</code><br>
+  <strong>Source:</strong> <code>/Users/rahulio/Documents/CodingProjects/sponic-control</code><br>
   <strong>Target:</strong> <code>/tmp/sponic-control-work</code> → <code>github.com/sponicgarden/sponic-control</code><br>
   <strong>Supabase:</strong> SponicControl (<code>xumcmantignrocihtrdx</code>)<br>
   <strong>Cloudflare:</strong> <code>394b5de665bbfdea54cdd57be9094762</code> (accounts@sponicgarden.com)
@@ -66,7 +66,7 @@ li { margin: 4px 0; }
     <div class="phase-est">~10 min</div>
   </div>
 
-  <p>Copy from <code>genalpaca-admin/shared/</code> to <code>sponic-control/shared/</code>, then rebrand (replace "Alpaca Playhouse" → "Sponic Garden", alpacaplayhouse.com → sponicgarden.com).</p>
+  <p>Copy from <code>sponic-control/shared/</code> to <code>sponic-control/shared/</code>, then rebrand (replace "Sponic Garden" → "Sponic Garden", sponicgarden.com → sponicgarden.com).</p>
 
   <table>
     <tr><th>Module</th><th>Lines</th><th>Purpose</th></tr>
@@ -113,7 +113,7 @@ li { margin: 4px 0; }
     <tr><td>resident-device-scope.js</td><td>125</td><td>Per-resident device access</td></tr>
   </table>
 
-  <div class="cmd">GA="/Users/rahulio/Documents/CodingProjects/genalpaca-admin"
+  <div class="cmd">GA="/Users/rahulio/Documents/CodingProjects/sponic-control"
 WORK="/tmp/sponic-control-work"
 
 # Copy missing service modules
@@ -135,8 +135,8 @@ cp "$GA/shared/services/"*.js "$WORK/shared/services/"
 # Rebrand: replace alpaca references
 find "$WORK/shared" -name "*.js" -exec sed -i '' \
   -e 's|alpacaplayhouse\.com|sponicgarden.com|g' \
-  -e "s|Alpaca Playhouse|Sponic Garden|g" \
-  -e "s|AlpacApps|SponicGarden|g" {} \;</div>
+  -e "s|Sponic Garden|Sponic Garden|g" \
+  -e "s|SponicGarden|SponicGarden|g" {} \;</div>
 </div>
 
 <h2>Phase 2: HTML Intranet Pages</h2>
@@ -168,10 +168,10 @@ find "$WORK/shared" -name "*.js" -exec sed -i '' \
   </table>
 
   <div class="note">
-    <strong>Exclude alpacapps-specific pages:</strong> mistiq/, rahulio/, sundays/, ukulele/, house/, kioskhall/, mobile/, pay/, welcome/, visiting-1/, bug-reporter-*, dev/test/
+    <strong>Exclude sponicgarden-specific pages:</strong> mistiq/, rahulio/, sundays/, ukulele/, house/, kioskhall/, mobile/, pay/, welcome/, visiting-1/, bug-reporter-*, dev/test/
   </div>
 
-  <div class="cmd">GA="/Users/rahulio/Documents/CodingProjects/genalpaca-admin"
+  <div class="cmd">GA="/Users/rahulio/Documents/CodingProjects/sponic-control"
 WORK="/tmp/sponic-control-work"
 
 # Copy core page directories
@@ -194,8 +194,8 @@ cp "$GA/404.html" "$WORK/public/404.html" 2>/dev/null
 # Rebrand all HTML files
 find "$WORK/public" -name "*.html" -exec sed -i '' \
   -e 's|alpacaplayhouse\.com|sponicgarden.com|g' \
-  -e "s|Alpaca Playhouse|Sponic Garden|g" \
-  -e "s|AlpacApps|SponicGarden|g" {} \;</div>
+  -e "s|Sponic Garden|Sponic Garden|g" \
+  -e "s|SponicGarden|SponicGarden|g" {} \;</div>
 </div>
 
 <h2>Phase 3: Supabase Edge Functions</h2>
@@ -259,7 +259,7 @@ find "$WORK/public" -name "*.html" -exec sed -i '' \
     <tr><td>vapi-server / vapi-webhook</td><td>Voice AI</td></tr>
   </table>
 
-  <div class="cmd">GA="/Users/rahulio/Documents/CodingProjects/genalpaca-admin"
+  <div class="cmd">GA="/Users/rahulio/Documents/CodingProjects/sponic-control"
 WORK="/tmp/sponic-control-work"
 
 # Copy all edge functions (including _shared)
@@ -283,13 +283,13 @@ cd "$WORK" && supabase functions deploy --project-ref xumcmantignrocihtrdx</div>
     <div class="phase-est">~15 min</div>
   </div>
 
-  <p>Copy migrations from genalpaca-admin and run against SponicControl. Order matters — run sequentially.</p>
+  <p>Copy migrations from sponic-control and run against SponicControl. Order matters — run sequentially.</p>
 
   <div class="warn">
-    <strong>Important:</strong> Some migrations reference alpacapps-specific data (Cedar Creek TX address, Alpaca Playhouse branding). These need sed replacement before running. The <code>property_config</code> seed data must be updated to Sponic Garden Warsaw.
+    <strong>Important:</strong> Some migrations reference sponicgarden-specific data (Warsaw TX address, Sponic Garden branding). These need sed replacement before running. The <code>property_config</code> seed data must be updated to Sponic Garden Warsaw.
   </div>
 
-  <div class="cmd">GA="/Users/rahulio/Documents/CodingProjects/genalpaca-admin"
+  <div class="cmd">GA="/Users/rahulio/Documents/CodingProjects/sponic-control"
 WORK="/tmp/sponic-control-work"
 
 # Copy all migrations
@@ -298,9 +298,9 @@ cp -R "$GA/supabase/migrations" "$WORK/supabase/migrations"
 
 # Rebrand migration seed data
 find "$WORK/supabase/migrations" -name "*.sql" -exec sed -i '' \
-  -e "s|Alpaca Playhouse|Sponic Garden|g" \
+  -e "s|Sponic Garden|Sponic Garden|g" \
   -e "s|alpacaplayhouse\.com|sponicgarden.com|g" \
-  -e "s|Cedar Creek|Warsaw|g" \
+  -e "s|Warsaw|Warsaw|g" \
   -e "s|Texas|Poland|g" \
   -e "s|TX|PL|g" {} \;
 
@@ -399,7 +399,7 @@ $B goto https://sponicgarden.com/en/signin
 
 # Commit and push
 git add -A
-git commit -m "feat: port full feature set from genalpaca-admin
+git commit -m "feat: port full feature set from sponic-control
 
 - 30 shared service modules (rentals, events, payments, smart home, etc.)
 - 63 edge functions (Stripe, Square, Govee, Sonos, Nest, etc.)
@@ -438,7 +438,7 @@ git push origin main</div>
   </table>
 </div>
 
-<h2>Exclusions (alpacapps-specific, do NOT copy)</h2>
+<h2>Exclusions (sponicgarden-specific, do NOT copy)</h2>
 
 <div class="phase">
   <table>
@@ -465,9 +465,9 @@ git push origin main</div>
   <strong>Copy and paste this into a new Claude Code session to execute the migration:</strong>
 </div>
 
-<div class="cmd" style="white-space: pre-wrap;">Read the migration plan at https://sponicgarden.com/plans/genalpaca-migration.html and execute it autonomously.
+<div class="cmd" style="white-space: pre-wrap;">Read the migration plan at https://sponicgarden.com/plans/sponic-migration.html and execute it autonomously.
 
-Source repo: /Users/rahulio/Documents/CodingProjects/genalpaca-admin
+Source repo: /Users/rahulio/Documents/CodingProjects/sponic-control
 Target repo: Clone https://github.com/sponicgarden/sponic-control.git to /tmp/sponic-control-work
 GitHub token: retrieve from Bitwarden "GitHub — Sponic Garden PAT"
 Supabase: SponicControl (xumcmantignrocihtrdx), credentials in Bitwarden "Supabase — SponicControl Project"

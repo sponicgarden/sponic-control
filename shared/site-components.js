@@ -1,5 +1,5 @@
 /**
- * Austin Sponic Garden - Site Components
+ * Sponic Garden Warsaw - Site Components
  *
  * Shared components for the main AAP website.
  * These components generate the header, navigation, and footer.
@@ -82,8 +82,8 @@ function renderHeader(options = {}) {
     <header class="aap-header ${headerClass} ${colorClass}" id="aap-header">
       <div class="aap-header__inner">
         <a href="${BASE_PATH}/" class="aap-header__logo">
-          <img src="${light ? IMAGES.iconInverted : IMAGES.icon}" alt="Sponic Garden Austin" class="aap-header__icon" width="21" height="30" data-light-src="${IMAGES.iconInverted}" data-dark-src="${IMAGES.icon}" onerror="this.onerror=null;this.src='${ALPACA_ICON_FALLBACK}'">
-          <img src="${light ? IMAGES.wordmarkInverted : IMAGES.wordmark}" alt="Sponic Garden Austin" class="aap-header__wordmark" width="22" height="22" data-light-src="${IMAGES.wordmarkInverted}" data-dark-src="${IMAGES.wordmark}" onerror="this.onerror=null;this.src='${ALPACA_WORDMARK_FALLBACK}'">
+          <img src="${light ? IMAGES.iconInverted : IMAGES.icon}" alt="Sponic Garden Warsaw" class="aap-header__icon" width="21" height="30" data-light-src="${IMAGES.iconInverted}" data-dark-src="${IMAGES.icon}" onerror="this.onerror=null;this.src='${ALPACA_ICON_FALLBACK}'">
+          <img src="${light ? IMAGES.wordmarkInverted : IMAGES.wordmark}" alt="Sponic Garden Warsaw" class="aap-header__wordmark" width="22" height="22" data-light-src="${IMAGES.wordmarkInverted}" data-dark-src="${IMAGES.wordmark}" onerror="this.onerror=null;this.src='${ALPACA_WORDMARK_FALLBACK}'">
           ${version ? `<span title="Site version" class="aap-header__version">${version}</span>` : ''}
         </a>
         <nav class="aap-nav" id="aap-nav">
@@ -151,8 +151,8 @@ function renderFooter() {
     <footer class="aap-footer">
       <div class="aap-footer__content">
         <div class="aap-footer__logo">
-          <img src="${IMAGES.iconInverted}" alt="Sponic Garden Austin" class="aap-footer__icon">
-          <img src="${IMAGES.wordmarkInverted}" alt="Sponic Garden Austin" class="aap-footer__wordmark">
+          <img src="${IMAGES.iconInverted}" alt="Sponic Garden Warsaw" class="aap-footer__icon">
+          <img src="${IMAGES.wordmarkInverted}" alt="Sponic Garden Warsaw" class="aap-footer__wordmark">
         </div>
 
         <div class="aap-footer__social">
@@ -171,8 +171,8 @@ function renderFooter() {
         </div>
 
         <p class="aap-footer__copyright">
-          © ${currentYear} Austin Sponic Garden. All rights reserved.<br>
-          160 Still Forest Drive, Cedar Creek, TX 78612
+          © ${currentYear} Sponic Garden Warsaw. All rights reserved.<br>
+          160 Still Forest Drive, Warsaw, TX 78612
         </p>
       </div>
     </footer>
