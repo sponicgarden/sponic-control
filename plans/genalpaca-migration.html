@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Migration Plan: genalpaca-admin → sponic-control</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f4f7f1; --surface: #ffffff; --border: #c4d4ba;
+  --text: #1a2412; --text-soft: #2d3b22; --text-muted: #7a9168;
+  --green: #2d6a1e; --green-soft: rgba(45,106,30,0.07);
+  --emerald: #047857; --earth: #92400e;
+}
+* { margin: 0; box-sizing: border-box; }
+body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; padding: 32px; max-width: 900px; margin: 0 auto; }
+h1 { font-family: 'DM Serif Display', serif; font-size: 2rem; margin-bottom: 8px; }
+h2 { font-size: 1.3rem; color: var(--green); margin: 32px 0 12px; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+h3 { font-size: 1rem; color: var(--text-soft); margin: 20px 0 8px; }
+.subtitle { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 32px; }
+.phase { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin: 16px 0; }
+.phase-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.phase-num { background: var(--green); color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem; flex-shrink: 0; }
+.phase-title { font-weight: 700; font-size: 1.1rem; }
+.phase-est { color: var(--text-muted); font-size: 0.8rem; margin-left: auto; }
+table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.85rem; }
+th { text-align: left; padding: 8px 12px; background: var(--green-soft); border: 1px solid var(--border); font-weight: 600; }
+td { padding: 8px 12px; border: 1px solid var(--border); vertical-align: top; }
+code { background: var(--green-soft); padding: 2px 6px; border-radius: 4px; font-size: 0.8rem; }
+.cmd { background: #1a2412; color: #d8e3cf; padding: 12px 16px; border-radius: 8px; font-family: monospace; font-size: 0.8rem; margin: 8px 0; overflow-x: auto; white-space: pre; }
+.warn { background: rgba(146,64,14,0.06); border: 1px solid rgba(146,64,14,0.20); border-radius: 8px; padding: 12px 16px; font-size: 0.85rem; color: var(--earth); margin: 12px 0; }
+.note { background: rgba(4,120,87,0.06); border: 1px solid rgba(4,120,87,0.18); border-radius: 8px; padding: 12px 16px; font-size: 0.85rem; color: var(--emerald); margin: 12px 0; }
+ul { padding-left: 20px; }
+li { margin: 4px 0; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin: 16px 0; }
+.stat { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 16px; text-align: center; }
+.stat-num { font-size: 1.5rem; font-weight: 700; color: var(--green); }
+.stat-label { font-size: 0.75rem; color: var(--text-muted); }
+</style>
+</head>
+<body>
+
+<h1>Migration Plan: genalpaca-admin → sponic-control</h1>
+<p class="subtitle">Full feature port for Sponic Garden Warsaw — autonomous overnight execution plan</p>
+
+<div class="stats">
+  <div class="stat"><div class="stat-num">30</div><div class="stat-label">Service Modules</div></div>
+  <div class="stat"><div class="stat-num">63</div><div class="stat-label">Edge Functions</div></div>
+  <div class="stat"><div class="stat-num">35</div><div class="stat-label">DB Migrations</div></div>
+  <div class="stat"><div class="stat-num">200+</div><div class="stat-label">HTML Pages</div></div>
+</div>
+
+<div class="warn">
+  <strong>Source:</strong> <code>/Users/rahulio/Documents/CodingProjects/genalpaca-admin</code><br>
+  <strong>Target:</strong> <code>/tmp/sponic-control-work</code> → <code>github.com/sponicgarden/sponic-control</code><br>
+  <strong>Supabase:</strong> SponicControl (<code>xumcmantignrocihtrdx</code>)<br>
+  <strong>Cloudflare:</strong> <code>394b5de665bbfdea54cdd57be9094762</code> (accounts@sponicgarden.com)
+</div>
+
+<h2>Phase 1: Shared Service Modules</h2>
+
+<div class="phase">
+  <div class="phase-header">
+    <div class="phase-num">1</div>
+    <div class="phase-title">Copy 26 missing shared/*.js service modules</div>
+    <div class="phase-est">~10 min</div>
+  </div>
+
+  <p>Copy from <code>genalpaca-admin/shared/</code> to <code>sponic-control/shared/</code>, then rebrand (replace "Alpaca Playhouse" → "Sponic Garden", alpacaplayhouse.com → sponicgarden.com).</p>
+
+  <table>
+    <tr><th>Module</th><th>Lines</th><th>Purpose</th></tr>
+    <tr><td>rental-service.js</td><td>1,490</td><td>Rental pipeline (inquiry→apply→sign→move-in)</td></tr>
+    <tr><td>event-service.js</td><td>1,133</td><td>Event pipeline (inquiry→contract→payment→confirm)</td></tr>
+    <tr><td>media-service.js</td><td>2,002</td><td>Media gallery, uploads, tags</td></tr>
+    <tr><td>hours-service.js</td><td>995</td><td>Work tracking, clock in/out, timesheets</td></tr>
+    <tr><td>email-service.js</td><td>539</td><td>Resend integration for outbound email</td></tr>
+    <tr><td>sms-service.js</td><td>334</td><td>Telnyx SMS integration</td></tr>
+    <tr><td>whatsapp-service.js</td><td>251</td><td>WhatsApp messaging</td></tr>
+    <tr><td>voice-service.js</td><td>176</td><td>Vapi voice calling</td></tr>
+    <tr><td>stripe-service.js</td><td>175</td><td>Stripe payments + Connect</td></tr>
+    <tr><td>square-service.js</td><td>471</td><td>Square payment processing</td></tr>
+    <tr><td>accounting-service.js</td><td>566</td><td>Ledger, 1099s, payouts</td></tr>
+    <tr><td>payout-service.js</td><td>461</td><td>Staff/associate payouts</td></tr>
+    <tr><td>signwell-service.js</td><td>303</td><td>E-signature integration</td></tr>
+    <tr><td>identity-service.js</td><td>295</td><td>Identity verification</td></tr>
+    <tr><td>lease-template-service.js</td><td>840</td><td>Lease document generation</td></tr>
+    <tr><td>event-template-service.js</td><td>363</td><td>Event contract templates</td></tr>
+    <tr><td>worktrade-template-service.js</td><td>416</td><td>Work-trade agreement templates</td></tr>
+    <tr><td>email-template-service.js</td><td>300</td><td>Email template CRUD</td></tr>
+    <tr><td>project-service.js</td><td>263</td><td>Project/task management</td></tr>
+    <tr><td>admin-shell.js</td><td>780</td><td>Admin dashboard shell</td></tr>
+    <tr><td>resident-shell.js</td><td>811</td><td>Resident portal shell</td></tr>
+    <tr><td>associate-shell.js</td><td>~400</td><td>Associate/staff shell</td></tr>
+    <tr><td>personal-page-shell.js</td><td>746</td><td>Personal page framework</td></tr>
+    <tr><td>chat-widget.js</td><td>128</td><td>AI chat widget</td></tr>
+    <tr><td>pai-widget.js</td><td>246</td><td>PAI assistant widget</td></tr>
+    <tr><td>demo-redact.js</td><td>190</td><td>Demo mode data redaction</td></tr>
+  </table>
+
+  <h3>shared/services/ (Smart Home Data Modules)</h3>
+  <table>
+    <tr><th>Module</th><th>Lines</th><th>Purpose</th></tr>
+    <tr><td>sonos-data.js</td><td>274</td><td>Sonos music system control</td></tr>
+    <tr><td>lighting-data.js</td><td>269</td><td>Govee lighting control</td></tr>
+    <tr><td>climate-data.js</td><td>225</td><td>Nest thermostat control</td></tr>
+    <tr><td>camera-data.js</td><td>137</td><td>Security camera feeds</td></tr>
+    <tr><td>laundry-data.js</td><td>167</td><td>LG ThinQ laundry</td></tr>
+    <tr><td>oven-data.js</td><td>242</td><td>Anova precision oven</td></tr>
+    <tr><td>printer-data.js</td><td>206</td><td>FlashForge 3D printer</td></tr>
+    <tr><td>cars-data.js</td><td>132</td><td>Tesla vehicle data</td></tr>
+    <tr><td>poll-manager.js</td><td>127</td><td>Device polling orchestration</td></tr>
+    <tr><td>resident-device-scope.js</td><td>125</td><td>Per-resident device access</td></tr>
+  </table>
+
+  <div class="cmd">GA="/Users/rahulio/Documents/CodingProjects/genalpaca-admin"
+WORK="/tmp/sponic-control-work"
+
+# Copy missing service modules
+for f in rental-service.js event-service.js media-service.js hours-service.js \
+  email-service.js sms-service.js whatsapp-service.js voice-service.js \
+  stripe-service.js square-service.js accounting-service.js payout-service.js \
+  signwell-service.js identity-service.js lease-template-service.js \
+  event-template-service.js worktrade-template-service.js email-template-service.js \
+  project-service.js admin-shell.js resident-shell.js associate-shell.js \
+  personal-page-shell.js chat-widget.js pai-widget.js demo-redact.js \
+  visitor-identity.js pdf-service.js; do
+  cp "$GA/shared/$f" "$WORK/shared/$f" 2>/dev/null
+done
+
+# Copy services/ subdirectory
+mkdir -p "$WORK/shared/services"
+cp "$GA/shared/services/"*.js "$WORK/shared/services/"
+
+# Rebrand: replace alpaca references
+find "$WORK/shared" -name "*.js" -exec sed -i '' \
+  -e 's|alpacaplayhouse\.com|sponicgarden.com|g' \
+  -e "s|Alpaca Playhouse|Sponic Garden|g" \
+  -e "s|AlpacApps|SponicGarden|g" {} \;</div>
+</div>
+
+<h2>Phase 2: HTML Intranet Pages</h2>
+
+<div class="phase">
+  <div class="phase-header">
+    <div class="phase-num">2</div>
+    <div class="phase-title">Copy admin, resident, associate, and public HTML pages</div>
+    <div class="phase-est">~15 min</div>
+  </div>
+
+  <p>Copy the full HTML page hierarchy. These pages load <code>shared/*.js</code> modules and render the actual tab content. Move to <code>public/</code> so Next.js static export serves them.</p>
+
+  <table>
+    <tr><th>Section</th><th>Source Path</th><th>Target Path</th><th>Pages</th></tr>
+    <tr><td>Admin Dashboard</td><td>spaces/admin/</td><td>public/spaces/admin/</td><td>24 HTML + 24 JS</td></tr>
+    <tr><td>Associates</td><td>associates/</td><td>public/associates/</td><td>4 HTML + 4 JS</td></tr>
+    <tr><td>Residents Portal</td><td>residents/</td><td>public/residents/</td><td>16 HTML + 16 JS</td></tr>
+    <tr><td>Spaces (Public)</td><td>spaces/</td><td>public/spaces/</td><td>6 HTML</td></tr>
+    <tr><td>Login</td><td>login/</td><td>public/login/</td><td>3 HTML</td></tr>
+    <tr><td>Events</td><td>events/</td><td>public/events/</td><td>3 HTML</td></tr>
+    <tr><td>Contact</td><td>contact/</td><td>public/contact/</td><td>1 HTML</td></tr>
+    <tr><td>Community</td><td>community/</td><td>public/community/</td><td>1 HTML</td></tr>
+    <tr><td>Orientation</td><td>orientation/</td><td>public/orientation/</td><td>1 HTML</td></tr>
+    <tr><td>Photos</td><td>photos/</td><td>public/photos/</td><td>1 HTML</td></tr>
+    <tr><td>Waiver</td><td>waiver/</td><td>public/waiver/</td><td>1 HTML</td></tr>
+    <tr><td>ClaudeD</td><td>clauded/</td><td>public/clauded/</td><td>4 HTML</td></tr>
+    <tr><td>CSS</td><td>site.css, tokens.css</td><td>public/</td><td>3 files</td></tr>
+  </table>
+
+  <div class="note">
+    <strong>Exclude alpacapps-specific pages:</strong> mistiq/, rahulio/, sundays/, ukulele/, house/, kioskhall/, mobile/, pay/, welcome/, visiting-1/, bug-reporter-*, dev/test/
+  </div>
+
+  <div class="cmd">GA="/Users/rahulio/Documents/CodingProjects/genalpaca-admin"
+WORK="/tmp/sponic-control-work"
+
+# Copy core page directories
+for dir in spaces associates residents login events contact community \
+  orientation photos waiver clauded directory worktrade; do
+  [ -d "$GA/$dir" ] && cp -R "$GA/$dir" "$WORK/public/$dir"
+done
+
+# Copy auth callbacks
+mkdir -p "$WORK/public/auth"
+cp -R "$GA/auth/" "$WORK/public/auth/" 2>/dev/null
+
+# Copy stylesheets
+cp "$GA/site.css" "$WORK/public/site.css" 2>/dev/null
+cp "$GA/tokens.css" "$WORK/public/tokens.css" 2>/dev/null
+
+# Copy 404 page
+cp "$GA/404.html" "$WORK/public/404.html" 2>/dev/null
+
+# Rebrand all HTML files
+find "$WORK/public" -name "*.html" -exec sed -i '' \
+  -e 's|alpacaplayhouse\.com|sponicgarden.com|g' \
+  -e "s|Alpaca Playhouse|Sponic Garden|g" \
+  -e "s|AlpacApps|SponicGarden|g" {} \;</div>
+</div>
+
+<h2>Phase 3: Supabase Edge Functions</h2>
+
+<div class="phase">
+  <div class="phase-header">
+    <div class="phase-num">3</div>
+    <div class="phase-title">Copy and deploy edge functions</div>
+    <div class="phase-est">~20 min</div>
+  </div>
+
+  <p>Copy all edge function source code, then deploy to SponicControl. Functions use Deno runtime on Supabase.</p>
+
+  <h3>Priority 1: Core Functions (deploy immediately)</h3>
+  <table>
+    <tr><th>Function</th><th>Purpose</th></tr>
+    <tr><td>api</td><td>Generic REST API gateway</td></tr>
+    <tr><td>contact-form</td><td>Public contact form submission</td></tr>
+    <tr><td>send-email</td><td>Resend email integration</td></tr>
+    <tr><td>error-report</td><td>Client error logging</td></tr>
+    <tr><td>verify-identity</td><td>Identity verification</td></tr>
+    <tr><td>release-info</td><td>Version info endpoint</td></tr>
+  </table>
+
+  <h3>Priority 2: Payment Functions</h3>
+  <table>
+    <tr><th>Function</th><th>Purpose</th></tr>
+    <tr><td>process-stripe-payment</td><td>Stripe card payments</td></tr>
+    <tr><td>stripe-webhook</td><td>Stripe event handler</td></tr>
+    <tr><td>stripe-connect-onboard</td><td>Stripe Connect for payouts</td></tr>
+    <tr><td>stripe-payout</td><td>Staff/associate payouts</td></tr>
+    <tr><td>process-square-payment</td><td>Square payments</td></tr>
+    <tr><td>square-webhook</td><td>Square event handler</td></tr>
+    <tr><td>record-payment</td><td>Payment recording</td></tr>
+    <tr><td>create-payment-link</td><td>Generate payment links</td></tr>
+  </table>
+
+  <h3>Priority 3: Smart Home Functions</h3>
+  <table>
+    <tr><th>Function</th><th>Purpose</th></tr>
+    <tr><td>govee-control</td><td>Lighting control</td></tr>
+    <tr><td>sonos-control</td><td>Music system</td></tr>
+    <tr><td>nest-control</td><td>Thermostat</td></tr>
+    <tr><td>lg-control</td><td>Laundry</td></tr>
+    <tr><td>anova-control</td><td>Precision oven</td></tr>
+    <tr><td>printer-control</td><td>3D printer</td></tr>
+    <tr><td>glowforge-control</td><td>Laser cutter</td></tr>
+    <tr><td>tesla-command</td><td>Vehicle control</td></tr>
+  </table>
+
+  <h3>Priority 4: Communication & Integration</h3>
+  <table>
+    <tr><th>Function</th><th>Purpose</th></tr>
+    <tr><td>send-sms</td><td>Telnyx SMS</td></tr>
+    <tr><td>send-whatsapp</td><td>WhatsApp messaging</td></tr>
+    <tr><td>signwell-webhook</td><td>E-signature events</td></tr>
+    <tr><td>telnyx-webhook</td><td>SMS events</td></tr>
+    <tr><td>resend-inbound-webhook</td><td>Inbound email</td></tr>
+    <tr><td>ical</td><td>Calendar feed</td></tr>
+    <tr><td>airbnb-sync</td><td>Airbnb calendar sync</td></tr>
+    <tr><td>vapi-server / vapi-webhook</td><td>Voice AI</td></tr>
+  </table>
+
+  <div class="cmd">GA="/Users/rahulio/Documents/CodingProjects/genalpaca-admin"
+WORK="/tmp/sponic-control-work"
+
+# Copy all edge functions (including _shared)
+rm -rf "$WORK/supabase/functions"
+cp -R "$GA/supabase/functions" "$WORK/supabase/functions"
+
+# Update _shared with SponicControl Supabase URL
+find "$WORK/supabase/functions" -name "*.ts" -exec sed -i '' \
+  -e 's|YOUR_SUPABASE_URL|https://xumcmantignrocihtrdx.supabase.co|g' {} \;
+
+# Deploy all functions
+cd "$WORK" && supabase functions deploy --project-ref xumcmantignrocihtrdx</div>
+</div>
+
+<h2>Phase 4: Database Migrations</h2>
+
+<div class="phase">
+  <div class="phase-header">
+    <div class="phase-num">4</div>
+    <div class="phase-title">Run all 35 database migrations</div>
+    <div class="phase-est">~15 min</div>
+  </div>
+
+  <p>Copy migrations from genalpaca-admin and run against SponicControl. Order matters — run sequentially.</p>
+
+  <div class="warn">
+    <strong>Important:</strong> Some migrations reference alpacapps-specific data (Cedar Creek TX address, Alpaca Playhouse branding). These need sed replacement before running. The <code>property_config</code> seed data must be updated to Sponic Garden Warsaw.
+  </div>
+
+  <div class="cmd">GA="/Users/rahulio/Documents/CodingProjects/genalpaca-admin"
+WORK="/tmp/sponic-control-work"
+
+# Copy all migrations
+rm -rf "$WORK/supabase/migrations"
+cp -R "$GA/supabase/migrations" "$WORK/supabase/migrations"
+
+# Rebrand migration seed data
+find "$WORK/supabase/migrations" -name "*.sql" -exec sed -i '' \
+  -e "s|Alpaca Playhouse|Sponic Garden|g" \
+  -e "s|alpacaplayhouse\.com|sponicgarden.com|g" \
+  -e "s|Cedar Creek|Warsaw|g" \
+  -e "s|Texas|Poland|g" \
+  -e "s|TX|PL|g" {} \;
+
+# Run migrations via node pg client (psql not available)
+node -e "
+const { Client } = require('pg');
+const fs = require('fs');
+const path = require('path');
+const client = new Client({
+  host: 'aws-0-us-west-2.pooler.supabase.com',
+  port: 6543,
+  user: 'postgres.xumcmantignrocihtrdx',
+  password: 'HyrdroSonics222@@@@',
+  database: 'postgres',
+  ssl: { rejectUnauthorized: false }
+});
+async function run() {
+  await client.connect();
+  const dir = 'supabase/migrations';
+  const files = fs.readdirSync(dir).filter(f => f.endsWith('.sql')).sort();
+  for (const file of files) {
+    try {
+      const sql = fs.readFileSync(path.join(dir, file), 'utf8');
+      await client.query(sql);
+      console.log('OK:', file);
+    } catch (e) {
+      console.log('SKIP:', file, '-', e.message.substring(0, 80));
+    }
+  }
+  await client.end();
+}
+run();
+"</div>
+</div>
+
+<h2>Phase 5: Property Configuration</h2>
+
+<div class="phase">
+  <div class="phase-header">
+    <div class="phase-num">5</div>
+    <div class="phase-title">Set property_config for Sponic Garden Warsaw</div>
+    <div class="phase-est">~5 min</div>
+  </div>
+
+  <div class="cmd">node -e "
+const { Client } = require('pg');
+const client = new Client({...});
+await client.connect();
+await client.query(\`
+  INSERT INTO property_config (id, config) VALUES (1, '{
+    \"property\": {
+      \"name\": \"Sponic Garden\",
+      \"short_name\": \"SG\",
+      \"tagline\": \"The Art and Science of Cultivation\",
+      \"address\": \"Warsaw, Poland\",
+      \"timezone\": \"Europe/Warsaw\"
+    },
+    \"domain\": {
+      \"primary\": \"sponicgarden.com\",
+      \"github_pages\": \"sponicgarden.github.io\"
+    },
+    \"email\": {
+      \"notifications_from\": \"Sponic Garden &lt;accounts@sponicgarden.com&gt;\",
+      \"noreply_from\": \"Sponic Garden &lt;noreply@sponicgarden.com&gt;\"
+    },
+    \"features\": {
+      \"lighting\": true, \"cameras\": true, \"music\": true,
+      \"climate\": true, \"laundry\": true, \"oven\": true,
+      \"printer_3d\": true, \"glowforge\": true,
+      \"sms\": true, \"voice\": true
+    }
+  }')
+  ON CONFLICT (id) DO UPDATE SET config = EXCLUDED.config
+\`);
+"</div>
+</div>
+
+<h2>Phase 6: Build & Deploy</h2>
+
+<div class="phase">
+  <div class="phase-header">
+    <div class="phase-num">6</div>
+    <div class="phase-title">Build, test, commit, push</div>
+    <div class="phase-est">~10 min</div>
+  </div>
+
+  <div class="cmd"># Build
+cd "$WORK" && npm run build
+
+# Test key pages load
+B=~/.claude/skills/gstack/browse/dist/browse
+$B goto https://sponicgarden.com/en
+$B goto https://sponicgarden.com/spaces/admin/
+$B goto https://sponicgarden.com/residents/
+$B goto https://sponicgarden.com/en/signin
+
+# Commit and push
+git add -A
+git commit -m "feat: port full feature set from genalpaca-admin
+
+- 30 shared service modules (rentals, events, payments, smart home, etc.)
+- 63 edge functions (Stripe, Square, Govee, Sonos, Nest, etc.)
+- 35 database migrations (full schema)
+- Admin dashboard (24 pages), Resident portal (16 pages)
+- Associates, events, community, orientation pages
+- Property config for Sponic Garden Warsaw
+
+Co-Authored-By: Claude Opus 4.6 (1M context) <noreply@anthropic.com>"
+
+git push origin main</div>
+</div>
+
+<h2>Phase 7: Verification</h2>
+
+<div class="phase">
+  <div class="phase-header">
+    <div class="phase-num">7</div>
+    <div class="phase-title">QA test all sections with /browse</div>
+    <div class="phase-est">~10 min</div>
+  </div>
+
+  <table>
+    <tr><th>Test</th><th>URL</th><th>Expected</th></tr>
+    <tr><td>Homepage</td><td>/en</td><td>Next.js app renders</td></tr>
+    <tr><td>Sign in</td><td>/en/signin</td><td>Google + email buttons</td></tr>
+    <tr><td>Admin dashboard</td><td>/spaces/admin/</td><td>Admin shell loads with tabs</td></tr>
+    <tr><td>Resident portal</td><td>/residents/</td><td>Resident shell with device tabs</td></tr>
+    <tr><td>Spaces listing</td><td>/spaces/</td><td>Property listing page</td></tr>
+    <tr><td>Events</td><td>/events/</td><td>Event listing page</td></tr>
+    <tr><td>Contact</td><td>/contact/</td><td>Contact form</td></tr>
+    <tr><td>Branding</td><td>/branding.html</td><td>Asset gallery</td></tr>
+    <tr><td>Patents</td><td>/patents/</td><td>Patent docs</td></tr>
+    <tr><td>Charter</td><td>/charter.html</td><td>Founding charter</td></tr>
+    <tr><td>Console errors</td><td>All pages</td><td>No JS errors</td></tr>
+  </table>
+</div>
+
+<h2>Exclusions (alpacapps-specific, do NOT copy)</h2>
+
+<div class="phase">
+  <table>
+    <tr><th>Directory</th><th>Reason</th></tr>
+    <tr><td>mistiq/</td><td>Alpaca-specific recruitment portal</td></tr>
+    <tr><td>rahulio/</td><td>Personal pages</td></tr>
+    <tr><td>sundays/</td><td>Alpaca-specific event</td></tr>
+    <tr><td>ukulele/</td><td>Alpaca-specific event</td></tr>
+    <tr><td>house/</td><td>Alpaca house-specific pages</td></tr>
+    <tr><td>kioskhall/</td><td>Physical kiosk display</td></tr>
+    <tr><td>mobile/</td><td>Capacitor mobile app (separate build)</td></tr>
+    <tr><td>pay/</td><td>Alpaca-specific payment page</td></tr>
+    <tr><td>welcome/</td><td>Alpaca-specific welcome page</td></tr>
+    <tr><td>bug-reporter-*/</td><td>Browser extension (separate project)</td></tr>
+    <tr><td>dev/test/</td><td>Development test pages</td></tr>
+    <tr><td>visiting-1/</td><td>Alpaca-specific variant</td></tr>
+    <tr><td>scripts/alpaclaw-landing/</td><td>Alpaca-specific landing</td></tr>
+  </table>
+</div>
+
+<h2>Autonomous Execution Prompt</h2>
+
+<div class="note">
+  <strong>Copy and paste this into a new Claude Code session to execute the migration:</strong>
+</div>
+
+<div class="cmd" style="white-space: pre-wrap;">Read the migration plan at https://sponicgarden.com/plans/genalpaca-migration.html and execute it autonomously.
+
+Source repo: /Users/rahulio/Documents/CodingProjects/genalpaca-admin
+Target repo: Clone https://github.com/sponicgarden/sponic-control.git to /tmp/sponic-control-work
+GitHub token: retrieve from Bitwarden "GitHub — Sponic Garden PAT"
+Supabase: SponicControl (xumcmantignrocihtrdx), credentials in Bitwarden "Supabase — SponicControl Project"
+
+Execute all 7 phases in order. Use /browse for QA verification. Commit and push after each major phase.
+Do NOT copy the excluded directories listed in the plan.
+Rebrand all alpaca references to Sponic Garden.
+Run database migrations via node pg client (psql not installed).
+Test with testuser@sponicgarden.com / test1234 after deployment.</div>
+
+<p style="text-align: center; color: var(--text-muted); margin-top: 40px; font-size: 0.8rem;">
+  Generated 2026-03-23 &bull; Sponic Garden &bull; sponicgarden.com
+</p>
+
+</body>
+</html>
