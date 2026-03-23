@@ -198,6 +198,8 @@
       // Section Drawing Shootout (Gemini vs MiniMax)
       'scene-01': '2026-03-22', 'scene-02': '2026-03-22', 'scene-03': '2026-03-22',
       'scene-04': '2026-03-22', 'scene-05': '2026-03-22', 'scene-06': '2026-03-22',
+      'scene-07': '2026-03-22', 'scene-08': '2026-03-22', 'scene-09': '2026-03-22',
+      'scene-10': '2026-03-22', 'scene-11': '2026-03-22',
       // Scene/Warsaw/Moody (60-74 in scene-style, warsaw-demo, moody-evening cats use different prefix matching)
       '90-': '2026-03-16', '91-': '2026-03-16', '92-': '2026-03-16', '93-': '2026-03-16', '94-': '2026-03-16',
       '95-': '2026-03-16', '96-': '2026-03-16', '97-': '2026-03-16', '98-': '2026-03-16', '99-': '2026-03-16',
@@ -401,6 +403,13 @@
       { id: 'scene-05-thermal-spa-minimax', cat: 'section-drawing', title: 'Thermal & Spa — MiniMax', desc: 'Outdoor hot tub and cold plunge. Tropical plants, natural stone. People relaxing in water, steam rising. Loungers. Evening landscape lighting, stars through glass roof.', model: 'minimax-image-01', ext: 'jpg' },
       { id: 'scene-06-sound-experience-gemini', cat: 'section-drawing', title: 'Sound & Atmosphere — Gemini', desc: 'Immersive listening room with acoustic panels and speakers. People in ergonomic chairs, eyes closed, experiencing spatial audio. Sound waves as flowing lines. Botanical accents.', model: 'gemini-3-pro-image-preview', ext: 'jpg' },
       { id: 'scene-06-sound-experience-minimax', cat: 'section-drawing', title: 'Sound & Atmosphere — MiniMax', desc: 'Immersive listening room with acoustic panels and speakers. People in ergonomic chairs, eyes closed, experiencing spatial audio. Sound waves as flowing lines. Botanical accents.', model: 'minimax-image-01', ext: 'jpg' },
+
+      // Homepage Illustrations — Colorful Drawing Style, Fitness/Spa Athleisure (Gemini 3 Pro)
+      { id: 'scene-07-hp-morning-yoga-gemini', cat: 'homepage-colorful', title: 'Morning Yoga Terrace', desc: 'Sunrise yoga on rooftop terrace. 6 people in colorful yoga wear doing sun salutations. Tropical plants, golden morning light, pink-orange sky. Cork mats, glass panels.', model: 'gemini-3-pro-image-preview', ext: 'jpg' },
+      { id: 'scene-08-hp-smoothie-bar-gemini', cat: 'homepage-colorful', title: 'Smoothie & Juice Bar', desc: 'Lively greenhouse juice bar. People in athleisure at wooden counter. Açaí bowls, wheatgrass, colorful smoothies. Mosaic tile, hanging plants. Berry purples, mango oranges, matcha greens.', model: 'gemini-3-pro-image-preview', ext: 'jpg' },
+      { id: 'scene-09-hp-sauna-garden-gemini', cat: 'homepage-colorful', title: 'Sauna & Garden Circuit', desc: 'Outdoor wellness circuit — barrel sauna, cold plunge, garden walkway. People in white robes and spa sandals. Steam wisps, birch trees, ferns, flowering plants. Dappled sunlight.', model: 'gemini-3-pro-image-preview', ext: 'jpg' },
+      { id: 'scene-10-hp-functional-fitness-gemini', cat: 'homepage-colorful', title: 'Functional Fitness Garden', desc: 'Energetic outdoor fitness area with vertical gardens. Kettlebells, battle ropes, bodyweight exercises. Bright athletic wear — coral, teal, yellow. Wooden rigs, natural stone. Dynamic poses.', model: 'gemini-3-pro-image-preview', ext: 'jpg' },
+      { id: 'scene-11-hp-community-dinner-gemini', cat: 'homepage-colorful', title: 'Harvest Community Dinner', desc: 'Long communal table under string lights in garden atrium. 10+ people sharing colorful plant-based dishes. Smart-casual athleisure, candles, ceramic plates. Amber lights, teal sky, autumn warmth.', model: 'gemini-3-pro-image-preview', ext: 'jpg' },
     ];
 
     const CAT_LABELS = {
@@ -422,8 +431,9 @@
       'moody-evening': 'Moody Evening — Adopted Style, All Scenes (Polish 25-47, Stylish Athleisure)',
       'logo-fusion': 'Logo Auditions — Botanical × Digital Fusion (Pick a Champion)',
       'section-drawing': 'Section Illustrations — Gemini vs MiniMax Drawing Style Shootout',
+      'homepage-colorful': 'Homepage Illustrations — Colorful Drawing Style (Fitness/Spa Athleisure)',
     };
-    const CAT_ORDER = ['section-drawing', 'flowing-vines', 'chosen', 'sonics-wordmark', 'logo-fusion', 'moody-evening', 'warsaw-demo', 'scene-style', 'wordmark-fusion', 'drawing-style', 'swapped-logo', 'style-audition', 'blended', 'artistic-style', 'scene', 'app-icon', 'logo', 'wordmark'];
+    const CAT_ORDER = ['homepage-colorful', 'section-drawing', 'flowing-vines', 'chosen', 'sonics-wordmark', 'logo-fusion', 'moody-evening', 'warsaw-demo', 'scene-style', 'wordmark-fusion', 'drawing-style', 'swapped-logo', 'style-audition', 'blended', 'artistic-style', 'scene', 'app-icon', 'logo', 'wordmark'];
 
     let reviews = {}; // asset_id -> review data (includes rank_order)
     let currentFilter = 'all';
