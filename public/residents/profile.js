@@ -1316,7 +1316,7 @@ async function startTeslaOAuth() {
         owner_name: currentUser.display_name || currentUser.email,
         tesla_email: currentUser.email,
         app_user_id: currentUser.id,
-        fleet_client_id: '3f53a292-07b8-443f-b86d-e4aedc37ac10',
+        fleet_client_id: 'YOUR_TESLA_CLIENT_ID',
         fleet_client_secret: 'ta-secret.TUwH2N+%JPP5!9^3',
         fleet_api_base: 'https://fleet-api.prd.na.vn.cloud.tesla.com',
       })
@@ -1329,7 +1329,7 @@ async function startTeslaOAuth() {
     const state = `profile:${account.id}`;
     const params = new URLSearchParams({
       response_type: 'code',
-      client_id: '3f53a292-07b8-443f-b86d-e4aedc37ac10',
+      client_id: 'YOUR_TESLA_CLIENT_ID',
       redirect_uri: 'https://sponicgarden.com/auth/tesla/callback',
       scope: 'openid offline_access vehicle_device_data vehicle_location vehicle_cmds vehicle_charging_cmds',
       state,
