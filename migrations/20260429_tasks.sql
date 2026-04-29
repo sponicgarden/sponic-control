@@ -109,15 +109,15 @@ ALTER TABLE public.task_activity   ENABLE ROW LEVEL SECURITY;
 CREATE POLICY task_projects_staff_read ON public.task_projects
   FOR SELECT USING (
     EXISTS (SELECT 1 FROM public.app_users
-            WHERE auth_user_id = auth.uid()
+            WHERE auth_id = auth.uid()
               AND role IN ('admin','oracle','staff'))
   );
 
 CREATE POLICY task_projects_admin_write ON public.task_projects
   FOR ALL USING (
-    (SELECT role FROM public.app_users WHERE auth_user_id = auth.uid()) IN ('admin','oracle')
+    (SELECT role FROM public.app_users WHERE auth_id = auth.uid()) IN ('admin','oracle')
   ) WITH CHECK (
-    (SELECT role FROM public.app_users WHERE auth_user_id = auth.uid()) IN ('admin','oracle')
+    (SELECT role FROM public.app_users WHERE auth_id = auth.uid()) IN ('admin','oracle')
   );
 
 CREATE POLICY task_projects_service ON public.task_projects
@@ -127,15 +127,15 @@ CREATE POLICY task_projects_service ON public.task_projects
 CREATE POLICY task_labels_staff_read ON public.task_labels
   FOR SELECT USING (
     EXISTS (SELECT 1 FROM public.app_users
-            WHERE auth_user_id = auth.uid()
+            WHERE auth_id = auth.uid()
               AND role IN ('admin','oracle','staff'))
   );
 
 CREATE POLICY task_labels_admin_write ON public.task_labels
   FOR ALL USING (
-    (SELECT role FROM public.app_users WHERE auth_user_id = auth.uid()) IN ('admin','oracle')
+    (SELECT role FROM public.app_users WHERE auth_id = auth.uid()) IN ('admin','oracle')
   ) WITH CHECK (
-    (SELECT role FROM public.app_users WHERE auth_user_id = auth.uid()) IN ('admin','oracle')
+    (SELECT role FROM public.app_users WHERE auth_id = auth.uid()) IN ('admin','oracle')
   );
 
 CREATE POLICY task_labels_service ON public.task_labels
@@ -147,15 +147,15 @@ CREATE POLICY task_labels_service ON public.task_labels
 CREATE POLICY tasks_staff_read ON public.tasks
   FOR SELECT USING (
     EXISTS (SELECT 1 FROM public.app_users
-            WHERE auth_user_id = auth.uid()
+            WHERE auth_id = auth.uid()
               AND role IN ('admin','oracle','staff'))
   );
 
 CREATE POLICY tasks_staff_write ON public.tasks
   FOR ALL USING (
-    (SELECT role FROM public.app_users WHERE auth_user_id = auth.uid()) IN ('admin','oracle','staff')
+    (SELECT role FROM public.app_users WHERE auth_id = auth.uid()) IN ('admin','oracle','staff')
   ) WITH CHECK (
-    (SELECT role FROM public.app_users WHERE auth_user_id = auth.uid()) IN ('admin','oracle','staff')
+    (SELECT role FROM public.app_users WHERE auth_id = auth.uid()) IN ('admin','oracle','staff')
   );
 
 CREATE POLICY tasks_service ON public.tasks
@@ -165,15 +165,15 @@ CREATE POLICY tasks_service ON public.tasks
 CREATE POLICY task_label_map_staff_read ON public.task_label_map
   FOR SELECT USING (
     EXISTS (SELECT 1 FROM public.app_users
-            WHERE auth_user_id = auth.uid()
+            WHERE auth_id = auth.uid()
               AND role IN ('admin','oracle','staff'))
   );
 
 CREATE POLICY task_label_map_staff_write ON public.task_label_map
   FOR ALL USING (
-    (SELECT role FROM public.app_users WHERE auth_user_id = auth.uid()) IN ('admin','oracle','staff')
+    (SELECT role FROM public.app_users WHERE auth_id = auth.uid()) IN ('admin','oracle','staff')
   ) WITH CHECK (
-    (SELECT role FROM public.app_users WHERE auth_user_id = auth.uid()) IN ('admin','oracle','staff')
+    (SELECT role FROM public.app_users WHERE auth_id = auth.uid()) IN ('admin','oracle','staff')
   );
 
 CREATE POLICY task_label_map_service ON public.task_label_map
@@ -184,13 +184,13 @@ CREATE POLICY task_label_map_service ON public.task_label_map
 CREATE POLICY task_activity_staff_read ON public.task_activity
   FOR SELECT USING (
     EXISTS (SELECT 1 FROM public.app_users
-            WHERE auth_user_id = auth.uid()
+            WHERE auth_id = auth.uid()
               AND role IN ('admin','oracle','staff'))
   );
 
 CREATE POLICY task_activity_staff_insert ON public.task_activity
   FOR INSERT WITH CHECK (
-    (SELECT role FROM public.app_users WHERE auth_user_id = auth.uid()) IN ('admin','oracle','staff')
+    (SELECT role FROM public.app_users WHERE auth_id = auth.uid()) IN ('admin','oracle','staff')
   );
 
 CREATE POLICY task_activity_service ON public.task_activity
