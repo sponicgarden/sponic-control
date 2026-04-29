@@ -2,14 +2,18 @@
 
 import { useState } from "react";
 import { useAuth } from "@/contexts/auth-context";
-import { useParams, useRouter } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 
 export default function SignInPage() {
   const { signIn, signInWithGoogle } = useAuth();
   const router = useRouter();
   const params = useParams();
+  const searchParams = useSearchParams();
   const lang = (params.lang as string) || "en";
+  const nextParam = searchParams.get("next");
+  const nextPath =
+    nextParam && nextParam.startsWith("/") ? nextParam : `/${lang}/intranet`;
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -26,7 +30,7 @@ export default function SignInPage() {
       setError(authError.message);
       setSubmitting(false);
     } else {
-      router.replace(`/${lang}/intranet`);
+      router.replace(nextPath);
     }
   };
 
