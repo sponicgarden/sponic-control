@@ -1,6 +1,12 @@
 "use client";
 
+import Link from "next/link";
+import { useParams } from "next/navigation";
+
 export function PlanlistTab() {
+  const params = useParams();
+  const lang = (params.lang as string) || "en";
+
   return (
     <div className="space-y-6">
       <div>
@@ -10,11 +16,20 @@ export function PlanlistTab() {
         </p>
       </div>
 
-      <div className="rounded-xl border border-slate-200 p-8 text-center text-slate-500">
-        <p>No plans recorded yet.</p>
-        <p className="text-sm mt-2">
-          Plans created during Claude Code sessions will appear here.
+      <div className="rounded-xl border border-amber-200 bg-amber-50 p-6">
+        <h2 className="text-base font-semibold text-amber-900 mb-1">
+          Moved to a dedicated section
+        </h2>
+        <p className="text-sm text-amber-800 mb-3">
+          Task management now lives at a top-level <strong>Tasks</strong> section in the intranet,
+          with a sortable list view, projects, labels, and per-task activity history.
         </p>
+        <Link
+          href={`/${lang}/intranet/tasks/list`}
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-white bg-amber-700 rounded-md hover:bg-amber-800"
+        >
+          Open Tasks →
+        </Link>
       </div>
     </div>
   );
