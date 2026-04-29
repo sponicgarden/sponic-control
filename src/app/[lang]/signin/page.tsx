@@ -1,11 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { useAuth } from "@/contexts/auth-context";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 
 export default function SignInPage() {
+  return (
+    <Suspense fallback={null}>
+      <SignInBody />
+    </Suspense>
+  );
+}
+
+function SignInBody() {
   const { signIn, signInWithGoogle } = useAuth();
   const router = useRouter();
   const params = useParams();
