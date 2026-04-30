@@ -1,10 +1,32 @@
+# Environment files (secrets — never commit)
 .env
-.env.local
-.env.production
+.env.*
+!.env.example
+
+# Credentials / private keys
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa
+id_ed25519
+credentials.json
+service-account*.json
+.aws/
+.npmrc
+
+# Build / dependencies
 node_modules/
 .next/
 out/
-.DS_Store
 *.tsbuildinfo
 next-env.d.ts
+
+# Local data
 schema-dump.sql
+*.sqlite
+*.sqlite3
+*.db
+
+# OS
+.DS_Store
