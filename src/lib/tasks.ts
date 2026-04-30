@@ -151,11 +151,19 @@ export function timeAgo(iso: string | null | undefined): string {
 
 export function formatDate(iso: string | null | undefined): string {
   if (!iso) return "—";
-  const [y, m, day] = iso.split("-").map(Number);
-  const d = new Date(y, m - 1, day);
+  let d: Date;
+  if (/^\d{4}-\d{2}-\d{2}$/.test(iso)) {
+    const [y, m, day] = iso.split("-").map(Number);
+    d = new Date(y, m - 1, day);
+  } else {
+    d = new Date(iso);
+  }
+  if (isNaN(d.getTime())) return "—";
   const today = new Date();
   today.setHours(0, 0, 0, 0);
-  const diffDays = Math.round((d.getTime() - today.getTime()) / 86400000);
+  const target = new Date(d);
+  target.setHours(0, 0, 0, 0);
+  const diffDays = Math.round((target.getTime() - today.getTime()) / 86400000);
   if (diffDays === 0) return "Today";
   if (diffDays === 1) return "Tomorrow";
   if (diffDays === -1) return "Yesterday";
