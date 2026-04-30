@@ -17,7 +17,7 @@ import {
   type TaskWithRelations,
 } from "@/lib/tasks";
 
-type SortKey = "title" | "status" | "priority" | "due_date" | "updated_at" | "project";
+type SortKey = "smart" | "title" | "status" | "priority" | "due_date" | "updated_at" | "project";
 
 interface Props {
   tasks: TaskWithRelations[];
@@ -35,14 +35,34 @@ const PRIORITY_RANK: Record<TaskPriority, number> = {
 const STATUS_RANK: Record<TaskStatus, number> = {
   backlog: 0, todo: 1, in_progress: 2, review: 3, done: 4,
 };
+const SMART_STATUS_RANK: Record<TaskStatus, number> = {
+  in_progress: 0, todo: 1, review: 2, backlog: 3, done: 4,
+};
+const SORT_LABELS: Record<Exclude<SortKey, "smart">, string> = {
+  status: "Status",
+  priority: "Priority",
+  title: "Title",
+  project: "Project",
+  due_date: "Due",
+  updated_at: "Updated",
+};
 
 export function TasksTable({ tasks, onSelect, onInlineUpdate }: Props) {
-  const [sortKey, setSortKey] = useState<SortKey>("updated_at");
-  const [sortDir, setSortDir] = useState<"asc" | "desc">("desc");
+  const [sortKey, setSortKey] = useState<SortKey>("smart");
+  const [sortDir, setSortDir] = useState<"asc" | "desc">("asc");
 
   const sorted = useMemo(() => {
     const arr = [...tasks];
     arr.sort((a, b) => {
+      if (sortKey === "smart") {
+        const sa = SMART_STATUS_RANK[a.status];
+        const sb = SMART_STATUS_RANK[b.status];
+        if (sa !== sb) return sa - sb;
+        const pa = PRIORITY_RANK[a.priority];
+        const pb = PRIORITY_RANK[b.priority];
+        if (pa !== pb) return pa - pb;
+        return (a.due_date || "9999").localeCompare(b.due_date || "9999");
+      }
       let cmp = 0;
       switch (sortKey) {
         case "title":
@@ -78,6 +98,11 @@ export function TasksTable({ tasks, onSelect, onInlineUpdate }: Props) {
     }
   };
 
+  const resetToSmart = () => {
+    setSortKey("smart");
+    setSortDir("asc");
+  };
+
   const sortIcon = (k: SortKey) => {
     if (k !== sortKey) return <span className="text-slate-300">↕</span>;
     return <span className="text-amber-600">{sortDir === "asc" ? "↑" : "↓"}</span>;
@@ -94,6 +119,21 @@ export function TasksTable({ tasks, onSelect, onInlineUpdate }: Props) {
 
   return (
     <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white">
+      {sortKey !== "smart" && (
+        <div className="px-3 py-2 border-b border-slate-100 bg-amber-50/40 text-xs text-slate-600 flex items-center gap-2">
+          <span>Sorted by</span>
+          <span className="font-medium text-slate-800">
+            {SORT_LABELS[sortKey]} {sortDir === "asc" ? "↑" : "↓"}
+          </span>
+          <button
+            type="button"
+            onClick={resetToSmart}
+            className="ml-auto text-amber-600 hover:text-amber-700 font-medium"
+          >
+            Reset to smart sort
+          </button>
+        </div>
+      )}
       <table className="min-w-full text-sm">
         <thead className="bg-slate-50 text-slate-600">
           <tr>
