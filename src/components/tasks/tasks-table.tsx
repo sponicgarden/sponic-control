@@ -55,12 +55,12 @@ export function TasksTable({ tasks, onSelect, onInlineUpdate }: Props) {
     const arr = [...tasks];
     arr.sort((a, b) => {
       if (sortKey === "smart") {
-        const sa = SMART_STATUS_RANK[a.status];
-        const sb = SMART_STATUS_RANK[b.status];
-        if (sa !== sb) return sa - sb;
         const pa = PRIORITY_RANK[a.priority];
         const pb = PRIORITY_RANK[b.priority];
         if (pa !== pb) return pa - pb;
+        const sa = SMART_STATUS_RANK[a.status];
+        const sb = SMART_STATUS_RANK[b.status];
+        if (sa !== sb) return sa - sb;
         return (a.due_date || "9999").localeCompare(b.due_date || "9999");
       }
       let cmp = 0;
