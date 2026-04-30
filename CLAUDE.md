@@ -1,13 +1,13 @@
 # Sponic Garden — SponicControl
 
 Property management platform for Sponic Garden Warsaw.
-Live at: https://sponicgarden.com
+Live at: https://in.sponicgardens.com
 
 ## Tech Stack
 - Next.js 16 + React 19 + TypeScript
 - Tailwind CSS 4
 - Supabase (auth, database, edge functions)
-- GitHub Pages (static export via GitHub Actions)
+- Cloudflare Pages (auto-deploy via GitHub integration)
 - Cloudflare Workers (D1, R2)
 
 ## QA Testing
@@ -18,14 +18,16 @@ Test credentials in `test.config.json`:
 - Role: demo
 
 ## Key URLs
-- Production: https://sponicgarden.com
-- Intranet: https://sponicgarden.com/en/intranet
-- Sign In: https://sponicgarden.com/en/signin
+- Production: https://in.sponicgardens.com
+- Intranet: https://in.sponicgardens.com/en/intranet
+- Sign In: https://in.sponicgardens.com/en/signin
 - Session API: https://claude-sessions.sponicgarden.workers.dev
 
 ## Deployment
-Push to `main` → GitHub Actions builds → deploys to GitHub Pages.
-Custom domain: sponicgarden.com (DNS on Cloudflare wingsiebird account).
+Push to `main` → Cloudflare Pages auto-deploys via GitHub integration (~1-3 min).
+GitHub Actions runs CI in parallel (`tsc --noEmit` + `lint` + `build`) as a pre-deploy guard but does not deploy itself.
+Custom domain: in.sponicgardens.com (DNS on Cloudflare wingsiebird account).
+Note: the bare `sponicgarden.com` (no `s`) is a separate marketing site, not this app.
 
 ## Credentials
 All secrets in Bitwarden collection: DevOps-sponicgarden (ALPU.CA org).
