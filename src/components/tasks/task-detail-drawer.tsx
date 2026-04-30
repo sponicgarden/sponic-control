@@ -140,7 +140,7 @@ export function TaskDetailDrawer({
               value={form.title}
               onChange={(e) => setForm({ ...form, title: e.target.value })}
               placeholder="What needs doing?"
-              className="w-full px-3 py-2 text-sm border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500"
+              className="w-full px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500"
               autoFocus
             />
           </div>
@@ -152,7 +152,7 @@ export function TaskDetailDrawer({
               onChange={(e) => setForm({ ...form, description: e.target.value })}
               rows={4}
               placeholder="Notes, links, context (markdown ok)…"
-              className="w-full px-3 py-2 text-sm border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500 font-mono text-xs"
+              className="w-full px-3 py-2 text-slate-900 placeholder:text-slate-400 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500 font-mono text-xs"
             />
           </div>
 
@@ -162,7 +162,7 @@ export function TaskDetailDrawer({
               <select
                 value={form.status}
                 onChange={(e) => setForm({ ...form, status: e.target.value as TaskStatus })}
-                className="w-full px-3 py-2 text-sm border border-slate-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-amber-500"
+                className="w-full px-3 py-2 text-sm text-slate-900 border border-slate-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-amber-500"
               >
                 {TASK_STATUSES.map((s) => <option key={s} value={s}>{STATUS_LABELS[s]}</option>)}
               </select>
@@ -172,7 +172,7 @@ export function TaskDetailDrawer({
               <select
                 value={form.priority}
                 onChange={(e) => setForm({ ...form, priority: e.target.value as TaskPriority })}
-                className="w-full px-3 py-2 text-sm border border-slate-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-amber-500"
+                className="w-full px-3 py-2 text-sm text-slate-900 border border-slate-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-amber-500"
               >
                 {TASK_PRIORITIES.map((p) => <option key={p} value={p}>{PRIORITY_LABELS[p]}</option>)}
               </select>
@@ -185,7 +185,7 @@ export function TaskDetailDrawer({
               <select
                 value={form.project_id}
                 onChange={(e) => setForm({ ...form, project_id: e.target.value })}
-                className="w-full px-3 py-2 text-sm border border-slate-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-amber-500"
+                className="w-full px-3 py-2 text-sm text-slate-900 border border-slate-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-amber-500"
               >
                 <option value="">No project</option>
                 {projects.map((p) => <option key={p.id} value={p.id}>{p.title}</option>)}
@@ -196,7 +196,7 @@ export function TaskDetailDrawer({
               <select
                 value={form.assignee_id}
                 onChange={(e) => setForm({ ...form, assignee_id: e.target.value })}
-                className="w-full px-3 py-2 text-sm border border-slate-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-amber-500"
+                className="w-full px-3 py-2 text-sm text-slate-900 border border-slate-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-amber-500"
               >
                 <option value="">Unassigned</option>
                 {users.map((u) => (
@@ -214,7 +214,7 @@ export function TaskDetailDrawer({
               type="date"
               value={form.due_date}
               onChange={(e) => setForm({ ...form, due_date: e.target.value })}
-              className="px-3 py-2 text-sm border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500"
+              className="px-3 py-2 text-sm text-slate-900 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500"
             />
           </div>
 
@@ -250,7 +250,7 @@ export function TaskDetailDrawer({
                   onChange={(e) => setComment(e.target.value)}
                   onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); handleComment(); } }}
                   placeholder="Add a comment…"
-                  className="flex-1 px-3 py-1.5 text-sm border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500"
+                  className="flex-1 px-3 py-1.5 text-sm text-slate-900 placeholder:text-slate-400 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500"
                 />
                 <button
                   type="button"
