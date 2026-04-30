@@ -151,12 +151,11 @@ export function timeAgo(iso: string | null | undefined): string {
 
 export function formatDate(iso: string | null | undefined): string {
   if (!iso) return "—";
-  const d = new Date(iso);
+  const [y, m, day] = iso.split("-").map(Number);
+  const d = new Date(y, m - 1, day);
   const today = new Date();
   today.setHours(0, 0, 0, 0);
-  const target = new Date(d);
-  target.setHours(0, 0, 0, 0);
-  const diffDays = Math.round((target.getTime() - today.getTime()) / 86400000);
+  const diffDays = Math.round((d.getTime() - today.getTime()) / 86400000);
   if (diffDays === 0) return "Today";
   if (diffDays === 1) return "Tomorrow";
   if (diffDays === -1) return "Yesterday";
@@ -166,9 +165,11 @@ export function formatDate(iso: string | null | undefined): string {
 
 export function isOverdue(dueDate: string | null, status: TaskStatus): boolean {
   if (!dueDate || status === "done") return false;
+  const [y, m, day] = dueDate.split("-").map(Number);
+  const due = new Date(y, m - 1, day);
   const today = new Date();
   today.setHours(0, 0, 0, 0);
-  return new Date(dueDate) < today;
+  return due < today;
 }
 
 export function userInitials(u: AppUserBrief | null | undefined): string {
