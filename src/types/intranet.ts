@@ -4,6 +4,7 @@ export type IntranetSection =
   | "associates"
   | "staff"
   | "tasks"
+  | "meetings"
   | "admin"
   | "devcontrol";
 
@@ -31,6 +32,7 @@ export const SECTIONS: SectionDefinition[] = [
   { key: "associates", label: "Associates" },
   { key: "staff", label: "Staff" },
   { key: "tasks", label: "Tasks" },
+  { key: "meetings", label: "Meetings" },
   { key: "admin", label: "Admin" },
   { key: "devcontrol", label: "DevControl" },
 ];
@@ -65,6 +67,11 @@ export const DEFAULT_TABS: Record<IntranetSection, TabDefinition[]> = {
     { key: "labels", label: "Labels", defaultVisible: true },
     { key: "projects", label: "Projects", defaultVisible: true },
   ],
+  meetings: [
+    { key: "list", label: "Meetings", defaultVisible: true },
+    { key: "action-items", label: "Action Items", defaultVisible: true },
+    { key: "import", label: "Import", defaultVisible: true },
+  ],
   admin: [
     { key: "users", label: "Users", defaultVisible: true },
     { key: "passwords", label: "Passwords", defaultVisible: false },
@@ -92,6 +99,7 @@ export const ALL_TAB_SLUGS: Record<IntranetSection, string[]> = {
   associates: DEFAULT_TABS.associates.map((t) => t.key),
   staff: DEFAULT_TABS.staff.map((t) => t.key),
   tasks: DEFAULT_TABS.tasks.map((t) => t.key),
+  meetings: DEFAULT_TABS.meetings.map((t) => t.key),
   admin: DEFAULT_TABS.admin.map((t) => t.key),
   devcontrol: DEFAULT_TABS.devcontrol.map((t) => t.key),
 };
