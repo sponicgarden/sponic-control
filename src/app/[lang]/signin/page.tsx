@@ -81,7 +81,7 @@ function SignInBody() {
               margin: 0,
             }}
           >
-            Sponic Garden
+            Sponic Gardens
           </h1>
           <p
             style={{
